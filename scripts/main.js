@@ -59,11 +59,11 @@ function adjustMonsterList() {
 		var monster = monsterList[i];
 		if (monster == '') continue;
 		var monsterCard = $('<img>');
-		monsterCard.attr('src', 'images/monsters_cards/' + urlize(monster) + actAddition + '.jpg');
+		monsterCard.attr('src', 'images/monster_cards/' + urlize(monster) + actAddition + '.jpg');
 		monsterCardsContainer.append(monsterCard);
 		if (MONSTERS[monster].hasBack) {
 			var monsterCardBack = $('<img>');
-			monsterCardBack.attr('src', 'images/monsters_cards/' + urlize(monster) + '_back' + actAddition + '.jpg');
+			monsterCardBack.attr('src', 'images/monster_cards/' + urlize(monster) + '_back' + actAddition + '.jpg');
 			monsterCardsContainer.append(monsterCardBack);
 		}
 	}
@@ -2119,7 +2119,7 @@ function constructMapFromConfig() {
 		var monsterHp = $('<div>').addClass('hit-points');
 		var z_index = 2;
 		monsterHp.html(monster.hp == undefined ? '' : monster.hp.toString());
-		var folder = 'images/monsters_tokens/';
+		var folder = 'images/monster_tokens/';
 		if (monster.vertical) folder += 'vertical/';
 		monsterObject.css({
 			'position' : 'absolute',
@@ -2163,7 +2163,7 @@ function constructMapFromConfig() {
 		var lieutenantImage = $('<img>');
 		var lieutenantHp = $('<div>').addClass('hit-points');
 		lieutenantHp.html(lieutenant.hp.toString());
-		var folder = 'images/monsters_tokens/';
+		var folder = 'images/monster_tokens/';
 		var z_index = 2;
 		if (lieutenant.vertical != undefined && lieutenant.vertical) folder += 'vertical/';
 		lieutenantObject.css({
