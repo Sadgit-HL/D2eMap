@@ -607,7 +607,7 @@ function updateLieutenant(element, value, showBack) {
 		container.removeClass('agent');
 	}
 	var actAcronym = '_act';
-	var cardFolder = isAgent ? 'plot_cards/agents' : 'plot_cards/agents';
+	var cardFolder = isAgent ? 'plot_cards/agents' : 'lieutenant_cards';
 	var cardImageExtension = isAgent ? '.png' : '.jpg';
 	container.find('img.lieutenant-image').attr('src', 'images/' + cardFolder + '/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + cardImageExtension).css('display','inline-block');
 	if (showBack) {
