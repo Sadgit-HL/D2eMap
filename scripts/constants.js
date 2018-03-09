@@ -1268,7 +1268,7 @@ OVERLORD_CARDS_LIST = [
 	['Possessive', 'soulbinder', 1],
 	['Restless Spirit', 'soulbinder', 1],
 	['Ties That Bind', 'soulbinder', 1],
-	['Unblinking', 'soulbinder', 1]
+	['Unblinking', 'soulbinder', 1],
         ['Offertory Affliction', 'overlord_reward', 1],
 	['Secrets of Flesh', 'overlord_reward', 1],
 	['Toxic Reprisal', 'overlord_reward', 1],
