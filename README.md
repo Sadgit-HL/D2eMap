@@ -7,6 +7,6 @@ Link to published version: https://sadgit-hl.github.io/D2eMap/
 - missing Dark Minotaurs and Crow Hags added
 - Blood Apes converted to 2x2 base
 - all hero cards and tokens updated to current versions
-- CK heroes and corresponding tokens for which no new version exists added
-- all other CK related stuff deleted
+- CK heroes and corresponding tokens added for which no new versions exist
+- all other CK related stuff removed
 - typos corrected
