@@ -896,7 +896,6 @@ var HEROES_LIST = [
 	['Aurim',8,5,sup],
 	['Bogran the Shadow',10,4,rog],
         ['Eliam',12,5,war],
-    	['Ashrian',10,4,sup],
         ['Brother Glyr',12,3,sup],
     	['Kirga',12,3,rog],
 	['Landrec the Wise',10,4,wiz],
