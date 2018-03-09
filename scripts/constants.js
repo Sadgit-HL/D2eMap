@@ -1219,7 +1219,6 @@ OVERLORD_CARDS_LIST = [
 	['No Rest For The Wicked', 'punisher', 1],
 	['Price Of Prevention', 'punisher', 1],
 	['Trading Pains', 'punisher', 1],
-	['Spligs Revenge', 'quest_reward', 1],
 	['Curse Of The Monkey God', 'saboteur', 1],
 	['Explosive Runes', 'saboteur', 1],
 	['Uthuk Demon Trap', 'saboteur', 1],
