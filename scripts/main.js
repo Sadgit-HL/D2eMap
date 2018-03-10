@@ -611,7 +611,7 @@ function updateLieutenant(element, value, showBack) {
 	var cardImageExtension = isAgent ? '.png' : '.jpg';
 	container.find('img.lieutenant-image').attr('src', 'images/' + cardFolder + '/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + cardImageExtension).css('display','inline-block');
 	if (showBack) {
-		container.find('img.lieutenant-image-back').attr('src', 'images/lieutenant_cards/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + '_back.jpg').css('display','inline-block');
+		container.find('img.lieutenant-image-back').attr('src', 'images/' + cardFolder + '/' + urlize(realName) + actAcronym + (actOne ? '1' : '2') + '_back.jpg').css('display','inline-block');
 	} else {
 		container.find('img.lieutenant-image-back').css('display','none');
 	}
