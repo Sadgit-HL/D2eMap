@@ -9,5 +9,5 @@ Link to published version: https://sadgit-hl.github.io/D2eMap/
 - all hero cards and tokens updated to current versions
 - CK heroes and corresponding tokens added for which no new versions exist
 - all other CK related stuff removed
-- replaced Bloodlust OL card with errata version
+- replaced Bloodlust and Reinforce OL cards with errata versions
 - typos corrected
