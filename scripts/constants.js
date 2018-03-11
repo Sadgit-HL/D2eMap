@@ -960,7 +960,7 @@ var HEROES_LIST = [
 	['Tatianna',12,4,rog],
 	['Okaluk and Rakash',8,3,sup],
 	['Krutzbeck',12,4,war],
-        ['Jonas the Kind',10,4,sup]
+        ['Jonas the Kind',10,4,sup],
         ['Laughin Buldar',14,3,war]  
 ];
 
