@@ -108,7 +108,7 @@ function updateOption(element, value, isMonster) {
 		var monsterTitle = $(element).html();
 		container.find('input[name="master"]').attr('value', monsterTitle.indexOf('master') > -1);
 		var xYSelects = $(container).find('.select-x, .select-y');
-		
+
 		if (isMonster) {
 			var monsterHp;
 			if (monsterTitle.indexOf('master') > -1) {
@@ -146,7 +146,7 @@ function updateOption(element, value, isMonster) {
 			value = container.find('.monster-title').html();
 			value = value.substring(0, value.length - 1);
 		}
-		
+
 		var firstClass = SHOWING_CLASSES[MONSTERS[value].width];
 		var secondClass = SHOWING_CLASSES[MONSTERS[value].height];
 		xYSelects.removeClass(SHOWING_CLASSES[1] + ' ' + SHOWING_CLASSES[2] + ' ' + SHOWING_CLASSES[3] + ' squared');
@@ -160,7 +160,7 @@ function updateOption(element, value, isMonster) {
 		var selectedSize = value.charAt(0);
 		var selectedCoordinate = value.substr(1);
 		var parent = $(element).parents('.btn-group');
-		
+
 		if (parent.hasClass('select-x')) {
 			container.find('input[name="monster-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="hero-x"]').attr('value',selectedCoordinate);
@@ -394,7 +394,7 @@ function updateHand(element, value) {
 	var twohand = $(element).parent().hasClass('twohand');
 	var tierOne = $(element).parent().hasClass('tierone');
 	var relic = $(element).parent().hasClass('relic');
-	var oldTwoHand = container.find('.items-container').find('.hand2').hasClass('secondary'); 
+	var oldTwoHand = container.find('.items-container').find('.hand2').hasClass('secondary');
 	var selector = '.hand';
 	if (second) selector += '2';
 	container.find('.items-container').find('.hand,.hand2').removeClass('secondary');
@@ -682,8 +682,8 @@ function updateCondition(element, value) {
 
 function removeCondition(element) {
 	var container = $(element).parents('.select-row');
-	var conditionSelect = $(element).parents('.select-condition'); 
-	var id = conditionSelect.attr('id'); 
+	var conditionSelect = $(element).parents('.select-condition');
+	var id = conditionSelect.attr('id');
 	conditionSelect.remove();
 	$('#input' + id).remove();
 	if (container.parents('#monsters').length > 0) {
@@ -1007,7 +1007,7 @@ function createTaintedSelectContent() {
 	for (var i = 0; i < TAINTED_CARDS_LIST.length; i++) {
 		html += addOption(TAINTED_CARDS_LIST[i] + ' ', '', 'updateTainted(this, \'' + TAINTED_CARDS_LIST[i] + '\')');
 	}
-	return html;	
+	return html;
 }
 
 function createOverlordRelicsSelectContent() {
@@ -1048,13 +1048,25 @@ function rebuildMap(mapName) {
 	config.tiles = mapConfig.tiles;
 	config.doors = mapConfig.doors;
 	config.xs = mapConfig.xs;
+	config.monsters = mapConfig.monsters;
+	config.lieutenants = mapConfig.lieutenants;
+	config.allies = mapConfig.allies;
+	config.actOne = mapConfig.actOne;
+
 	clearMapControlTab();
+	clearAllies();
+	clearLieutenants();
+
+	updateAct(config.actOne);
+	constructMonstersAndLieutenantsTabFromConfig();
 	constructMapControlsTabFromConfig();
+	constructAlliesTabFromConfig();
 	if (mapConfig.objectives != undefined) {
 		config.objectives = mapConfig.objectives;
 		clearMiscellaneousObjectsTab();
 		constructMiscellaneousObjectsTabFromConfig();
 	}
+	switchToMap();
 }
 
 function clearMapControlTab() {
@@ -1081,7 +1093,13 @@ function clearLieutenants() {
 }
 
 function clearFamiliarsAndAllies() {
+	clearFamiliars();
+	clearAllies();
+}
+function clearFamiliars() {
 	$('#familiars-container .select-row').remove();
+}
+function clearAllies() {
 	$('#allies-container .select-row').remove();
 }
 
@@ -1154,7 +1172,7 @@ function addMonsterLine() {
 	monsterLine.append($('<input type="hidden" name="master" value=""/>'));
 	monsterLine.append($('<input type="hidden" name="monster-y-size" value=""/>'));
 	monsterLine.append($('<input type="hidden" name="monster-x-size" value=""/>'));
-	
+
 	monsterLine.find('.select-monster ul').append(createMonsterSelectContent());
 	monsterLine.find('.select-x ul').append(createXSelectContent(false));
 	monsterLine.find('.select-y ul').append(createYSelectContent(false));
@@ -1166,7 +1184,7 @@ function addHeroLine(number) {
 	var heroLine = $('<div>').attr('id','hero' + number.toString() + 'wrapper');
 	addUnitLine(heroLine, 'hero');
 	heroLine.append($('<input type="text" name="hero-stamina" class="form-control" placeholder="Set stamina" value=""/>'));
-	
+
 	heroLine.find('.select-hero ul').append(createHeroSelectContent());
 	heroLine.find('.select-x ul').append(createXSelectContent(true));
 	heroLine.find('.select-x ul').addClass('showOneCell');
@@ -1202,7 +1220,7 @@ function buildTaintedButton() {
 function getHeroImage() {
 	var heroImage = $('<img>');
 	var heroImageFeat = $('<div>').addClass('hero-image-feat');
-	var heroImageContainer = $('<div>').addClass('hero-image-container'); 
+	var heroImageContainer = $('<div>').addClass('hero-image-container');
 	heroImageContainer.append(heroImage);
 	heroImageContainer.append(heroImageFeat);
 	heroImage.attr('src', '').attr('onclick',"$(this).parent().toggleClass('feat-used')");
@@ -1217,7 +1235,7 @@ function addMapTileLine() {
 	mapTileLine.append(createInputSelect('Select angle', 'angle-title', 'select-angle'));
 	mapTileLine.append($('<input type="hidden" name="tile-side" value=""/>'));
 	mapTileLine.append($('<input type="hidden" name="tile-angle" value=""/>'));
-	
+
 	mapTileLine.find('.select-tile ul').append(createTileSelectContent());
 	mapTileLine.find('.select-side ul').append(createSideSelectContent());
 	mapTileLine.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
@@ -1242,7 +1260,7 @@ function addDoorLine() {
 	doorLine.append(openedCheckbox);
 
 	doorLine.append($('<input type="hidden" name="door-direction" value=""/>'));
-	
+
 	doorLine.find('.select-door ul').append(createDoorSelectContent());
 	doorLine.find('.select-direction ul').append(createDirectionSelectContent());
 	doorLine.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
@@ -1256,7 +1274,7 @@ function addXsLine() {
 	var xLine = $('<div>');
 	addUnitLine(xLine, 'Xs');
 	xLine.find('input[type="text"]').remove();
-	
+
 	xLine.find('.select-xs ul').append(createXsSelectContent());
 	xLine.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	xLine.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
@@ -1268,7 +1286,7 @@ function addXsLine() {
 function addAllyLine() {
 	var ally = $('<div>');
 	addUnitLine(ally, 'Ally');
-	
+
 	ally.find('.select-ally ul').append(createAlliesSelectContent());
 	ally.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	ally.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
@@ -1286,7 +1304,7 @@ function addAllyLine() {
 function addFamiliarLine() {
 	var familiar = $('<div>');
 	addUnitLine(familiar, 'Familiar');
-	
+
 	familiar.find('.select-familiar ul').append(createFamiliarsSelectContent());
 	familiar.find('[name="familiar-hp"]').attr('name', 'hp');
 	familiar.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
@@ -1301,7 +1319,7 @@ function addObjectiveLine() {
 	var objective = $('<div>');
 	addUnitLine(objective, 'Objective');
 	objective.find('input[type="text"]').remove();
-	
+
 	objective.find('.select-objective ul').append(createObjectiveSelectContent());
 	objective.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	objective.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
@@ -1328,7 +1346,7 @@ function removeHpInput(element) {
 function addLieutenantLine() {
 	var lieutenant = $('<div>');
 	addUnitLine(lieutenant, 'Lieutenant');
-	
+
 	lieutenant.find('.select-lieutenant ul').append(createLieutenantsSelectContent());
 	lieutenant.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	lieutenant.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
@@ -1352,14 +1370,14 @@ function createConditionsBlock() {
 function createSkillsBlock(heroNumber) {
 	var html = $('<div>').addClass('showClass').addClass('skills-container');
 	html.append($('<h1>Skills</h1>'));
-	
+
 	for (var i = 0; i < HYBRID_CLASSES.length; i++) {
 		var hc = HYBRID_CLASSES[i];
 		var hybridInput = createInputSelect('Select Class ', 'hybrid-class-title', 'select-hybrid-class ' + folderize(hc.title));
 		html.append(hybridInput);
 		hybridInput.find('ul').addClass(folderize(hc.newArchetype.title) + ' showarch').append(createClassSelectContent(true));
 	}
-	
+
 	html.append($('<input type="hidden" name="hybrid-class-title" value=""/>'));
 	var skillsImages = $('<div>').addClass('imagescontainer');
 	for (var tempoClass in CLASSES) {
@@ -1453,28 +1471,28 @@ function createItemsBlock() {
 	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item').attr('onclick', "$(this).toggleClass('exhausted')"));
 	itemsContainer.append($('<img src="images/misc/item.png">').addClass('item2').attr('onclick', "$(this).toggleClass('exhausted')"));
 	html.append(itemsContainer);
-	
+
 	var itemsSelects = $('<div>').addClass('items-selects showclass');
 	var weaponSelect = $(createInputSelect('Select Weapon', 'weapon-title', 'select-weapon'));
 	weaponSelect.find('ul').append(createHandSelectContent());
 	itemsSelects.append(weaponSelect);
-	
+
 	var weaponSelectSecond = $(createInputSelect('Select Weapon', 'weapon-title', 'select-weapon')).addClass('second-select');
 	weaponSelectSecond.find('ul').append(createHandSelectContent());
 	itemsSelects.append(weaponSelectSecond);
-	
+
 	var armorSelect = $(createInputSelect('Select Armor', 'armor-title', 'select-armor'));
 	armorSelect.find('ul').append(createArmorSelectContent());
 	itemsSelects.append(armorSelect);
-	
+
 	var itemsSelect = $(createInputSelect('Select Item', 'item-title', 'select-item'));
 	itemsSelect.find('ul').append(createItemSelectContent());
 	itemsSelects.append(itemsSelect);
-	
+
 	var itemsSelectSecond = $(createInputSelect('Select Item', 'item-title', 'select-item')).addClass('second-select');
 	itemsSelectSecond.find('ul').append(createItemSelectContent());
 	itemsSelects.append(itemsSelectSecond);
-	
+
 	html.append(itemsSelects);
 	html.append($('<input type="hidden" name="hand">'));
 	html.append($('<input type="hidden" name="hand2">'));
@@ -1524,7 +1542,7 @@ function createPlotDeckBlock() {
 function createPlotCardsBlock() {
 	var html = $('<div>').addClass('showplot').addClass('plot-cards-container');
 	html.append($('<h2>Plot cards</h2>'));
-	
+
 	var plotImages = $('<div>').addClass('imagescontainer');
 	for (var i = 0; i < PLOT_DECKS.length; i++) {
 		var currentPlotDeck = PLOT_DECKS[i];
@@ -1655,7 +1673,7 @@ function createSackAndSearchBlock() {
 	additionButton.html('Add Item or Search card');
 	sackContainer.append(additionButton);
 	html.append(sackContainer);
-	
+
 	var sackSelects = $('<div>').addClass('sack-selects');
 	html.append(sackSelects);
 	return html;
@@ -1730,7 +1748,7 @@ function hero(element) {
 		hero.hp = container.find('[name="hero-hp"]').val();
 		hero.stamina = container.find('[name="hero-stamina"]').val();
 		hero.className = container.find('[name="class-title"]').val();
-		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val(); 
+		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val();
 		hero.featUsed = container.find('.hero-image-container img').parent().hasClass('feat-used');
 		hero.skills = getSkills(container, hero.className, hero.hybridClassName);
 		hero.items = getItems(container);
@@ -1746,14 +1764,14 @@ function getSkills(container, className, hybridClassName) {
 	var result = [];
 	var skills = $(container).find('.checkbox.' + folderize(className) + ' input');
 	for (var i = 0; i < skills.length; i++) {
-		var currentSkill = $(skills[i]); 
+		var currentSkill = $(skills[i]);
 		var image = container.find('img[skill="' + currentSkill.attr('name') + '"]');
 		result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted'), image.hasClass('hasmelody'), image.hasClass('hasharmony')]);
 	}
 	if (hybridClassName != undefined) {
 		var hybridSkills = $(container).find('.checkbox.' + folderize(hybridClassName) + ' input');
 		for (var i = 0; i < hybridSkills.length; i++) {
-			var currentSkill = $(hybridSkills[i]); 
+			var currentSkill = $(hybridSkills[i]);
 			var image = container.find('img[skill="' + currentSkill.attr('name') + '"]');
 			result.push([currentSkill.attr('name'), currentSkill.prop('checked'), currentSkill.hasClass('card-exhausted'), image.hasClass('hasmelody'), image.hasClass('hasharmony')]);
 		}
@@ -1918,7 +1936,7 @@ function getPlotInfo() {
 	var cards = [];
 	var plotCards = $(container).find('.checkbox.' + folderize(plot.title) + ' input');
 	for (var i = 0; i < plotCards.length; i++) {
-		var currentPlotCard = $(plotCards[i]); 
+		var currentPlotCard = $(plotCards[i]);
 		// var image = container.find('img[skill="' + currentPlotCard.attr('name') + '"]');
 		cards.push([currentPlotCard.attr('name'), currentPlotCard.prop('checked'), currentPlotCard.hasClass('card-exhausted')]);
 	}
@@ -1998,7 +2016,7 @@ function constructMapFromConfig() {
     map.html('');
     figures.html('');
 	mapObjects = [];
-	
+
 	for (var i = 0; config.tiles != undefined && i < config.tiles.length; i++) {
 		var tile = config.tiles[i];
 		var tileObject = $('<div>');
@@ -2023,7 +2041,7 @@ function constructMapFromConfig() {
 		tileObject.append(tileImage);
         map.append(tileObject);
 	}
-	
+
 	for (var i = 0; config.doors != undefined && i < config.doors.length; i++) {
 		var door = config.doors[i];
 		var doorObject = $('<div>');
@@ -2049,7 +2067,7 @@ function constructMapFromConfig() {
 		doorObject.append(doorImage);
         map.append(doorObject);
 	}
-	
+
 	for (var i = 0; config.xs != undefined && i < config.xs.length; i++) {
 		var xs = config.xs[i];
 		var xsObject = $('<div>');
@@ -2064,7 +2082,7 @@ function constructMapFromConfig() {
 		xsObject.append(xsImage);
         map.append(xsObject);
 	}
-	
+
 	for (var i = 0; config.objectives != undefined && i < config.objectives.length; i++) {
 		var objective = config.objectives[i];
 		var objectiveObject = $('<div>');
@@ -2087,7 +2105,7 @@ function constructMapFromConfig() {
 		addMapObject(objective.x, objective.y, objectiveObject, z_index);
         map.append(objectiveObject);
 	}
-	
+
 	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
 		var familiar = config.familiars[i];
 		var familiarObject = $('<div>');
@@ -2111,7 +2129,7 @@ function constructMapFromConfig() {
 		addMapObject(familiar.x, familiar.y, familiarObject, z_index);
         figures.append(familiarObject);
 	}
-	
+
 	for (var i = 0; config.monsters != undefined && i < config.monsters.length; i++) {
 		var monster = config.monsters[i];
 		var monsterObject = $('<div>');
@@ -2134,7 +2152,7 @@ function constructMapFromConfig() {
 		addMapObject(monster.x, monster.y, monsterObject, z_index);
         figures.append(monsterObject);
 	}
-	
+
 	for (var i = 0; config.allies != undefined && i < config.allies.length; i++) {
 		var ally = config.allies[i];
 		var allyObject = $('<div>');
@@ -2156,7 +2174,7 @@ function constructMapFromConfig() {
 		addMapObject(ally.x, ally.y, allyObject, z_index);
         figures.append(allyObject);
 	}
-	
+
 	for (var i = 0; config.lieutenants != undefined && i < config.lieutenants.length; i++) {
 		var lieutenant = config.lieutenants[i];
 		var lieutenantObject = $('<div>');
@@ -2179,14 +2197,14 @@ function constructMapFromConfig() {
 		addMapObject(lieutenant.x, lieutenant.y, lieutenantObject, z_index);
         figures.append(lieutenantObject);
 	}
-	
+
 	addHeroToMap(config.hero1);
 	addHeroToMap(config.hero2);
 	addHeroToMap(config.hero3);
 	addHeroToMap(config.hero4);
-	
+
 	adjustOverlappingImages();
-	
+
 	setShortLink();
 }
 
@@ -2420,17 +2438,17 @@ function constructMonstersAndLieutenantsTabFromConfig() {
 				var monsterLine = addMonsterLine();
 				var width = monster.vertical ? MONSTERS[monster.title].width : MONSTERS[monster.title].height;
 				var height = monster.vertical ? MONSTERS[monster.title].height : MONSTERS[monster.title].width;
-				
+
 				var monsterSelectUnit = monsterLine.find('[onclick="updateMonster(this, \'' + monster.title + '\');"]');
 				var correctMonsterSelectUnit;
-				
+
 				if (monster.master && $(monsterSelectUnit[0]).html().indexOf('master') > -1 || !monster.master && !($(monsterSelectUnit[0]).html().indexOf('master') > -1)) {
 					correctMonsterSelectUnit = monsterSelectUnit[0];
 				} else {
 					correctMonsterSelectUnit = monsterSelectUnit[1];
 				}
 				updateMonster(correctMonsterSelectUnit, monster.title);
-				
+
 				var xValue = width.toString() + monster.x.toString();
 				updateCoordinate(monsterLine.find('.select-x [onclick="updateCoordinate(this, \'' + xValue + '\');"]'), xValue);
 				var yValue = height.toString() + monster.y.toString();
@@ -2509,6 +2527,25 @@ function constructMapControlsTabFromConfig() {
 }
 
 function constructAlliesAndFamiliarsTabFromConfig() {
+	constructFamiliarsTabFromConfig();
+	constructAlliesTabFromConfig();
+}
+function constructFamiliarsTabFromConfig() {
+	if (config.familiars != undefined) {
+		for (var i = 0 ; i < config.familiars.length; i++) {
+			var container = addFamiliarLine();
+			var familiar = config.familiars[i];
+			updateFamiliar(container.find('.select-familiar li')[0], familiar.title);
+			container.find('[name="familiar-x"]').val(familiar.x);
+			container.find('.x-title').html(getAlphabetChar(familiar.x - 1) + ' ');
+			container.find('[name="familiar-y"]').val(familiar.y);
+			container.find('.y-title').html(familiar.y.toString() + ' ');
+			container.find('[name="hp"]').val(familiar.hp);
+			updateConditionsInSettings(familiar.conditions, container);
+		}
+	}
+}
+function constructAlliesTabFromConfig() {
 	if (config.allies != undefined) {
 		for (var i = 0 ; i < config.allies.length; i++) {
 			var container = addAllyLine();
@@ -2524,19 +2561,6 @@ function constructAlliesAndFamiliarsTabFromConfig() {
 			}
 			updateConditionsInSettings(ally.conditions, container);
 			adjustAlliesSkillsImages(container.children()[0]);
-		}
-	}
-	if (config.familiars != undefined) {
-		for (var i = 0 ; i < config.familiars.length; i++) {
-			var container = addFamiliarLine();
-			var familiar = config.familiars[i];
-			updateFamiliar(container.find('.select-familiar li')[0], familiar.title);
-			container.find('[name="familiar-x"]').val(familiar.x);
-			container.find('.x-title').html(getAlphabetChar(familiar.x - 1) + ' ');
-			container.find('[name="familiar-y"]').val(familiar.y);
-			container.find('.y-title').html(familiar.y.toString() + ' ');
-			container.find('[name="hp"]').val(familiar.hp);
-			updateConditionsInSettings(familiar.conditions, container);
 		}
 	}
 }
@@ -2651,7 +2675,7 @@ function drawGrid() {
 }
 
 function updateAct(actOne) {
-	var isActOne = actOne == undefined || actOne; 
+	var isActOne = actOne == undefined || actOne;
 	$(isActOne ? '#actOne' : '#actTwo').prop('checked', true);
 	adjustAct();
 }
@@ -2713,7 +2737,7 @@ function moveObjectsOnMap(right, down) {
 					configPart[i].y = (parseInt(configPart[i].y) + down).toString();;
 				}
 			}
-			
+
 		}
 	}
 	constructMapFromConfig();
@@ -2724,7 +2748,7 @@ function moveObjectsOnMap(right, down) {
 
 function rotateMap(clockwise) {
 	var realWidth = 0;
-	var realHeight = 0; 
+	var realHeight = 0;
 	for (var i = 0; i < config.tiles.length; i++) {
 		var tile = config.tiles[i];
 		var rightSide, bottomSide;
@@ -2885,13 +2909,13 @@ function rotateObjectives(clockwise, realWidth, realHeight) {
 }
 
 function rotateObjectClockwise(object, height, canvasHeight) {
-	var newX = (canvasHeight - parseInt(object.y) + 1 - height).toString(); //+1 and -1 lower are made becays numbering on x starts width 1 and on y - with 0 
+	var newX = (canvasHeight - parseInt(object.y) + 1 - height).toString(); //+1 and -1 lower are made becays numbering on x starts width 1 and on y - with 0
 	object.y = (parseInt(object.x) - 1).toString();
 	object.x = newX;
 }
 
 function rotateObjectCounterClockwise(object, width, canvasWidth) {
-	var newY = (canvasWidth - parseInt(object.x) - width + 1).toString(); 
+	var newY = (canvasWidth - parseInt(object.x) - width + 1).toString();
 	object.x = (parseInt(object.y) + 1).toString();
 	object.y = newY;
 }
@@ -2964,7 +2988,7 @@ $(function() {
 	}
 	drawGrid();
 	setMapSizeFromConfig();
-	
+
 	$('.nav-tabs a').click(function (e) {
 		e.preventDefault();
 		$(this).tab('show');
