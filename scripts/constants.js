@@ -8,7 +8,7 @@ function listsort(a, b) {
     return 0;
 }
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
-	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast', 
+	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast',
 	SoE = 'Shards of Everdark', SoN = 'Shadow of Narekhall', SotS = 'Stewards of the Secret', TF = 'The Trollfens', ToC = 'Treaty of Champions',
 	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall', CtR = 'Chains that Rust';
 var Building = 'Building',
@@ -24,7 +24,7 @@ var Building = 'Building',
 var MONSTER_TRAITS = [Building,Cave,Civilized,Cold,Cursed,Dark,Hot,Mountain,Water,Wilderness];
 var monsterTraits = {};
 for (var i=0; i < MONSTER_TRAITS.length; i++) {
-	monsterTraits[urlize(MONSTER_TRAITS[i])] = urlize(MONSTER_TRAITS[i]); 
+	monsterTraits[urlize(MONSTER_TRAITS[i])] = urlize(MONSTER_TRAITS[i]);
 }
 
 var MONSTERS_LIST = [
@@ -119,7 +119,7 @@ var LIEUTENANTS = {};
 
 for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
 	LIEUTENANTS[LIEUTENANTS_LIST[i][0]] = {'hasBack':LIEUTENANTS_LIST[i][1], 'width':LIEUTENANTS_LIST[i][2], 'height':LIEUTENANTS_LIST[i][3]};
-} 
+}
 
 var MONSTERS_HP = [
 	['Arachyura',5,7,7,9],
@@ -478,7 +478,7 @@ var apothecary = {},
 	treasureHunter = {},
 	wildlander = {},
 	shadowwalker = {};
-	
+
 	apothecary.title = 'Apothecary';
 	bard.title = 'Bard';
 	disciple.title = 'Disciple';
@@ -523,7 +523,7 @@ var apothecary = {},
 		['Hidden Stash', 3],
 		['Potent Remedies', 3]
 	];
-	
+
 	bard.skills = [
 		['Aria Of War', 2],
 		['Cacophony', 3],
@@ -537,14 +537,14 @@ var apothecary = {},
 		['Understudy', 1],
 		['Wayfarer', 3]
 	];
-	
+
 	battlemage.skills = [
 		['Arcane Veteran', 0],
 		['Death Siphon', 3],
 		['Planar Weapon', 1],
 		['Runic Weave', 2]
 	];
-	
+
 	beastmaster.skills = [
 		['Predator', 3],
 		['Changing Skins', 3],
@@ -559,7 +559,7 @@ var apothecary = {},
 		['Skinning Knife', 0, hand],
 		['Hunting Spear', 0, hand]
 	];
-	
+
 	berserker.skills = [
 		['Execute', 3],
 		['Death Rage', 3],
@@ -570,9 +570,9 @@ var apothecary = {},
 		['Counter Attack', 1],
 		['Brute', 1],
 		['Rage', 0],
-		['Chipped Greataxe', 0, twohand]              
+		['Chipped Greataxe', 0, twohand]
 	];
-	
+
 	bountyHunter.skills = [
    		['Chosen Target', 0],
    		['Dark Iron Chains', 2],
@@ -585,7 +585,7 @@ var apothecary = {},
    		['Rapid Fire', 3],
    		['Undercover', 2]
    	];
-   	
+
    	champion.skills = [
 		['A Living Legend', 1],
 		['For The Cause', 3],
@@ -599,7 +599,7 @@ var apothecary = {},
 		['Valorous Strike', 3],
 		['Worn Greatsword', 0, twohand]
 	];
-	
+
 	conjurer.skills = [
 		['Blinding Light', 2],
 		['Channeling', 0],
@@ -613,7 +613,7 @@ var apothecary = {},
 		['Sleight Of Mind', 2],
 		['Vortex', 3]
 	];
-	
+
 	disciple.skills = [
 		['Armor Of Faith', 1],
 		['Blessed Strike', 1],
@@ -627,7 +627,7 @@ var apothecary = {},
 		['Time Of Need', 2],
 		['Wooden Shield', 0, hand]
 	];
-	
+
 	geomancer.skills = [
 		['Cataclysm', 3],
 		['Earthen Anguish', 1],
@@ -641,7 +641,7 @@ var apothecary = {},
 		['Terracall', 0],
 		['Ways Of Stone', 2]
 	];
-	
+
 	hexer.skills = [
 		['Accursed Arms', 3],
 		['Affliction', 1],
@@ -654,7 +654,7 @@ var apothecary = {},
 		['Staff Of The Grave', 0, twohand],
 		['Viral Hex', 1]
 	];
-	
+
 	knight.skills = [
 		['Advance', 1],
 		['Challenge', 1],
@@ -668,7 +668,7 @@ var apothecary = {},
 		['Stalwart', 3],
 		['Wooden Shield', 0, hand]
 	];
-	
+
 	marshal.skills = [
 		['By The Book', 2],
 		['Crushing Blow', 3],
@@ -682,14 +682,14 @@ var apothecary = {},
 		['War Hammer', 0, twohand],
 		['Zealous Fire', 1]
 	];
-	
+
 	monk.skills = [
 	    ['Greater calling', 0],
 	    ['Inner Balance', 1],
 	    ['Openhanded', 2],
 	    ['Vow Of Freedom', 3]
 	];
-	
+
 	necromancer.skills = [
 		['Army Of Death', 3],
 		['Corpse Blast', 1],
@@ -703,7 +703,7 @@ var apothecary = {},
 		['Undead Might', 2],
 		['Vampiric Blood', 2]
 	];
-	
+
 	prophet.skills = [
 		['All Seeing', 2],
 		['Battle Vision', 1],
@@ -717,7 +717,7 @@ var apothecary = {},
 		['Soothing Insight', 0],
 		['Victory Foretold', 2]
 	];
-	
+
 	runemaster.skills = [
 		['Arcane Bolt', 0, twohand],
 		['Break The Rune', 3],
@@ -730,8 +730,8 @@ var apothecary = {},
 		['Runic Knowledge', 0],
 		['Runic Sorcery', 2]
 	];
-	
-	shadowwalker.skills = [	
+
+	shadowwalker.skills = [
 		['Dark Servant', 1],
 		['Dark Shift', 2],
 		['Endless Void', 2],
@@ -745,7 +745,7 @@ var apothecary = {},
 		['Through The Veil', 1],
 		['Tribal Cloak', 0, armor]
 	];
-	
+
 	skirmisher.skills = [
 		['Back In Action', 1],
 		['Born In Battle', 2],
@@ -759,7 +759,7 @@ var apothecary = {},
 		['Unrelenting', 2],
 		['Unstoppable', 3]
 	];
-	
+
 	spiritspeaker.skills = [
 		['Ancestor Spirits', 3],
 		['Cloud Of Mist', 2],
@@ -772,7 +772,7 @@ var apothecary = {},
 		['Tempest', 2],
 		['Vigor', 3]
 	];
-	
+
 	stalker.skills = [
 		['Ambush', 3],
 		['Black Widows Web', 0, hand],
@@ -786,14 +786,14 @@ var apothecary = {},
 		['Set Trap', 0],
 		['Upper Hand', 3]
 	];
-	
+
 	steelcaster.skills = [
 	    ['Iron Blooded', 3],
 	    ['Rune Grafting', 1],
 	    ['Runeguard', 0],
 	    ['Shield Mage', 2]
 	];
-	
+
 	thief.skills = [
 		['Appraisal', 1],
 		['Bushwack', 3],
@@ -807,7 +807,7 @@ var apothecary = {},
 		['Tumble', 2],
 		['Unseen', 2]
 	];
-	
+
 	treasureHunter.skills = [
 		['Delver', 0],
 		['Dungeoneer', 1],
@@ -821,14 +821,14 @@ var apothecary = {},
 		['The Dead Mans Compass', 0, item],
 		['Trail Of Riches', 3]
 	];
-	
+
 	watchman.skills = [
 		['Quick Recovery', 1],
 		['Trailblazer', 2],
 		['Unity', 3],
 		['Vigilance', 0]
 	];
-	
+
 	wildlander.skills = [
 		['Accurate', 1],
 		['Black Arrow', 3],
@@ -855,7 +855,7 @@ var wiz = {},
 	rog.title = 'Scout';
 	rog.classes = [bountyHunter, monk, shadowwalker, stalker, thief, treasureHunter, wildlander];
 	sup.title = 'Healer';
-	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker, watchman];			
+	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker, watchman];
 
 var ARCHETYPE_CLASSES = 'mage warrior scout healer';
 var ARCHETYPES_LIST = [wiz, war, rog, sup];
@@ -871,7 +871,7 @@ for (var i = 0; i < ARCHETYPES_LIST.length; i++) {
 		CLASSES[classObject.title] = classObject;
 		for (var k = 0; k < classObject.skills.length; k++) {
 			if (classObject.skills[k][2] != undefined) {
-				var classItem = []; 
+				var classItem = [];
 				classItem[0] = classObject.skills[k][0];
 				classItem[1] = classObject.title.replace(new RegExp(" ",'g'), '').toLowerCase();
 				classItem[2] = classObject.skills[k][2];
@@ -961,7 +961,7 @@ var HEROES_LIST = [
 	['Okaluk and Rakash',8,3,sup],
 	['Krutzbeck',12,4,war],
         ['Jonas the Kind',10,4,sup],
-        ['Laughin Buldar',14,3,war]  
+        ['Laughin Buldar',14,3,war]
 ];
 
 var HEROES = {};
@@ -1519,7 +1519,7 @@ var actOne = true;
 
 var MAP_HASES_LIST = [
 	['TSR - First Blood', "eyJ0aWxlcyI6W3sidGl0bGUiOiI4Iiwic2lkZSI6IkEiLCJ4IjoiNiIsInkiOiIwIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiNSIsInkiOiIxIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxNiIsInNpZGUiOiJBIiwieCI6IjYiLCJ5IjoiNCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxMiIsInNpZGUiOiJBIiwieCI6IjEiLCJ5IjoiMyIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4aXQiLCJzaWRlIjoiQSIsIngiOiIyIiwieSI6IjEiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjI2Iiwic2lkZSI6IkEiLCJ4IjoiMTAiLCJ5IjoiNCIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjkiLCJzaWRlIjoiQSIsIngiOiI2IiwieSI6IjgiLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiNSIsInkiOiI5IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbnRyYW5jZSIsInNpZGUiOiJBIiwieCI6IjEwIiwieSI6IjkiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiIxMyIsInkiOiI1IiwiYW5nbGUiOiIyNzAifV0sImRvb3JzIjpbXSwieHMiOltdLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlNlYXJjaCIsIngiOiIxIiwieSI6IjcifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjUiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTMiLCJ5IjoiNSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiNSIsInkiOiIxIn1dLCJtb25zdGVycyI6W3sidGl0bGUiOiJFdHRpbiIsIm1hc3RlciI6dHJ1ZSwieCI6IjciLCJ5IjoiMSIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiIxNiIsImNvbmRpdGlvbnMiOltdfSx7InRpdGxlIjoiRXR0aW4iLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiNyIsInkiOiIxIiwidmVydGljYWwiOmZhbHNlLCJocCI6IjUiLCJjb25kaXRpb25zIjpbXX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOnRydWUsIngiOiIxMSIsInkiOiI1IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjQiLCJjb25kaXRpb25zIjpbXX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMTEiLCJ5IjoiNSIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiIyIiwiY29uZGl0aW9ucyI6W119LHsidGl0bGUiOiJHb2JsaW4gQXJjaGVyIiwibWFzdGVyIjpmYWxzZSwieCI6IjExIiwieSI6IjUiLCJ2ZXJ0aWNhbCI6ZmFsc2UsImhwIjoiMiIsImNvbmRpdGlvbnMiOltdfSx7InRpdGxlIjoiR29ibGluIEFyY2hlciIsIm1hc3RlciI6ZmFsc2UsIngiOiIxMSIsInkiOiI1IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjIiLCJjb25kaXRpb25zIjpbXX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMTEiLCJ5IjoiNSIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiIyIiwiY29uZGl0aW9ucyI6W119XSwibGlldXRlbmFudHMiOltdLCJhY3RPbmUiOnRydWV9"],
-	['TSR - Fat Goblin - E1', "eyJ4cyI6W3sidGl0bGUiOiIxeDEiLCJ4IjoiNiIsInkiOiI4In0seyJ0aXRsZSI6IjF4MSIsIngiOiI3IiwieSI6IjgifV0sInRpbGVzIjpbeyJ0aXRsZSI6IjIwIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiIxIiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiMyIsInNpZGUiOiJBIiwieCI6IjQiLCJ5IjoiMCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxMCIsInNpZGUiOiJBIiwieCI6IjUiLCJ5IjoiNCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiNiIsInkiOiI4IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjE4Iiwic2lkZSI6IkEiLCJ4IjoiMTAiLCJ5IjoiMSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjExIiwic2lkZSI6IkEiLCJ4IjoiMTEiLCJ5IjoiNSIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRXhpdCIsInNpZGUiOiJBIiwieCI6IjIiLCJ5IjoiOSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMTIiLCJ5IjoiOSIsImFuZ2xlIjoiMjcwIn1dLCJkb29ycyI6W10sIm9iamVjdGl2ZXMiOlt7InRpdGxlIjoiUmVkIiwieCI6IjUiLCJ5IjoiNyJ9LHsidGl0bGUiOiJSZWQiLCJ4IjoiNSIsInkiOiI0In0seyJ0aXRsZSI6IlJlZCIsIngiOiI4IiwieSI6IjQifSx7InRpdGxlIjoiUmVkIiwieCI6IjgiLCJ5IjoiNyJ9XX0="],
+	['TSR - Fat Goblin - E1', "eyJtb25zdGVycyI6W3sidGl0bGUiOiJHb2JsaW4gQXJjaGVyIiwibWFzdGVyIjp0cnVlLCJ4IjoiMiIsInkiOiI5IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjQiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMiIsInkiOiI5IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjIiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMiIsInkiOiI5IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjIiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMiIsInkiOiI5IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjIiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkdvYmxpbiBBcmNoZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiMiIsInkiOiI5IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjIiLCJjb25kaXRpb25zIjp7fX1dLCJoZXJvMSI6eyJ0aXRsZSI6IkFzaHJpYW4iLCJ4IjoiMTIiLCJ5IjoiOCIsImhwIjoiMTAiLCJzdGFtaW5hIjoiNCIsImNsYXNzTmFtZSI6IkRpc2NpcGxlIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFybW9yIE9mIEZhaXRoIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCbGVzc2VkIFN0cmlrZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQ2xlYW5zaW5nIFRvdWNoIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEaXZpbmUgRnVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiSG9seSBQb3dlciIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUHJheWVyIE9mIEhlYWxpbmciLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUHJheWVyIE9mIFBlYWNlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSYWRpYW50IExpZ2h0IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJUaW1lIE9mIE5lZWQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJJcm9uIE1hY2UiLCJoYW5kMiI6Ildvb2RlbiBTaGllbGQiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvMiI6eyJ0aXRsZSI6IlN5bmRyYWVsIiwieCI6IjEyIiwieSI6IjkiLCJocCI6IjEyIiwic3RhbWluYSI6IjQiLCJjbGFzc05hbWUiOiJLbmlnaHQiLCJmZWF0VXNlZCI6ZmFsc2UsInNraWxscyI6W1siQWR2YW5jZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQ2hhbGxlbmdlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEZWZlbmQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkRlZmVuc2UgVHJhaW5pbmciLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkd1YXJkIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJbnNwaXJhdGlvbiIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiT2F0aCBPZiBIb25vciIsdHJ1ZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJTaGllbGQgU2xhbSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiU3RhbHdhcnQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJJcm9uIExvbmdzd29yZCIsImhhbmQyIjoiV29vZGVuIFNoaWVsZCIsImFybW9yIjoiIiwiaXRlbSI6IiIsIml0ZW0yIjoiIn0sInNhY2siOltdLCJjb25kaXRpb25zIjp7fX0sImhlcm8zIjp7InRpdGxlIjoiTGVvcmljIG9mIHRoZSBCb29rIiwieCI6IjEyIiwieSI6IjEwIiwiaHAiOiI4Iiwic3RhbWluYSI6IjUiLCJjbGFzc05hbWUiOiJSdW5lbWFzdGVyIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkJyZWFrIFRoZSBSdW5lIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJFeHBsb2RpbmcgUnVuZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiR2hvc3QgQXJtb3IiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkluc2NyaWJlIFJ1bmUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIklyb24gV2lsbCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUXVpY2sgQ2FzdGluZyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuZSBNYXN0ZXJ5IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSdW5pYyBLbm93bGVkZ2UiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuaWMgU29yY2VyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdXSwiaXRlbXMiOnsiaGFuZCI6IkFyY2FuZSBCb2x0IiwiaGFuZDIiOiIiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvNCI6eyJ0aXRsZSI6IkphaW4gRmFpcndvb2QiLCJ4IjoiMTIiLCJ5IjoiMTEiLCJocCI6IjgiLCJzdGFtaW5hIjoiNSIsImNsYXNzTmFtZSI6IldpbGRsYW5kZXIiLCJmZWF0VXNlZCI6ZmFsc2UsInNraWxscyI6W1siQWNjdXJhdGUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkJsYWNrIEFycm93IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCb3cgTWFzdGVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGFuZ2VyIFNlbnNlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJFYWdsZSBFeWVzIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJGaXJzdCBTdHJpa2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkZsZWV0IE9mIEZvb3QiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIk5pbWJsZSIsdHJ1ZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSdW5uaW5nIFNob3QiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJZZXcgU2hvcnRib3ciLCJoYW5kMiI6IiIsImFybW9yIjoiIiwiaXRlbSI6IiIsIml0ZW0yIjoiIn0sInNhY2siOltdLCJjb25kaXRpb25zIjp7fX0sInRpbGVzIjpbeyJ0aXRsZSI6IjIwIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiIxIiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiMyIsInNpZGUiOiJBIiwieCI6IjQiLCJ5IjoiMCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxMCIsInNpZGUiOiJBIiwieCI6IjUiLCJ5IjoiNCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiNiIsInkiOiI4IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjE4Iiwic2lkZSI6IkEiLCJ4IjoiMTAiLCJ5IjoiMSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjExIiwic2lkZSI6IkEiLCJ4IjoiMTEiLCJ5IjoiNSIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRXhpdCIsInNpZGUiOiJBIiwieCI6IjIiLCJ5IjoiOSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMTIiLCJ5IjoiOSIsImFuZ2xlIjoiMjcwIn1dLCJkb29ycyI6W10sInhzIjpbeyJ0aXRsZSI6IjF4MSIsIngiOiI2IiwieSI6IjgifSx7InRpdGxlIjoiMXgxIiwieCI6IjciLCJ5IjoiOCJ9XSwiYWxsaWVzIjpbXSwiZmFtaWxpYXJzIjpbeyJ0aXRsZSI6IkltYWdlIiwieCI6IjIiLCJ5IjoiMCIsImhwIjoiMiIsImNvbmRpdGlvbnMiOnt9fV0sIm9iamVjdGl2ZXMiOlt7InRpdGxlIjoiUmVkIiwieCI6IjUiLCJ5IjoiNyJ9LHsidGl0bGUiOiJSZWQiLCJ4IjoiNSIsInkiOiI0In0seyJ0aXRsZSI6IlJlZCIsIngiOiI4IiwieSI6IjQifSx7InRpdGxlIjoiUmVkIiwieCI6IjgiLCJ5IjoiNyJ9XSwib3ZlcmxvcmQiOnsiY2FyZHMiOlt7InNlY29uZGFyeSI6MCwidGl0bGUiOiJDcml0aWNhbCBCbG93In0seyJzZWNvbmRhcnkiOjAsInRpdGxlIjoiRGFyayBDaGFybSJ9LHsic2Vjb25kYXJ5IjowLCJ0aXRsZSI6IkRhcmsgRm9ydHVuZSJ9LHsic2Vjb25kYXJ5IjowLCJ0aXRsZSI6IkRhcmsgTWlnaHQifSx7InNlY29uZGFyeSI6MCwidGl0bGUiOiJEYXNoIn0seyJzZWNvbmRhcnkiOjAsInRpdGxlIjoiRnJlbnp5In0seyJzZWNvbmRhcnkiOjAsInRpdGxlIjoiUGl0IFRyYXAifSx7InNlY29uZGFyeSI6MCwidGl0bGUiOiJQb2lzb24gRGFydCJ9LHsic2Vjb25kYXJ5IjowLCJ0aXRsZSI6IlRyaXB3aXJlIn0seyJzZWNvbmRhcnkiOjAsInRpdGxlIjoiV29yZCBPZiBNaXNlcnkifSx7InNlY29uZGFyeSI6MCwidGl0bGUiOiJPdXRicmVhayJ9LHsic2Vjb25kYXJ5IjowLCJ0aXRsZSI6IlRhaW50ZWQgQmxvdyJ9XX0sImxpZXV0ZW5hbnRzIjpbXSwiYWN0T25lIjp0cnVlLCJtYXBXaWR0aCI6NDAsIm1hcEhlaWdodCI6NTAsInF1ZXN0T2JqZWN0aXZlcyI6eyJoZXJvZXNWaWN0b3J5IjoidGVzdCIsIm92ZWxvcmRWaWN0b3J5IjoiIiwiY3VycmVudFN0YXR1cyI6IiIsInJlaW5mb3JjZW1lbnRzIjoiIn0sInBsb3QiOnsidGl0bGUiOiJDdXJzZWQgQnkgUG93ZXIiLCJjYXJkcyI6W1siQm9sdCBGcm9tIFRoZSBCbHVlIix0cnVlLGZhbHNlXSxbIkNhYmFsIixmYWxzZSxmYWxzZV0sWyJEYXJrIFBhY3QiLHRydWUsZmFsc2VdLFsiRnJpZW5kcyBJbiBIaWdoIFBsYWNlcyIsZmFsc2UsZmFsc2VdLFsiTWFzcXVlcyIsZmFsc2UsZmFsc2VdLFsiTXlzdGljIE1pZ2h0IixmYWxzZSxmYWxzZV0sWyJTdW1tb24gLSBNZXJpY2siLGZhbHNlLGZhbHNlXSxbIlRoYXVtYXR1cmd5IixmYWxzZSxmYWxzZV0sWyJUaGUgRGFyayBNYXJrIixmYWxzZSxmYWxzZV0sWyJUaGUgR3Jhc3BpbmcgR3JhdmUiLGZhbHNlLGZhbHNlXV0sIm51bWJlciI6IjMifSwibW9uc3RlclRyYWl0cyI6eyJidWlsZGluZyI6ImJ1aWxkaW5nIiwiY2F2ZSI6ImNhdmUiLCJjaXZpbGl6ZWQiOiJjaXZpbGl6ZWQiLCJjb2xkIjoiY29sZCIsImN1cnNlZCI6ImN1cnNlZCIsImRhcmsiOiJkYXJrIiwiaG90IjoiaG90IiwibW91bnRhaW4iOiJtb3VudGFpbiIsIndhdGVyIjoid2F0ZXIiLCJ3aWxkZXJuZXNzIjoid2lsZGVybmVzcyJ9LCJleHBhbnNpb25zIjp7InNlY29uZGVkaXRpb25iYXNlZ2FtZSI6InNlY29uZGVkaXRpb25iYXNlZ2FtZSIsImJvbmRzb2Z0aGV3aWxkIjoiYm9uZHNvZnRoZXdpbGQiLCJjcm93bm9mZGVzdGlueSI6ImNyb3dub2ZkZXN0aW55IiwiY3J1c2FkZW9mdGhlZm9yZ290dGVuIjoiY3J1c2FkZW9mdGhlZm9yZ290dGVuIiwiZ3VhcmRpYW5zb2ZkZWVwaGFsbCI6Imd1YXJkaWFuc29mZGVlcGhhbGwiLCJsYWJ5cmludGhvZnJ1aW4iOiJsYWJ5cmludGhvZnJ1aW4iLCJsYWlyb2Z0aGV3eXJtIjoibGFpcm9mdGhld3lybSIsIm1hbm9yb2ZyYXZlbnMiOiJtYW5vcm9mcmF2ZW5zIiwib2F0aG9mdGhlb3V0Y2FzdCI6Im9hdGhvZnRoZW91dGNhc3QiLCJzaGFyZHNvZmV2ZXJkYXJrIjoic2hhcmRzb2ZldmVyZGFyayIsInNoYWRvd29mbmFyZWtoYWxsIjoic2hhZG93b2ZuYXJla2hhbGwiLCJzdGV3YXJkc29mdGhlc2VjcmV0Ijoic3Rld2FyZHNvZnRoZXNlY3JldCIsInRoZXRyb2xsZmVucyI6InRoZXRyb2xsZmVucyIsInRyZWF0eW9mY2hhbXBpb25zIjoidHJlYXR5b2ZjaGFtcGlvbnMiLCJ2aXNpb25zb2ZkYXduIjoidmlzaW9uc29mZGF3biIsImNvbnZlcnNpb25raXQiOiJjb252ZXJzaW9ua2l0IiwibWlzdHNvZmJpbGVoYWxsIjoibWlzdHNvZmJpbGVoYWxsIiwiY2hhaW5zdGhhdHJ1c3QiOiJjaGFpbnN0aGF0cnVzdCJ9fQ=="],
 	['TSR - Fat Goblin - E2', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkIiLCJ4IjoiMTMiLCJ5IjoiMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiMTUiLCJzaWRlIjoiQiIsIngiOiIxMiIsInkiOiIyIiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjI3Iiwic2lkZSI6IkIiLCJ4IjoiMTMiLCJ5IjoiNiIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjkiLCJzaWRlIjoiQiIsIngiOiIxMiIsInkiOiI4IiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMTMiLCJ5IjoiMTIiLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiMjMiLCJzaWRlIjoiQiIsIngiOiI2IiwieSI6IjkiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIxMSIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiOCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQiIsIngiOiIxIiwieSI6IjkiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjI2Iiwic2lkZSI6IkIiLCJ4IjoiNyIsInkiOiI2IiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiOCIsInkiOiI1IiwiYW5nbGUiOiIxODAifV0sImRvb3JzIjpbeyJ0aXRsZSI6IkRvb3IiLCJ2ZXJ0aWNhbCI6ZmFsc2UsIngiOiI3IiwieSI6IjgifSx7InRpdGxlIjoiRG9vciIsInZlcnRpY2FsIjpmYWxzZSwieCI6IjEyIiwieSI6IjcifSx7InRpdGxlIjoiRG9vciIsInZlcnRpY2FsIjp0cnVlLCJ4IjoiMTEiLCJ5IjoiOCJ9XSwib2JqZWN0aXZlcyI6W3sidGl0bGUiOiJVbmtub3duIiwieCI6IjciLCJ5IjoiNiJ9LHsidGl0bGUiOiJVbmtub3duIiwieCI6IjciLCJ5IjoiNyJ9LHsidGl0bGUiOiJVbmtub3duIiwieCI6IjEwIiwieSI6IjYifSx7InRpdGxlIjoiVW5rbm93biIsIngiOiIxMCIsInkiOiI3In1dfQ=="],
 	['TSR - Castle Daerion - E1', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkV4aXQiLCJzaWRlIjoiQSIsIngiOiI1IiwieSI6IjAiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjEzIiwic2lkZSI6IkEiLCJ4IjoiMyIsInkiOiIyIiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjQiLCJzaWRlIjoiQSIsIngiOiIxIiwieSI6IjgiLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiRXh0ZW5zaW9uMXgyIiwic2lkZSI6IkEiLCJ4IjoiNyIsInkiOiIxMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiNyIsInNpZGUiOiJBIiwieCI6IjgiLCJ5IjoiOSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4dGVuc2lvbjF4MiIsInNpZGUiOiJBIiwieCI6IjEyIiwieSI6IjEyIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIzIiwic2lkZSI6IkEiLCJ4IjoiMTMiLCJ5IjoiMTAiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IkVuZCIsInNpZGUiOiJBIiwieCI6IjE0IiwieSI6IjE2IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMTQiLCJ5IjoiOCIsImFuZ2xlIjoiOTAifV0sImRvb3JzIjpbeyJ0aXRsZSI6IkRvb3IiLCJ2ZXJ0aWNhbCI6ZmFsc2UsIngiOiIyIiwieSI6IjUifSx7InRpdGxlIjoiRG9vciIsInZlcnRpY2FsIjp0cnVlLCJ4IjoiNyIsInkiOiI5In0seyJ0aXRsZSI6IkRvb3IiLCJ2ZXJ0aWNhbCI6dHJ1ZSwieCI6IjExIiwieSI6IjExIn1dLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlJlZCIsIngiOiI3IiwieSI6IjIifSx7InRpdGxlIjoiUmVkIiwieCI6IjIiLCJ5IjoiMTIifSx7InRpdGxlIjoiUmVkIiwieCI6IjExIiwieSI6IjkifSx7InRpdGxlIjoiUmVkIiwieCI6IjE1IiwieSI6IjE2In1dfQ=="],
 	['TSR - Castle Daerion - E2', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IjEiLCJzaWRlIjoiQiIsIngiOiIxIiwieSI6IjUiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIxOCIsInNpZGUiOiJCIiwieCI6IjQiLCJ5IjoiMSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjE0Iiwic2lkZSI6IkIiLCJ4IjoiOCIsInkiOiIwIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMTIiLCJ5IjoiMSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjE5Iiwic2lkZSI6IkIiLCJ4IjoiOSIsInkiOiI2IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkIiLCJ4IjoiMTUiLCJ5IjoiNiIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IkVuZCIsInNpZGUiOiJCIiwieCI6IjQiLCJ5IjoiMTEiLCJhbmdsZSI6IjAifV0sImRvb3JzIjpbXSwib2JqZWN0aXZlcyI6W3sidGl0bGUiOiJXaGl0ZSIsIngiOiIzIiwieSI6IjciLCJocCI6IjI1In1dfQ=="],
@@ -1586,7 +1586,7 @@ var MAP_HASES_LIST = [
 var MAP_HASHES = {};
 
 for (var i = 0; i < MAP_HASES_LIST.length; i++) {
-	MAP_HASHES[MAP_HASES_LIST[i][0]] = MAP_HASES_LIST[i][1]; 
+	MAP_HASHES[MAP_HASES_LIST[i][0]] = MAP_HASES_LIST[i][1];
 }
 
 var mapWidth = 40;
