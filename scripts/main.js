@@ -1035,16 +1035,59 @@ function createLieutenantsSelectContent() {
 	return html;
 }
 
-function createMapsSelectContent() {
-	var html = '';
-	for (var i = 0; i < MAP_HASES_LIST.length; i++) {
-		html += addOption(MAP_HASES_LIST[i][0] + ' ', 'search', 'rebuildMap(\'' + MAP_HASES_LIST[i][0] + '\')');
+function createFullMapsBlock() {
+	var html = $('<div>').addClass('full-maps-container');
+
+	html.append(createInputSelect('Select Campaign ', 'campaign-title', 'select-campaign'));
+	html.find('.select-campaign ul').addClass(ALL_CAMPAIGNS_CLASSES + ' showcampaign').append(createCampaignSelectContent());
+	html.append($('<input type="hidden" name="campaign-title" value=""/>'));
+
+	html.append(createInputSelect('Remove and replace current map with : Quest / Encounter ', 'encounter-title', 'select-encounter'));
+	html.find('.select-encounter ul').addClass(ALL_CAMPAIGNS_CLASSES + ' showcampaign').append(createEncounterSelectContent());
+
+	$('#full-maps-container').append(html);
+}
+
+function createCampaignSelectContent() {
+	var html = addOption('Clear', '', 'clearCampaign(this);');
+	for (var i = 0; i < CAMPAIGNS.length; i++) {
+		var code = CAMPAIGNS[i][1];
+		var title = CAMPAIGNS[i][0];
+		html += addOption(title + ' ', code, 'updateCampaign(this, \'' + code + '\');');
 	}
 	return html;
 }
 
-function rebuildMap(mapName) {
-	var mapConfig = JSON.parse(Base64.decode(MAP_HASHES[mapName]));
+function updateCampaign(element, value) {
+	var container = $(element).parents('.full-maps-container');
+	container.find('.campaign-title').html(element.innerText + ' ');
+	container.find('input[name="campaign-title"]').attr('value',value);
+	adjustEncounter(element, value);
+}
+
+function clearCampaign(element) {
+	var container = $(element).parents('.full-maps-container');
+	container.find('.select-campaign ul').addClass(ALL_CAMPAIGNS_CLASSES);
+	container.find('.campaign-title').html('Select campaign ');
+	container.find('input[name="campaign-title"]').attr('value','');
+	adjustEncounter(element, ALL_CAMPAIGNS_CLASSES);
+}
+
+function createEncounterSelectContent() {
+	var html = '';
+	for (var i = 0; i < MAP_HASES_LIST.length; i++) {
+		html += addOption(MAP_HASES_LIST[i][1] + ' ',MAP_HASES_LIST[i][0], 'rebuildMap(this, \'' + i + '\', false);');
+	}
+	return html;
+}
+
+function adjustEncounter(element, campaign) {
+	var container = $(element).parents('.full-maps-container');
+	container.find('.select-encounter ul').removeClass(ALL_CAMPAIGNS_CLASSES).addClass(campaign);
+}
+
+function rebuildMap(element, mapNb) {
+	var mapConfig = JSON.parse(Base64.decode(MAP_HASES_LIST[mapNb][2]));
 	config.tiles = mapConfig.tiles;
 	config.doors = mapConfig.doors;
 	config.xs = mapConfig.xs;
@@ -1052,12 +1095,16 @@ function rebuildMap(mapName) {
 	config.lieutenants = mapConfig.lieutenants;
 	config.allies = mapConfig.allies;
 	config.actOne = mapConfig.actOne;
+	config.questObjectives = mapConfig.questObjectives;
+	config.monsterTraits = mapConfig.monsterTraits;
 
 	clearMapControlTab();
 	clearAllies();
 	clearLieutenants();
 
+	constructQuestObjectives();
 	updateAct(config.actOne);
+	updateTraitsFromConfig()
 	constructMonstersAndLieutenantsTabFromConfig();
 	constructMapControlsTabFromConfig();
 	constructAlliesTabFromConfig();
@@ -1067,6 +1114,7 @@ function rebuildMap(mapName) {
 		constructMiscellaneousObjectsTabFromConfig();
 	}
 	switchToMap();
+	clearCampaign(element);
 }
 
 function clearMapControlTab() {
@@ -1609,15 +1657,6 @@ function exhaustPlotCard(image) {
 	$(image).toggleClass('exhausted');
 	var container = $(image).parents('.select-row');
 	container.find('[name="' + $(image).attr('card') + '"]').toggleClass('card-exhausted');
-}
-
-function createFullMapsBlock() {
-	var html = $('<div>').addClass('full-maps-container');
-	var select = $(createInputSelect('Remove current map with standard', 'map-title', 'select-map'));
-	var ul = select.find('ul');
-	ul.append(createMapsSelectContent());
-	html.append(select);
-	$('#full-maps-container').append(html);
 }
 
 function createFamiliarsImagesBlock() {
@@ -2300,7 +2339,7 @@ function adjustOverlappingImages() {
 
 function constructSettingsFromConfig() {
 	updateAct(config.actOne);
-	updateTraitsAndExpansions();
+	updateTraitsAndExpansionsFromConfig();
 	constructQuestObjectives();
 	constructHeroesTabsFromConfig();
 	constructMonstersAndLieutenantsTabFromConfig();
@@ -2312,11 +2351,17 @@ function constructSettingsFromConfig() {
 	constructMapSize();
 }
 
-function updateTraitsAndExpansions() {
+function updateTraitsAndExpansionsFromConfig() {
+	updateTraitsFromConfig();
+	updateExpansionsFromConfig();
+}
+function updateTraitsFromConfig() {
 	if (config.monsterTraits != undefined) {
 		monsterTraits = config.monsterTraits;
 		updateTraits();
 	}
+}
+function updateExpansionsFromConfig() {
 	if (config.expansions != undefined) {
 		selectedExpansions = config.expansions;
 		updateExpansions();
