@@ -1501,7 +1501,7 @@ var PLOT_DECKS = [
 		['Soul Ensnare',3,1],
 		['Summon Tristayne',3,2],
 		['Wild Energy',0,0]]],
-	['Ethernal Agony', [
+	['Eternal Agony', [
 		['Branded',2,1],
 		['Idle Hands',3,1],
 		['If Looks Could Kill',1,2],
