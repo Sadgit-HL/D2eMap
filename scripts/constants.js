@@ -101,7 +101,7 @@ var LIEUTENANTS_LIST = [
 	['Kyndrithul', true, 1, 1],
 	['Lady Eliza Farrow', true, 1, 1],
 	['Lord Merick Farrow', true, 1, 1],
-	['Mirklace', true, 2, 2],
+	['Gargan Mirklace', true, 2, 2],
 	['Queen Ariad', true, 2, 2],
 	['Raythen', true, 1, 1],
 	['Rylan Olliven', true, 1, 1],
@@ -1322,7 +1322,7 @@ var PLOT_DECKS = [
 		['Inferno',0,2],
 		['Scorching Presence',2,1],
 		['Shifting Earth',2,1],
-		['Summon Mirklace',3,2],
+		['Summon Gargan Mirklace',3,2],
 		['Taste Of The Forbidden',2,0],
 		['Ynfernael Bonds',2,1]]],
 	['Cursed By Power', [
