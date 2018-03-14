@@ -1322,7 +1322,7 @@ var PLOT_DECKS = [
 		['Inferno',0,2],
 		['Scorching Presence',2,1],
 		['Shifting Earth',2,1],
-		['Summon - Mirklace',3,2],
+		['Summon Mirklace',3,2],
 		['Taste Of The Forbidden',2,0],
 		['Ynfernael Bonds',2,1]]],
 	['Cursed By Power', [
@@ -1332,7 +1332,7 @@ var PLOT_DECKS = [
 		['Greater Power',2,1],
 		['Masques',2,1],
 		['Mystic Might',3,1],
-		['Summon - Merick',3,2],
+		['Summon Merick',3,2],
 		['Thaumaturgy',3,1],
 		['The Dark Mark',2,0],
 		['The Grasping Grave',2,2]]],
@@ -1344,7 +1344,7 @@ var PLOT_DECKS = [
 		['Mirage',2,1],
 		['Misdirection',0,1],
 		['Phantasm',3,1],
-		['Summon - Ariad',3,2],
+		['Summon Ariad',3,2],
 		['Tainted Blood',1,1],
 		['The Ritual Continues',4,0]]],
 	['Dragons Greed', [
@@ -1355,7 +1355,7 @@ var PLOT_DECKS = [
 		['Massive Bulk',3,1],
 		['Mine All Mine',0,0],
 		['Punish The Weak',3,1],
-		['Summon - Valyndra',3,2],
+		['Summon Valyndra',3,2],
 		['Terrifying Presence',2,1],
 		['Valyndras Shadow',4,1]]],
 	['Endless Thirst', [
@@ -1365,7 +1365,7 @@ var PLOT_DECKS = [
 		['Nights Embrace',2,1],
 		['Nighttime Hunt',3,1],
 		['Scent Of Blood',3,1],
-		['Summon - Eliza',3,2],
+		['Summon Eliza',3,2],
 		['The Ladys Care',3,1],
 		['The Power Of Blood',2,1],
 		['The Taste Of Suffering',3,1]]],
@@ -1379,7 +1379,7 @@ var PLOT_DECKS = [
 		['Raided Armory',4,2],
 		['Scavenge',4,1],
 		['Spirited Retreat',0,1],
-		['Summon - Splig',3,2]]],
+		['Summon Splig',3,2]]],
 	['Hybrid Loyalty', [
 		['Bribery',2,2],
 		['Cut A Deal',2,0],
@@ -1390,7 +1390,7 @@ var PLOT_DECKS = [
 		['Make Our Own Luck',2,1],
 		['Resourceful',3,1],
 		['Show Of Force',2,1],
-		['Summon - Belthir',2,3]]],
+		['Summon Belthir',2,3]]],
 	['Inner Corruption', [
 		['Deceitful Scribe',3,0],
 		['False Informant',3,0],
@@ -1399,7 +1399,7 @@ var PLOT_DECKS = [
 		['Merchants Guild',2,0],
 		['One Of Us',3,2],
 		['Shadow Council',2,1],
-		['Summon - Rylan',3,2],
+		['Summon Rylan',3,2],
 		['Thieves Guild',2,1],
 		['Traitorous Friend',3,1]]],
 	['Raging Infection', [
@@ -1409,7 +1409,7 @@ var PLOT_DECKS = [
 		['Infected',2,1],
 		['Mass Mutation',2,1],
 		['Plague Release',0,1],
-		['Summon - Bolgoreth',3,2],
+		['Summon Bolgoreth',3,2],
 		['Virulent Cloud',4,1],
 		['Weakened Spirit',3,1],
 		['Weakness Within',2,2]]],
@@ -1421,7 +1421,7 @@ var PLOT_DECKS = [
 		['Rush Of Power',2,1],
 		['Scrying And Plotting',1,3],
 		['Sole Purpose',0,0],
-		['Summon - Zachareth',3,2],
+		['Summon Zachareth',3,2],
 		['Trouble On The Road',3,2],
 		['Two-Pronged Gambit',2,1]]],
 	['Silent Protector', [
@@ -1433,7 +1433,7 @@ var PLOT_DECKS = [
 		['Pity The Weak',2,1],
 		['Power In Mourning',3,1],
 		['Shared Burdens',3,1],
-		['Summon - Serena',3,2],
+		['Summon Serena',3,2],
 		['Travelers Rest',3,2]]],
 	['Skulduggery', [
 		['Bait And Switch',3,2],
@@ -1445,7 +1445,7 @@ var PLOT_DECKS = [
 		['Guarded Treasure',3,0],
 		['Petty Theft',0,1],
 		['Slippery',2,1],
-		['Summon - Raythen',3,2]]],
+		['Summon Raythen',3,2]]],
 	['Tangled Web', [
 		['Embrace Darkness',2,1],
 		['Entangling Weave',2,1],
@@ -1454,7 +1454,7 @@ var PLOT_DECKS = [
 		['Natural Camouflage',0,1],
 		['Savage Exploitation',4,2],
 		['Solitary Prey',3,1],
-		['Summon - Queen Ariad',3,2],
+		['Summon Queen Ariad',3,2],
 		['Unsafe Passage',2,2],
 		['Web Of Deception',2,1]]],
 	['The Fallen Elite', [
@@ -1464,7 +1464,7 @@ var PLOT_DECKS = [
 		['Fight In Formation',2,1],
 		['Knight Training',3,1],
 		['Refuse To Die',4,3],
-		['Summon - Alric',3,2],
+		['Summon Alric',3,2],
 		['Trial Of Knighthood',2,1],
 		['Unkillable',3,2],
 		['Veteran Council',2,1]]],
@@ -1489,7 +1489,7 @@ var PLOT_DECKS = [
 		['Initiation',3,1],
 		['Into The Shadows',3,1],
 		['Mouths To Feed',0,0],
-		['Summon - Verminous',3,2]]],
+		['Summon Verminous',3,2]]],
 	['Unstable Forces', [
 		['Descend To Madness',3,1],
 		['Explosive Fall',2,1],
@@ -1499,8 +1499,41 @@ var PLOT_DECKS = [
 		['Pariah',2,0],
 		['Power And Sacrifice',3,0],
 		['Soul Ensnare',3,1],
-		['Summon - Tristayne',3,2],
+		['Summon Tristayne',3,2],
 		['Wild Energy',0,0]]]
+	['Ethernal Agony', [
+		['Branded',2,1],
+		['Idle Hands',3,1],
+		['If Looks Could Kill',1,2],
+		['Long Suffering',1,1],
+		['Make No Excuse',1,1],
+		['Pins And Needles',2,0],
+		['Sadist',3,2],
+		['Spite',0,1],
+		['Summon Zarihell',3,2],
+		['Time On The Rack',3,1]]]
+	['First Legion', [
+		['Camaraderie',2,1],
+		['Defensive Position',3,2],
+		['Fealty',2,1],
+		['Loyality Rewarded',4,1],
+		['Retribution',2,1],
+		['Rise to the Challenge',4,0],
+		['Strength in Numbers',0,1],
+		['Swarming Tide',2,1],
+		['Summon IxErebus',3,2],
+		['Threatening Masses',2,1]]]
+	['Vital Essence', [
+		['Bleed it out',3,0],
+		['Broken',0,0],
+		['Dangerous Knowledge',2,0],
+		['Invest in the Flesh',3,1],
+		['Last Words',1,1],
+		['No Interference',2,1],
+		['Plague in Mind',2,1],
+		['Slow Bones',3,1],
+		['Summon Kyndrithul',3,2],
+		['Worn Down',3,1]]]
 ];
 
 var SHOWING_CLASSES = [];
