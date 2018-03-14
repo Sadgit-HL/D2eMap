@@ -1500,7 +1500,7 @@ var PLOT_DECKS = [
 		['Power And Sacrifice',3,0],
 		['Soul Ensnare',3,1],
 		['Summon Tristayne',3,2],
-		['Wild Energy',0,0]]]
+		['Wild Energy',0,0]]],
 	['Ethernal Agony', [
 		['Branded',2,1],
 		['Idle Hands',3,1],
@@ -1511,7 +1511,7 @@ var PLOT_DECKS = [
 		['Sadist',3,2],
 		['Spite',0,1],
 		['Summon Zarihell',3,2],
-		['Time On The Rack',3,1]]]
+		['Time On The Rack',3,1]]],
 	['First Legion', [
 		['Camaraderie',2,1],
 		['Defensive Position',3,2],
@@ -1522,7 +1522,7 @@ var PLOT_DECKS = [
 		['Strength in Numbers',0,1],
 		['Swarming Tide',2,1],
 		['Summon IxErebus',3,2],
-		['Threatening Masses',2,1]]]
+		['Threatening Masses',2,1]]],
 	['Vital Essence', [
 		['Bleed it out',3,0],
 		['Broken',0,0],
