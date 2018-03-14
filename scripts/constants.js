@@ -1372,7 +1372,6 @@ var PLOT_DECKS = [
 	['Goblin Uprising', [
 		['Dive Into Cover',3,1],
 		['Emergency Rations',2,1],
-		['Feral Instincts',2,1],
 		['Goblin Ambush',3,1],
 		['Meat Shield',2,1],
 		['Overfed',2,1],
@@ -1399,7 +1398,7 @@ var PLOT_DECKS = [
 		['Merchants Guild',2,0],
 		['One Of Us',3,2],
 		['Shadow Council',2,1],
-		['Summon Rylan',3,2],
+		['Summon Rylan Olliven',3,2],
 		['Thieves Guild',2,1],
 		['Traitorous Friend',3,1]]],
 	['Raging Infection', [
@@ -1449,7 +1448,6 @@ var PLOT_DECKS = [
 	['Tangled Web', [
 		['Embrace Darkness',2,1],
 		['Entangling Weave',2,1],
-		['Feral Instincts',1,1],
 		['Hidden Predator',2,1],
 		['Natural Camouflage',0,1],
 		['Savage Exploitation',4,2],
@@ -1461,7 +1459,7 @@ var PLOT_DECKS = [
 		['Armor Of Darkness',0,1],
 		['Dark Champions',3,3],
 		['Elite Guard',3,1],
-		['Fight In Formation',2,1],
+		['Vengeful Resolve',3,1],
 		['Knight Training',3,1],
 		['Refuse To Die',4,3],
 		['Summon Alric',3,2],
@@ -1499,7 +1497,7 @@ var PLOT_DECKS = [
 		['Pariah',2,0],
 		['Power And Sacrifice',3,0],
 		['Soul Ensnare',3,1],
-		['Summon Tristayne',3,2],
+		['Summon Tristayne Olliven',3,2],
 		['Wild Energy',0,0]]],
 	['Eternal Agony', [
 		['Branded',2,1],
@@ -1521,7 +1519,7 @@ var PLOT_DECKS = [
 		['Rise to the Challenge',4,0],
 		['Strength in Numbers',0,1],
 		['Swarming Tide',2,1],
-		['Summon IxErebus',3,2],
+		['Summon Ardus IxErebus',3,2],
 		['Threatening Masses',2,1]]],
 	['Vital Essence', [
 		['Bleed it out',3,0],
@@ -1530,7 +1528,7 @@ var PLOT_DECKS = [
 		['Invest in the Flesh',3,1],
 		['Last Words',1,1],
 		['No Interference',2,1],
-		['Plague in Mind',2,1],
+		['Plague of the Mind',2,1],
 		['Slow Bones',3,1],
 		['Summon Kyndrithul',3,2],
 		['Worn Down',3,1]]]
