@@ -3,6 +3,8 @@ Map tool for Descent 2nd edition (designed by Vitezslav)
 
 Link to published version: https://sadgit-hl.github.io/D2eMap/
 
+- menu for easy map selection
+- additional preset maps included
 - included erratas on all cards
 - all agent card backsides added
 - all monster cards and tokens updated to current versions
