@@ -1314,7 +1314,7 @@ CORRUPTED_CITIZEN_CARDS = [
 ];
 
 var PLOT_DECKS = [
-    ['Burning Ambition', [
+        ['Burning Ambition', [
 		['Blazing Rage',3,1],
 		['Crushing Exhaustion',3,2],
 		['Demons Bargain',3,0],
@@ -1448,6 +1448,7 @@ var PLOT_DECKS = [
 	['Tangled Web', [
 		['Embrace Darkness',2,1],
 		['Entangling Weave',2,1],
+		['Feral Instincs',2,1],
 		['Hidden Predator',2,1],
 		['Natural Camouflage',0,1],
 		['Savage Exploitation',4,2],
@@ -1458,7 +1459,7 @@ var PLOT_DECKS = [
 	['The Fallen Elite', [
 		['Armor Of Darkness',0,1],
 		['Dark Champions',3,3],
-		['Elite Guard',3,1],
+		['Fight in Formation',3,1],
 		['Vengeful Resolve',3,1],
 		['Knight Training',3,1],
 		['Refuse To Die',4,3],
