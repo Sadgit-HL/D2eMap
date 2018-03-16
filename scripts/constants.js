@@ -83,7 +83,7 @@ var MONSTERS_LIST = [
 	['Wendigo',2,2,false,GoD,[Cold,Cave],true],
 	['Wraith',1,1,true,MoR,[Civilized,Cursed],true],
 	['Ynfernael Hulk',2,2,false,SoN,[Hot,Cursed],true],
-        ['Zombie',1,1,false,bg2e,[Cursed,Building],true]
+        ['Zombie',1,1,false,bg2e,[Cursed,Building],true],
     	['Open Group',1,1,false,bg2e,[Cursed,Building],true]
 ];
 
@@ -178,7 +178,7 @@ var MONSTERS_HP = [
 	['Wendigo',5,7,7,10],
 	['Wraith',5,7,6,8],
 	['Ynfernael Hulk',8,9,9,10],
-        ['Zombie',3,6,5,9]
+        ['Zombie',3,6,5,9],
         ['Open Group',0,0,0,0]
 ];
 
