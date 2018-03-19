@@ -12,7 +12,7 @@ function createOverlordCardsBlock() {
 				html.append(cardCheckbox);
 			}
 			for (var j = 0; j < card.number; j++) {
-				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + cardType + '/' + urlize(card.title) + '.jpg').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
+				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + cardType + '/' + urlize(card.title) + '.png').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
 			}
 		}
 	}

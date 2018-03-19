@@ -81,7 +81,7 @@ function getAllySkillsBlock() {
 			skillObject.css('display', 'none');
 			skillObject.append($('<label><input type="checkbox" name="' + skill + '" onClick="adjustAlliesSkillsImages(this);"/> ' + skill + '</label>'));
 			html.append(skillObject);
-			allySkillsImages.append($('<img style="display: none;">').attr('src', 'images/ally_skill_cards/' + urlize(ally) + '/' + urlize(skill) + '.jpg').attr('skill', skill).attr('ally',ally));
+			allySkillsImages.append($('<img style="display: none;">').attr('src', 'images/ally_skill_cards/' + urlize(ally) + '/' + urlize(skill) + '.png').attr('skill', skill).attr('ally',ally));
 		}
 	}
 	html.append(allySkillsImages);
@@ -135,7 +135,7 @@ function createFamiliarsImagesBlock() {
 	var familiarImagesContainer = $('<div>').addClass('familiars-images');
 	for (var i = 0; i < FAMILIARS_LIST.length; i++) {
 		if (FAMILIARS_LIST[i][1]) {
-			var familiarImage = $('<img>').addClass('familiar-image').attr('name',urlize(FAMILIARS_LIST[i][0])).attr('src','images/familiars_cards/' + urlize(FAMILIARS_LIST[i][0]) + '.jpg').css('display','none');
+			var familiarImage = $('<img>').addClass('familiar-image').attr('name',urlize(FAMILIARS_LIST[i][0])).attr('src','images/familiars_cards/' + urlize(FAMILIARS_LIST[i][0]) + '.png').css('display','none');
 			familiarImagesContainer.append(familiarImage);
 		}
 	}

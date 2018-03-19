@@ -42,7 +42,7 @@ function updateHero(element, value) {
 	container.find('input[name="hero-y"]').attr('value','');
 	container.find('input[name="hero-hp"]').val(HEROES[value].hp);
 	container.find('input[name="hero-stamina"]').val(HEROES[value].stamina);
-	container.find('.hero-image-container').children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.jpg');
+	container.find('.hero-image-container').children('img').attr('src', 'images/heroes_cards/' + urlize(value) + '.png');
 	var heroId = container.parent().attr('id');
 	var heroImage = $('<img>');
 	heroImage.attr('src', 'images/heroes_tokens/' + urlize(value) + '.png');
@@ -64,7 +64,7 @@ function clearHero(element) {
 	var container = $(element).parents('.select-row');
 	container.find('.hero-title').html('Select hero ');
 	container.find('input[name="hero-title"]').attr('value','');
-	container.children('img').attr('src', 'images/heroes_cards/default.jpg');
+	container.children('img').attr('src', 'images/heroes_cards/default.png');
 	var heroId = container.parent().attr('id');
 	heroId = heroId.substring(0, 5);
 	var heroMenuIcon = $('[href="#' + heroId + '"]');
@@ -225,7 +225,7 @@ function createSkillsBlock(heroNumber) {
 				skillObject.find('input').attr('disabled', '');
 			}
 			html.append(skillObject);
-			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.jpg').attr('skill', skill[0]).attr('onclick',"exhaustSkill(this);").attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
+			skillsImages.append($('<img>').attr('src', 'images/classes_cards/' + classUpdatedTitle + '/' + urlize(skill[0]) + '.png').attr('skill', skill[0]).attr('onclick',"exhaustSkill(this);").attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
 		}
 		if (currentClass.title == 'Bard') {
 			skillsImages.append($('<div>').attr('class','fakeimg').attr('ondragover',"allowDrop(event)").attr('ondrop',"drop(event)"));
@@ -427,11 +427,11 @@ function updateHand(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.png';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.png';
 	}
 	container.find('.items-container').find(twohand ? '.hand,.hand2' : selector).attr('src', src);
 	if (!twohand && oldTwoHand) {
@@ -505,11 +505,11 @@ function updateArmor(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.png';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.png';
 	}
 	container.find('.items-container').find('.armor').attr('src', src);
 	$(element).parents('.select-armor').find('.armor-title').html(value + ' ');
@@ -555,11 +555,11 @@ function updateItem(element, value) {
 	var src;
 	if ($(element).parent().hasClass('classitem')) {
 		var classValue = container.find('input[name="class-title"]').attr('value');
-		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.jpg';
+		src = 'images/classes_cards/' + folderize(classValue) + '/' + urlize(value) + '.png';
 	} else {
 		var tierFolder = tierOne ? 'tier_one' : 'tier_two';
 		if (relic) tierFolder = 'relic';
-		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.jpg';
+		src = 'images/items_cards/' + tierFolder + '/' + urlize(value) + '.png';
 	}
 	container.find('.items-container').find(selector).attr('src', src);
 	$(element).parents('.select-item').find('.item-title').html(value + ' ');
@@ -644,7 +644,7 @@ function createItemsAndSearchSelect() {
 function addToSack(element) {
 	var container = $(element).parents('.select-row');
 	var sackAttribute = 'sack' + sackNumber.toString();
-	container.find('.sack-container button').before('<img src="images/search_cards/flipped.jpg" item="Flipped" sack="' + sackAttribute + '"/>');
+	container.find('.sack-container button').before('<img src="images/search_cards/flipped.png" item="Flipped" sack="' + sackAttribute + '"/>');
 	container.find('.sack-selects').append(createItemsAndSearchSelect().attr('sack', sackAttribute));
 	sackNumber += 1;
 	return sackAttribute;
@@ -667,7 +667,7 @@ function updateSackItem(element, value) {
 	if (classItem) {
 		folder = 'classes_cards/' + parent.attr('class').replace(new RegExp("classitem",'g'), '').replace(new RegExp("twohand",'g'), '').replace(new RegExp(" ",'g'), '');
 	}
-	container.find('img[sack="' + elementAttr + '"]').attr('src', 'images/' + folder + '/' + urlize(value) + '.jpg').attr('item', value);
+	container.find('img[sack="' + elementAttr + '"]').attr('src', 'images/' + folder + '/' + urlize(value) + '.png').attr('item', value);
 	container.find('div[sack="' + elementAttr + '"]').find('.sack-title').html(value + ' ');
 }
 
@@ -703,7 +703,7 @@ function addTainted(button) {
 	var taintedSelect = $(createInputSelect('Back', 'tainted-title', 'select-tainted'));
 	taintedSelect.find('ul').append(createTaintedSelectContent());
 	buttonObject.remove();
-	buttonContainer.append($('<img src="images/tainted_cards/back.jpg" class="tainted-image">'));
+	buttonContainer.append($('<img src="images/tainted_cards/back.png" class="tainted-image">'));
 	buttonContainer.append(taintedSelect);
 	buttonContainer.append($('<input type="hidden" name="tainted" value="back">'));
 	return taintedSelect;
@@ -717,7 +717,7 @@ function updateTainted(element, value) {
 	var taintedContainer = $(element).parents('.tainted-container');
 	taintedContainer.find('.tainted-title').html(value + ' ');
 	taintedContainer.find('input[name="tainted"]').val(value);
-	taintedContainer.find('img').attr('src','images/tainted_cards/' + urlize(value) + '.jpg');
+	taintedContainer.find('img').attr('src','images/tainted_cards/' + urlize(value) + '.png');
 }
 
 function removeTainted(element) {

@@ -139,7 +139,7 @@ function addConditions(conditions, container) {
 	for (var condition in conditions) {
 		if (condition == undefined || condition == '' || !CONDITIONS[condition].hasConditionCard) continue;
 		var conditionImage = $('<img>');
-		conditionImage.attr('src', 'images/conditions_cards/' + urlize(condition) + '.jpg').addClass('condition');
+		conditionImage.attr('src', 'images/conditions_cards/' + urlize(condition) + '.png').addClass('condition');
 		container.append(conditionImage);
 	}
 }
