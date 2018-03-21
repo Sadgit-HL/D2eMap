@@ -1183,6 +1183,37 @@ for (var i = 0; i < CONDITIONS_INITIAL.length; i++) {
 	CONDITIONS[CONDITIONS_INITIAL[i][0]] = {'hasConditionCard' : CONDITIONS_INITIAL[i][1]};
 }
 
+TRACKING_TOKENS_INITIAL = [
+	['Bleeding',true],
+	['Burning',true],
+	['Cursed',true],
+	['Diseased',true],
+	['Doomed',true],
+	['Immobilized',true],
+	['Poisoned',true],
+	['Stunned',true],
+	['Terrified',true],
+	['Weakened',true],
+	['Elixir',false],
+	['Fortune',false],
+	['Hexed',false],
+	['Infected',false],
+	['Insight',false],
+	['Tracked',false],
+	['Objective',false],
+	['Threat',false],
+	['Valor',false]
+];
+
+var TRACKING_TOKENS = {};
+var TRACKING_TOKENS_LIST = [];
+
+for (var i = 0; i < TRACKING_TOKENS_INITIAL.length; i++) {
+	TRACKING_TOKENS_LIST.push(TRACKING_TOKENS_INITIAL[i][0]);
+	TRACKING_TOKENS[TRACKING_TOKENS_INITIAL[i][0]] = {'hasConditionCard' : TRACKING_TOKENS_INITIAL[i][1]};
+}
+
+
 OVERLORD_CARDS_LIST = [
 	['Critical Blow', 'basic', 1],
 	['Dark Charm', 'basic', 1],
@@ -1656,6 +1687,6 @@ var mapHeight = 50;
 
 var monsterList = [];
 var mapObjects = [];
-var conditionsToShow = {};
+//var conditionsToShow = {};
 
 var overlordRelicNumber = 0;
