@@ -982,9 +982,7 @@ HEROES_LIST.sort(listsort);
 
 FAMILIARS_LIST = [
 	['Brightblaze',true],
-	['Image',false],
-	['Kata',false],
-	['Mata',false],
+	['Mirror Image',false],
 	['Pico',true],
 	['Raven Flock',true],
 	['Reanimate',true],
