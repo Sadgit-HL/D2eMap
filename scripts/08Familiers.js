@@ -1,7 +1,8 @@
 
 function constructAlliesAndFamiliarsTabFromConfig() {
-	constructFamiliarsTabFromConfig();
 	constructAlliesTabFromConfig();
+	constructFamiliarsTabFromConfig();
+	constructVillagersTabFromConfig();
 }
 
 function constructAlliesTabFromConfig() {
@@ -167,8 +168,9 @@ function createFamiliarsSelectContent() {
 }
 
 function clearFamiliarsAndAllies() {
-	clearFamiliars();
 	clearAllies();
+	clearFamiliars();
+	clearVillagers();
 }
 function clearFamiliars() {
 	$('#familiars-container .select-row').remove();
@@ -226,5 +228,96 @@ function clearFamiliar(element) {
 	var container = $(element).parents('.select-row');
 	container.find('.familiar-title').html('Select Familiar ');
 	container.find('input[name="familiar-title"]').attr('value','');
+}
+
+
+
+
+function createVillagersImagesBlock() {
+	var villagersContainer = $('#villagers-container');
+	var villagerImagesContainer = $('<div>').addClass('villagers-images');
+	for (var i = 0; i < VILLAGERS_LIST.length; i++) {
+		if (VILLAGERS_LIST[i][1]) {
+			var villagerImage = $('<img>').addClass('villager-image').attr('name',urlize(VILLAGERS_LIST[i][0])).attr('src','images/villagers_cards/' + urlize(VLLAGERS_LIST[i][0]) + '.png').css('display','none');
+			villagerImagesContainer.append(villagerImage);
+		}
+	}
+	villagersContainer.append(villagerImagesContainer);
+}
+
+function constructVillagersTabFromConfig() {
+	if (config.villagers != undefined) {
+		for (var i = 0 ; i < config.villagers.length; i++) {
+			var container = addVillagerLine();
+			var villager = config.villagers[i];
+			updateVillager(container.find('.select-villager li')[0], villager.title);
+			container.find('[name="villager-x"]').val(villager.x);
+			container.find('.x-title').html(getAlphabetChar(villager.x - 1) + ' ');
+			container.find('[name="villager-y"]').val(villager.y);
+			container.find('.y-title').html(villager.y.toString() + ' ');
+			container.find('[name="hp"]').val(villager.hp);
+			updateConditionsInSettings(villager.conditions, container);
+		}
+	}
+}
+
+function createVillagersSelectContent() {
+	var html = addOption('Clear', '', 'clearVillager(this);');
+	for (var i = 0; i < VILLAGERS_LIST.length; i++) {
+		html += addOption(VILLAGERS_LIST[i][0] + ' ', '', 'updateVillager(this, \'' + VILLAGERS_LIST[i][0] + '\')');
+	}
+	return html;
+}
+
+function clearVillagers() {
+	$('#villagers-container .select-row').remove();
+}
+
+function addVillagerLine() {
+	var villager = $('<div>');
+	addUnitLine(villager, 'Villager');
+
+	villager.find('.select-villager ul').append(createVillagersSelectContent());
+	villager.find('[name="villager-hp"]').attr('name', 'hp');
+	villager.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
+	villager.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
+	villager.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	villager.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
+	$('#villagers-container').append(villager);
+	return villager;
+}
+
+function getVillagers() {
+	var result = [];
+	var villagers = $('#villagers-container .select-row');
+	for (var i = 0; i < villagers.length; i++) {
+		var container = $(villagers[i]);
+		var villager = {};
+		villager.title = container.find('[name="villager-title"]').val();
+		villager.x = container.find('[name="villager-x"]').val();
+		villager.y = container.find('[name="villager-y"]').val();
+		villager.hp = container.find('[name="hp"]').val();
+		villager.conditions = getConditions(container);
+		result.push(villager);
+	}
+	return result;
+}
+
+function updateVillager(element, value) {
+	var container = $(element).parents('.select-row');
+	container.find('.villager-title').html(value + ' ');
+	container.find('input[name="villager-title"]').attr('value',value);
+	$('.villager-image').css('display','none');
+	var villagerTitlesContainers = $('input[name="villager-title"]');
+	for (var i = 0; i < villagerTitlesContainers.length; i++) {
+		var titleContainer = $(villagerTitlesContainers[i]);
+		$('[name="' + urlize(titleContainer.attr('value')) + '"]').css('display','inline-block');
+	}
+}
+
+function clearVillager(element) {
+	var container = $(element).parents('.select-row');
+	container.find('.villager-title').html('Select Villager ');
+	container.find('input[name="villager-title"]').attr('value','');
 }
 
