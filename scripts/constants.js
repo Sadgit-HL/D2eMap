@@ -980,6 +980,15 @@ for (var i = 0; i < HEROES_LIST.length; i++) {
 MONSTERS_LIST.sort(listsort);
 HEROES_LIST.sort(listsort);
 
+ALLIES_LIST = [
+	'Serena',
+	'Raythen'
+];
+
+ALLIES_SKILLS = {};
+ALLIES_SKILLS['Serena'] = ['Aura Of Might', 'Healing Aura', 'Holy Hammer'];
+ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
+
 FAMILIARS_LIST = [
 	['Brightblaze',true],
 	['Image',false],
@@ -994,19 +1003,13 @@ FAMILIARS_LIST = [
 	['Summoned Stone',true],
 	['Trap',false],
 	['Wolf',true],
-	['Villager Female',false],
-	['Villager Male',false],
 	['Desmond',true]
 ];
 
-ALLIES_LIST = [
-	'Serena',
-	'Raythen'
+VILLAGERS_LIST = [
+	['Villager Female',false],
+	['Villager Male',false]
 ];
-
-ALLIES_SKILLS = {};
-ALLIES_SKILLS['Serena'] = ['Aura Of Might', 'Healing Aura', 'Holy Hammer'];
-ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
 
 MAP_TILES_LIST_COMPLETE = [
 	['1',8,6],
