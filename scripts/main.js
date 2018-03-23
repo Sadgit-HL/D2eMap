@@ -1184,4 +1184,9 @@ $(function() {
 	$('#map').click(function() {
 		switchToMap();
 	});
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // esc keycode
+			switchToMap();
+        }
+    });
 });
