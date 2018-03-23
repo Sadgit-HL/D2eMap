@@ -7,6 +7,15 @@
 		<script src="scripts/bootstrap.min.js"></script>
 		<script src="scripts/base_functions.js"></script>
 		<script src="scripts/constants.js"></script>
+		<script src="scripts/01QuestObjectives.js"></script>
+		<script src="scripts/02MapControls.js"></script>
+		<script src="scripts/03Monsters.js"></script>
+		<script src="scripts/04Heroes.js"></script>
+		<script src="scripts/08Familiers.js"></script>
+		<script src="scripts/09OLCards.js"></script>
+		<script src="scripts/10Tokens.js"></script>
+		<script src="scripts/11PlotCards.js"></script>
+
 		<script src="scripts/main.js"></script>
 		<script src="scripts/Base64.js"></script>
 	</head>
@@ -14,7 +23,7 @@
 		<div role="tabpanel">
 			<ul class="nav nav-tabs" role="tablist" id="tabs">
 				<li role="presentation" class="active map-icon-container"><a href="#map" aria-controls="home" role="tab" data-toggle="tab" onclick="populate();">Map</a></li>
-				<li role="presentation"><a href="#quest-objectives" aria-controls="home" role="tab" data-toggle="tab"><img src="images/quest_objectives_icon.jpg" height="64px"/></a></li>
+				<li role="presentation"><a href="#quest-objectives" aria-controls="home" role="tab" data-toggle="tab"><img src="images/quest_objectives_icon.png" height="64px"/></a></li>
 				<li role="presentation"><a href="#map-controls" aria-controls="home" role="tab" data-toggle="tab"><img src="images/map_tiles/ExitA.png" height="64px"/></a></li>
 				<li role="presentation"><a href="#monsters" aria-controls="profile" role="tab" data-toggle="tab"><img src="images/monster_tokens/baron_zachareth.png"/></a></li>
 				<li role="presentation"><a href="#hero1" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/heroes_tokens/unknown.png"/></a></li>
@@ -22,11 +31,11 @@
 				<li role="presentation"><a href="#hero3" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/heroes_tokens/unknown.png"/></a></li>
 				<li role="presentation"><a href="#hero4" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/heroes_tokens/unknown.png"/></a></li>
 				<li role="presentation" class="no-border-radius"><a href="#familiars" aria-controls="messages" role="tab" data-toggle="tab""><img src="images/familiars_tokens/reanimate.png"/></a></li>
-				<li role="presentation" class="no-border-radius"><a href="#overlord" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/overlord_cards/overlord_back.jpg" height="64px"/></a></li>
+				<li role="presentation" class="no-border-radius"><a href="#overlord" aria-controls="messages" role="tab" data-toggle="tab"><img src="images/overlord_cards/overlord_back.png" height="64px"/></a></li>
 				<li role="presentation"><a href="#misc" aria-controls="settings" role="tab" data-toggle="tab"><img src="images/misc/unknown.png"/></a></li>
-				<li role="presentation"><a href="#plot" aria-controls="settings" role="tab" data-toggle="tab"><img src="images/plot_deck_icon.jpg"/></a></li>
+				<li role="presentation"><a href="#plot" aria-controls="settings" role="tab" data-toggle="tab"><img src="images/plot_deck_icon.png"/></a></li>
 			</ul>
-			
+
 			<div class="top-controls">
 				<div id="tinyUrl">Place for tiny link</div>
 				<div id="map-transformation">
@@ -93,17 +102,21 @@
 					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addAllyLine();">Add Ally</button>
 					<div id="familiars-container"><h1>Familiars</h1></div>
 					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addFamiliarLine();">Add Familiar</button>
+					<div id="villagers-container"><h1>Villagers</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addVillagerLine();">Add Villager</button>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="overlord">
 					<div id="overlord-container">
 						<h1>Overlord available cards</h1>
-						<button type="button" class="btn btn-success" aria-expanded="false" onclick="selectBasicOverlordDeck();">Select first default deck</button>
-						<button type="button" class="btn btn-success" aria-expanded="false" onclick="selectBasic2OverlordDeck();">Select second default deck</button>
+						<button type="button" class="btn btn-success" aria-expanded="false" onclick="clearOverlordDeck();">Reset deck</button>
+						<button type="button" class="btn btn-success" aria-expanded="false" onclick="selectBasicOverlordDeck();">Basic I</button>
+						<button type="button" class="btn btn-success" aria-expanded="false" onclick="selectBasic2OverlordDeck();">Basic II</button>
+						<button type="button" class="btn btn-success" aria-expanded="false" onclick="HashOverlordDeck();">Random Sort For HASH</button>
 					</div>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="misc">
-					<div id="objective-container"><h1>Objective objects</h1></div>
-					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addObjectiveLine();">Add objectective object</button>
+					<div id="objective-container"><h1>Tokens</h1></div>
+					<button type="button" class="btn btn-success" aria-expanded="false" onclick="addObjectiveLine();">Add token</button>
 				</div>
 				<div role="tabpanel" class="tab-pane" id="plot">
 					<!-- empty -->

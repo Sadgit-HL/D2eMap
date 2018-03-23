@@ -3,7 +3,7 @@ function toggleMenu() {
 }
 
 function urlize(value) {
-	return somethingize(value, '_'); 
+	return somethingize(value, '_');
 }
 
 function folderize(value) {
@@ -20,4 +20,15 @@ function somethingize(value, replacement) {
 
 function mapTilize(value) {
 	return value.replace(new RegExp(" ",'g'), '');
+}
+
+function setClipboard(value) {
+//    var tempInput = document.createElement("input");
+    var tempInput = document.createElement("TEXTAREA");
+    tempInput.style = "position: absolute; left: -1000px; top: -1000px";
+    tempInput.value = value;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
 }

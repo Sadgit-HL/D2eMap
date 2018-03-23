@@ -3,6 +3,9 @@ Map tool for Descent 2nd edition (designed by Vitezslav)
 
 Link to published version: https://sadgit-hl.github.io/D2eMap/
 
+- automatic randomized OL card list feature included
+- choice of OL deck (Basic 1 or 2) included in URL
+- villager positions are saved on predefined maps
 - plot decks Vital Essence, First Legion and Ethernal Agony added
 - offical versions for all plot decks added
 - menu for easy map selection added
