@@ -3,18 +3,21 @@ function createOverlordCardsBlock() {
 	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
 	for (var cardType in OVERLORD_CARDS) {
 		if (OVERLORD_CARDS[cardType] == undefined) continue;
+		var cardClass = $('<div>').addClass('overlord-cards-class');
+		cardClass.append("<b>"+cardType+"</b>");
 		var cardsOfType = OVERLORD_CARDS[cardType];
 		for (var i = 0; i < cardsOfType.length; i++) {
 			var card = cardsOfType[i];
 			if (true || cardType != 'basic' && cardType != 'basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
-				html.append(cardCheckbox);
+				cardClass.append(cardCheckbox);
 			}
 			for (var j = 0; j < card.number; j++) {
 				cardsImages.append($('<img>').attr('src', 'images/overlord_cards/' + cardType + '/' + urlize(card.title) + '.png').attr('card', card.title).attr('onclick','$(this).toggleClass(\'secondary\');').css('display','none'));
 			}
 		}
+		html.append(cardClass);
 	}
 	html.prepend(cardsImages);
 	$('#overlord-container').append(html);
@@ -74,7 +77,7 @@ function updateOverlordCard(title, value) {
 }
 
 function getOverlordCards() {
-	$('.overlord-cards-images-container img').css('display','none');
+	//$('.overlord-cards-images-container img').css('display','none');
 	var overlordCards = $('.overlord-cards-container input[type="checkbox"]');
 	var result = [];
 	for (var i = 0; i < overlordCards.length; i++) {
