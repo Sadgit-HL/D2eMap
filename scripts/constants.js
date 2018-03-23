@@ -1481,7 +1481,7 @@ var PLOT_DECKS = [
 	['Tangled Web', [
 		['Embrace Darkness',2,1],
 		['Entangling Weave',2,1],
-		['Feral Instincs',2,1],
+		['Feral Instincts',2,1],
 		['Hidden Predator',2,1],
 		['Natural Camouflage',0,1],
 		['Savage Exploitation',4,2],
