@@ -1001,7 +1001,6 @@ FAMILIARS_LIST = [
 	['Summoned Stone',true],
 	['Trap',false],
 	['Wolf',true],
-	['Desmond',true]
 ];
 
 VILLAGERS_LIST = [
