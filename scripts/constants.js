@@ -991,9 +991,7 @@ ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
 
 FAMILIARS_LIST = [
 	['Brightblaze',true],
-	['Image',false],
-	['Kata',false],
-	['Mata',false],
+	['Mirror Image',false],
 	['Pico',true],
 	['Raven Flock',true],
 	['Reanimate',true],
@@ -1003,7 +1001,6 @@ FAMILIARS_LIST = [
 	['Summoned Stone',true],
 	['Trap',false],
 	['Wolf',true],
-	['Desmond',true]
 ];
 
 VILLAGERS_LIST = [
