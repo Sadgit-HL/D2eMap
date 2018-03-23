@@ -40,7 +40,7 @@ function addAllyLine() {
 	ally.find('.select-ally ul').append(createAlliesSelectContent());
 	ally.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	ally.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
-	ally.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	ally.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
 	ally.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	ally.append($('<br/>'));
 	ally.append($('<img src="" style="display: none;">').addClass('ally-image'));
@@ -184,7 +184,7 @@ function addFamiliarLine() {
 	familiar.find('[name="familiar-hp"]').attr('name', 'hp');
 	familiar.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	familiar.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
-	familiar.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	familiar.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
 	familiar.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#familiars-container').append(familiar);
 	return familiar;
@@ -281,7 +281,7 @@ function addVillagerLine() {
 	villager.find('[name="villager-hp"]').attr('name', 'hp');
 	villager.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	villager.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
-	villager.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	villager.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
 	villager.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	$('#villagers-container').append(villager);
 	return villager;

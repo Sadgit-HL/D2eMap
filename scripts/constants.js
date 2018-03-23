@@ -1139,7 +1139,7 @@ BLOCKS_LIST = [
 
 OBJECTIVES_LIST = [
 	'Green',
-	'Purple',
+	'Blue',
 	'Red',
 	'White',
 	'Unknown'

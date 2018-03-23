@@ -58,8 +58,8 @@ function addMonsterLine() {
 	var monsterLine = $('<div>').attr('id','monster' + monsterNumber.toString());
 	monsterNumber += 1;
 	addUnitLine(monsterLine, 'monster');
-	monsterLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
-	monsterLine.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
+	monsterLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
+	monsterLine.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove monster</button>'));
 	monsterLine.append($('<input type="hidden" name="master" value=""/>'));
 	monsterLine.append($('<input type="hidden" name="monster-y-size" value=""/>'));
 	monsterLine.append($('<input type="hidden" name="monster-x-size" value=""/>'));
@@ -170,7 +170,7 @@ function addLieutenantLine() {
 	lieutenant.append($('<input type="hidden" name="lieutenant-direction" value=""/>'));
 	lieutenant.find('.select-direction ul').append(createDirectionSelectContent());
 	lieutenant.append($('<button type="button" class="btn btn-info" aria-expanded="false" onclick="addRelic(this);">Add relic</button>'));
-	lieutenant.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	lieutenant.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
 	lieutenant.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
 	lieutenant.append($('<br/>'));
 	lieutenant.append($('<img src="" style="display: none;">').addClass('lieutenant-image'));

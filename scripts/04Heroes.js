@@ -14,7 +14,7 @@ function addHeroLine(number) {
 	heroLine.append(createInputSelect('Select Class ', 'class-title', 'select-class'));
 	heroLine.find('.select-class ul').addClass(ARCHETYPE_CLASSES + ' showarch').append(createClassSelectContent(false));
 	heroLine.append($('<input type="hidden" name="class-title" value=""/>'));
-	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add condition</button>'));
+	heroLine.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addCondition(this);">Add token</button>'));
 	heroLine.append($('<button type="button" class="btn btn-default" aria-expanded="false" onclick="addAura(this);">Add aura</button>'));
 	heroLine.append(createConditionsBlock());
 	heroLine.append(createSkillsBlock(number));
