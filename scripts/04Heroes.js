@@ -628,7 +628,7 @@ function getSackAndSearch(container) {
 }
 
 function createItemsAndSearchSelect() {
-	var select = $(createInputSelect('Select Item or Search card', 'sack-title', 'select-sack'));
+	var select = $(createInputSelect('Set Item/Search', 'sack-title', 'select-sack'));
 	var ul = select.find('ul');
 	ul.append(addOption('Remove', '', 'removeFromSack(this);'));
 	ul.append($('<li role="separator" class="divider"></li>'));
