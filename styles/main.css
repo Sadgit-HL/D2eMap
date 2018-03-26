@@ -455,6 +455,13 @@ img.relic-image {
     max-height: 300px;
 }
 
+.expansions-group {
+	display: block;
+	padding: 5px;
+	float: left;
+	min-height: 200px;
+}
+
 #tinyUrl {
 /* 	pointer-events: none; */
 	color: white;

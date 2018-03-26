@@ -349,14 +349,23 @@ function updateTraits() {
 
 function createExpansionsBlock() {
 	var html = $('#expansions');
-	for (var i = 0; i < EXPANSIONS.length; i++) {
-		var expansion = EXPANSIONS[i];
-		var expansionObject = $('<div>').addClass('checkbox');
-		var expansionInput = $('<input type="checkbox" name="' + folderize(expansion) + '" onClick="updateMonstersVisibility();" />');
-		expansionInput.prop('checked', true);
-		expansionObject.append($('<label> ' + expansion + '</label>').prepend(expansionInput));
-		html.append(expansionObject);
+	for (var expansionGroup in EXPANSION_GROUPS) {
+		if (EXPANSION_GROUPS[expansionGroup] == undefined) continue;
+		var GroupHTML = $('<div>').addClass('expansions-group');
+		GroupHTML.append("<b>"+expansionGroup+"</b>");
+		var expansionList = EXPANSION_GROUPS[expansionGroup];
+
+		for (var i = 0; i < expansionList.length; i++) {
+			var expansion = expansionList[i];
+			var expansionObject = $('<div>').addClass('checkbox');
+			var expansionInput = $('<input type="checkbox" name="' + folderize(expansion) + '" onClick="updateMonstersVisibility();" />');
+			expansionInput.prop('checked', true);
+			expansionObject.append($('<label> ' + expansion + '</label>').prepend(expansionInput));
+			GroupHTML.append(expansionObject);
+		}
+		html.append(GroupHTML);
 	}
+
 	return html;
 }
 

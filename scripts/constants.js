@@ -3,9 +3,9 @@ var ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var cellSize = 64;
 
 function listsort(a, b) {
-    if(a[0] < b[0]) return -1;
-    if(a[0] > b[0]) return 1;
-    return 0;
+	if(a[0] < b[0]) return -1;
+	if(a[0] > b[0]) return 1;
+	return 0;
 }
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
 	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast',
@@ -83,18 +83,44 @@ var MONSTERS_LIST = [
 	['Wendigo',2,2,false,GoD,[Cold,Cave],true],
 	['Wraith',1,1,true,MoR,[Civilized,Cursed],true],
 	['Ynfernael Hulk',2,2,false,SoN,[Hot,Cursed],true],
-        ['Zombie',1,1,false,bg2e,[Cursed,Building],true],
-    	['Open Group',1,1,false,bg2e,[Cursed,Building],false]
+	['Zombie',1,1,false,bg2e,[Cursed,Building],true],
+	['Open Group',1,1,false,bg2e,[Cursed,Building],false]
 ];
 
-var EXPANSIONS = [bg2e, BoW, CoD, CotF, GoD, LoR, LoW, MoR, OotO, SoE, SoN, SotS, TF, ToC, VoD, CK, MoB, CtR];
+var EXPANSIONS = [
+	[bg2e,'Big'],
+	[LoR,'Big'],
+	[SoN,'Big'],
+	[LoW,'Small'],
+	[MoR,'Small'],
+	[TF,'Small'],
+	[MoB,'Small'],
+	[CtR,'Small'],
+	[BoW,'H&M'],
+	[CoD,'H&M'],
+	[CotF,'H&M'],
+	[GoD,'H&M'],
+	[OotO,'H&M'],
+	[SoE,'H&M'],
+	[SotS,'H&M'],
+	[ToC,'H&M'],
+	[VoD,'H&M'],
+	[CK,'CK']];
 var selectedExpansions = {};
+var EXPANSION_GROUPS = {};
 for (var i=0; i < EXPANSIONS.length; i++) {
-	selectedExpansions[folderize(EXPANSIONS[i])] = folderize(EXPANSIONS[i]);
+	selectedExpansions[folderize(EXPANSIONS[i][0])] = folderize(EXPANSIONS[i][0]);
+
+	if (EXPANSION_GROUPS[EXPANSIONS[i][1]] == undefined) {
+		EXPANSION_GROUPS[EXPANSIONS[i][1]] = [];
+	}
+	EXPANSION_GROUPS[EXPANSIONS[i][1]].push(EXPANSIONS[i][0]);
 }
 
+
+
 var LIEUTENANTS_LIST = [
-        ['Ardus IxErebus', true, 1, 1],
+	['Ardus IxErebus', true, 1, 1],
 	['Ariad', true, 1, 1],
 	['Baron Zachareth', true, 1, 1],
 	['Belthir', true, 1, 1],
@@ -178,8 +204,8 @@ var MONSTERS_HP = [
 	['Wendigo',5,7,7,10],
 	['Wraith',5,7,6,8],
 	['Ynfernael Hulk',8,9,9,10],
-        ['Zombie',3,6,5,9],
-        ['Open Group',0,0,0,0]
+	['Zombie',3,6,5,9],
+	['Open Group',0,0,0,0]
 ];
 
 MONSTERS = {};
@@ -393,9 +419,9 @@ RELICS_LIST = [
 ];
 
 OVERLORD_RELICS_LIST = [
-    'Azatheas Triumph',
-    'Band Of Foresight',
-    'Blade Of Brivala',
+	'Azatheas Triumph',
+	'Band Of Foresight',
+	'Blade Of Brivala',
 	'Bones Of Woe',
 	'Curative Vial',
 	'Duskblade',
@@ -576,19 +602,19 @@ var apothecary = {},
 	];
 
 	bountyHunter.skills = [
-   		['Chosen Target', 0],
-   		['Dark Iron Chains', 2],
-   		['Double Crossbow', 0, twohand],
-   		['Evil Eye', 2],
-   		['Lie In Wait', 1],
-   		['Longshot', 1],
-   		['Not So Fast', 1],
-   		['Payday', 3],
-   		['Rapid Fire', 3],
-   		['Undercover', 2]
-   	];
+		['Chosen Target', 0],
+		['Dark Iron Chains', 2],
+		['Double Crossbow', 0, twohand],
+		['Evil Eye', 2],
+		['Lie In Wait', 1],
+		['Longshot', 1],
+		['Not So Fast', 1],
+		['Payday', 3],
+		['Rapid Fire', 3],
+		['Undercover', 2]
+	];
 
-   	champion.skills = [
+	champion.skills = [
 		['A Living Legend', 1],
 		['For The Cause', 3],
 		['Glory Of Battle', 1],
@@ -686,10 +712,10 @@ var apothecary = {},
 	];
 
 	monk.skills = [
-	    ['Greater calling', 0],
-	    ['Inner Balance', 1],
-	    ['Openhanded', 2],
-	    ['Vow Of Freedom', 3]
+		['Greater calling', 0],
+		['Inner Balance', 1],
+		['Openhanded', 2],
+		['Vow Of Freedom', 3]
 	];
 
 	necromancer.skills = [
@@ -790,10 +816,10 @@ var apothecary = {},
 	];
 
 	steelcaster.skills = [
-	    ['Iron Blooded', 3],
-	    ['Rune Grafting', 1],
-	    ['Runeguard', 0],
-	    ['Shield Mage', 2]
+		['Iron Blooded', 3],
+		['Rune Grafting', 1],
+		['Runeguard', 0],
+		['Shield Mage', 2]
 	];
 
 	thief.skills = [
@@ -892,20 +918,20 @@ battlemage.newArchetype = war;
 var HYBRID_CLASSES = [monk, steelcaster, battlemage, watchman];
 
 var HEROES_LIST = [
-        ['Ronan of the Wild',10,5,rog],
+	['Ronan of the Wild',10,5,rog],
 	['Hugo the Glorious',12,3,war],
 	['Aurim',8,5,sup],
 	['Bogran the Shadow',10,4,rog],
-        ['Eliam',12,5,war],
-        ['Brother Glyr',12,3,sup],
-    	['Kirga',12,3,rog],
+	['Eliam',12,5,war],
+	['Brother Glyr',12,3,sup],
+	['Kirga',12,3,rog],
 	['Landrec the Wise',10,4,wiz],
 	['Mad Carthos',8,3,wiz],
-        ['Red Scorpion',8,5,rog],
-        ['Tobin Farslayer',12,3,rog],
-    	['Varikas the Dead',12,3,war],
-    	['Ashrian',10,4,sup],
-        ['Grisban the Thirsty',14,4,war],
+	['Red Scorpion',8,5,rog],
+	['Tobin Farslayer',12,3,rog],
+	['Varikas the Dead',12,3,war],
+	['Ashrian',10,4,sup],
+	['Grisban the Thirsty',14,4,war],
 	['Jain Fairwood',8,5,rog],
 	['Leoric of the Book',8,5,wiz],
 	['Avric Albright',12,4,sup],
@@ -962,8 +988,8 @@ var HEROES_LIST = [
 	['Tatianna',12,4,rog],
 	['Okaluk and Rakash',8,3,sup],
 	['Krutzbeck',12,4,war],
-        ['Jonas the Kind',10,4,sup],
-        ['Laughin Buldar',14,3,war]
+	['Jonas the Kind',10,4,sup],
+	['Laughin Buldar',14,3,war]
 ];
 
 var HEROES = {};
@@ -1215,111 +1241,111 @@ for (var i = 0; i < TRACKING_TOKENS_INITIAL.length; i++) {
 
 
 OVERLORD_CARDS_LIST = [
-	['Critical Blow', 'basic', 1],
-	['Dark Charm', 'basic', 1],
-	['Dark Fortune', 'basic', 2],
-	['Dark Might', 'basic', 2],
-	['Dash', 'basic', 2],
-	['Frenzy', 'basic', 2],
-	['Pit Trap', 'basic', 1],
-	['Poison Dart', 'basic', 1],
-	['Tripwire', 'basic', 2],
-	['Word Of Misery', 'basic', 1],
-	['Befuddle', 'basic2', 2],
-	['Blinding Speed', 'basic2', 2],
-	['Dirty Fighting', 'basic2', 2],
-	['Flurry', 'basic2', 1],
-	['Grease Trap', 'basic2', 1],
-	['Mental Error', 'basic2', 1],
-	['Mimic', 'basic2', 1],
-	['Overwhelm', 'basic2', 1],
-	['Reflective Ward', 'basic2', 1],
-	['Sign Of Weakness', 'basic2', 1],
-	['Uncontrolled Power', 'basic2', 2],
-	['Adaptive Contagion', 'infector', 1],
-	['Airborne', 'infector', 1],
-	['Contaminated', 'infector', 1],
-	['Dark Host', 'infector', 1],
-	['Outbreak', 'infector', 1],
-	['Tainted Blow', 'infector', 1],
-	['Virulent Infection', 'infector', 1],
-	['Diabolic Power', 'magus', 1],
-	['Rise Again', 'magus', 1],
-	['Unholy Ritual', 'magus', 1],
-	['Word Of Despair', 'magus', 1],
-	['Word Of Pain', 'magus', 1],
-	['Blood Bargaining', 'punisher', 1],
-	['Exploit Weakness', 'punisher', 1],
-	['No Rest For The Wicked', 'punisher', 1],
-	['Price Of Prevention', 'punisher', 1],
-	['Trading Pains', 'punisher', 1],
-	['Curse Of The Monkey God', 'saboteur', 1],
-	['Explosive Runes', 'saboteur', 1],
-	['Uthuk Demon Trap', 'saboteur', 1],
-	['Web Trap', 'saboteur', 1],
-	['Wicked Laughter', 'saboteur', 1],
-	['Dark Remedy', 'universal', 2],
-	['Dark Resilience', 'universal', 2],
-	['Placebo', 'universal', 1],
-	['Plan Ahead', 'universal', 1],
-	['Refresh', 'universal', 1],
-	['Schemes', 'universal', 1],
-	['Solidarity', 'universal', 1],
-	['Upgrade', 'universal', 1],
-	['Diverse Means', 'universal', 1],
-	['Bloodlust', 'warlord', 1],
-	['Blood Rage', 'warlord', 2],
-	['Dark Fortitude', 'warlord', 1],
-	['Expert Blow', 'warlord', 1],
-	['Reinforce', 'warlord', 1],
-	['Beneath The Shadow', 'unkindness', 1],
-	['Beware', 'unkindness', 1],
-	['Call Of The Ravens', 'unkindness', 1],
-	['Feast', 'unkindness', 1],
-	['Ill Omen', 'unkindness', 1],
-	['Imitation', 'unkindness', 1],
-	['Sudden Flurry', 'unkindness', 1],
-	['Envelop', 'unkindness', 1],
-	['Imploding Rift', 'shadowmancer', 1],
-	['Mistrust', 'shadowmancer', 1],
-	['Shadow Of Doubt', 'shadowmancer', 1],
-	['Out Of Darkness', 'shadowmancer', 1],
-	['Black Out', 'shadowmancer', 1],
-	['Shadow Walk', 'shadowmancer', 1],
-	['Treacherous Shadows', 'shadowmancer', 1],
-	['Dragonbone Pendant', 'enchanter', 1],
-	['Rings Of ZholAlam', 'enchanter', 1],
-	['Elixir Of Stone', 'enchanter', 1],
-	['Wristlet Of Wind', 'enchanter', 1],
-	['Ward Of Peace', 'enchanter', 1],
-	['Rune Of The Phoenix', 'enchanter', 1],
-	['Sign Of The Last Zenith', 'enchanter', 1],
-	['Dance Macabre', 'soulbinder', 1],
-	['Dark Silhouette', 'soulbinder', 1],
-	['Grotesque', 'soulbinder', 1],
-	['Haunted Steps', 'soulbinder', 1],
-	['Possessive', 'soulbinder', 1],
-	['Restless Spirit', 'soulbinder', 1],
-	['Ties That Bind', 'soulbinder', 1],
-	['Unblinking', 'soulbinder', 1],
-	['Offertory Affliction', 'overlord_reward', 1],
-	['Secrets of Flesh', 'overlord_reward', 1],
-	['Toxic Reprisal', 'overlord_reward', 1],
-	['Down And Out', 'overlord_reward', 1],
-	['Twin Souls', 'overlord_reward', 1],
-	['The Wyrm Queens Favor', 'overlord_reward', 1],
-	['Endless Supply', 'overlord_reward', 1],
-	['Fire Gems', 'overlord_reward', 1],
-	['Forgotten Sorcery', 'overlord_reward', 1],
-	['Hags Hunger', 'overlord_reward', 1],
-	['Mockery', 'overlord_reward', 1],
-	['Power in Numbers', 'overlord_reward', 1],
-	['Twin Souls', 'overlord_reward', 1],
-	['The Wyrm Queens Favor', 'overlord_reward', 1],
-	['Splice', 'overlord_reward', 1],
-	['Spligs Revenge', 'overlord_reward', 1],
-	['Unbroken', 'overlord_reward', 1],
-	['Unseen Wings', 'overlord_reward', 1],
+	['Critical Blow', 'Basic', 1],
+	['Dark Charm', 'Basic', 1],
+	['Dark Fortune', 'Basic', 2],
+	['Dark Might', 'Basic', 2],
+	['Dash', 'Basic', 2],
+	['Frenzy', 'Basic', 2],
+	['Pit Trap', 'Basic', 1],
+	['Poison Dart', 'Basic', 1],
+	['Tripwire', 'Basic', 2],
+	['Word Of Misery', 'Basic', 1],
+	['Befuddle', 'Basic2', 2],
+	['Blinding Speed', 'Basic2', 2],
+	['Dirty Fighting', 'Basic2', 2],
+	['Flurry', 'Basic2', 1],
+	['Grease Trap', 'Basic2', 1],
+	['Mental Error', 'Basic2', 1],
+	['Mimic', 'Basic2', 1],
+	['Overwhelm', 'Basic2', 1],
+	['Reflective Ward', 'Basic2', 1],
+	['Sign Of Weakness', 'Basic2', 1],
+	['Uncontrolled Power', 'Basic2', 2],
+	['Dragonbone Pendant', 'Enchanter', 1],
+	['Rings Of ZholAlam', 'Enchanter', 1],
+	['Elixir Of Stone', 'Enchanter', 1],
+	['Wristlet Of Wind', 'Enchanter', 1],
+	['Ward Of Peace', 'Enchanter', 1],
+	['Rune Of The Phoenix', 'Enchanter', 1],
+	['Sign Of The Last Zenith', 'Enchanter', 1],
+	['Adaptive Contagion', 'Infector', 1],
+	['Airborne', 'Infector', 1],
+	['Contaminated', 'Infector', 1],
+	['Dark Host', 'Infector', 1],
+	['Outbreak', 'Infector', 1],
+	['Tainted Blow', 'Infector', 1],
+	['Virulent Infection', 'Infector', 1],
+	['Diabolic Power', 'Magus', 1],
+	['Rise Again', 'Magus', 1],
+	['Unholy Ritual', 'Magus', 1],
+	['Word Of Despair', 'Magus', 1],
+	['Word Of Pain', 'Magus', 1],
+	['Blood Bargaining', 'Punisher', 1],
+	['Exploit Weakness', 'Punisher', 1],
+	['No Rest For The Wicked', 'Punisher', 1],
+	['Price Of Prevention', 'Punisher', 1],
+	['Trading Pains', 'Punisher', 1],
+	['Curse Of The Monkey God', 'Saboteur', 1],
+	['Explosive Runes', 'Saboteur', 1],
+	['Uthuk Demon Trap', 'Saboteur', 1],
+	['Web Trap', 'Saboteur', 1],
+	['Wicked Laughter', 'Saboteur', 1],
+	['Imploding Rift', 'Shadowmancer', 1],
+	['Mistrust', 'Shadowmancer', 1],
+	['Shadow Of Doubt', 'Shadowmancer', 1],
+	['Out Of Darkness', 'Shadowmancer', 1],
+	['Black Out', 'Shadowmancer', 1],
+	['Shadow Walk', 'Shadowmancer', 1],
+	['Treacherous Shadows', 'Shadowmancer', 1],
+	['Dance Macabre', 'Soulbinder', 1],
+	['Dark Silhouette', 'Soulbinder', 1],
+	['Grotesque', 'Soulbinder', 1],
+	['Haunted Steps', 'Soulbinder', 1],
+	['Possessive', 'Soulbinder', 1],
+	['Restless Spirit', 'Soulbinder', 1],
+	['Ties That Bind', 'Soulbinder', 1],
+	['Unblinking', 'Soulbinder', 1],
+	['Beneath The Shadow', 'Unkindness', 1],
+	['Beware', 'Unkindness', 1],
+	['Call Of The Ravens', 'Unkindness', 1],
+	['Feast', 'Unkindness', 1],
+	['Ill Omen', 'Unkindness', 1],
+	['Imitation', 'Unkindness', 1],
+	['Sudden Flurry', 'Unkindness', 1],
+	['Envelop', 'Unkindness', 1],
+	['Bloodlust', 'Warlord', 1],
+	['Blood Rage', 'Warlord', 2],
+	['Dark Fortitude', 'Warlord', 1],
+	['Expert Blow', 'Warlord', 1],
+	['Reinforce', 'Warlord', 1],
+	['Dark Remedy', 'Universal', 2],
+	['Dark Resilience', 'Universal', 2],
+	['Placebo', 'Universal', 1],
+	['Plan Ahead', 'Universal', 1],
+	['Refresh', 'Universal', 1],
+	['Schemes', 'Universal', 1],
+	['Solidarity', 'Universal', 1],
+	['Upgrade', 'Universal', 1],
+	['Diverse Means', 'Universal', 1],
+	['Offertory Affliction', 'Overlord Reward', 1],
+	['Secrets of Flesh', 'Overlord Reward', 1],
+	['Toxic Reprisal', 'Overlord Reward', 1],
+	['Down And Out', 'Overlord Reward', 1],
+	['Twin Souls', 'Overlord Reward', 1],
+	['The Wyrm Queens Favor', 'Overlord Reward', 1],
+	['Endless Supply', 'Overlord Reward', 1],
+	['Fire Gems', 'Overlord Reward', 1],
+	['Forgotten Sorcery', 'Overlord Reward', 1],
+	['Hags Hunger', 'Overlord Reward', 1],
+	['Mockery', 'Overlord Reward', 1],
+	['Power in Numbers', 'Overlord Reward', 1],
+	['Twin Souls', 'Overlord Reward', 1],
+	['The Wyrm Queens Favor', 'Overlord Reward', 1],
+	['Splice', 'Overlord Reward', 1],
+	['Spligs Revenge', 'Overlord Reward', 1],
+	['Unbroken', 'Overlord Reward', 1],
+	['Unseen Wings', 'Overlord Reward', 1],
 ];
 
 var OVERLORD_CARDS = {};
@@ -1618,8 +1644,8 @@ var MAP_HASES_LIST = [
 	['TSR','The Overlord Revealed', "eyJ0aWxlcyI6W3sidGl0bGUiOiJFbnRyYW5jZSIsInNpZGUiOiJCIiwieCI6IjEiLCJ5IjoiNSIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiJFeGl0Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiMjQiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiIxMCIsInNpZGUiOiJCIiwieCI6IjMiLCJ5IjoiNCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiJFeHRlbnNpb24xeDIiLCJzaWRlIjoiQiIsIngiOiI3IiwieSI6IjUiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjI1Iiwic2lkZSI6IkIiLCJ4IjoiOCIsInkiOiI1IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIyMyIsInNpZGUiOiJCIiwieCI6IjYiLCJ5IjoiMTEiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIxMiIsInNpZGUiOiJCIiwieCI6IjEiLCJ5IjoiMTAiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjMwIiwic2lkZSI6IkIiLCJ4IjoiMiIsInkiOiIxNSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4dGVuc2lvbjJ4MiIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiMTkiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiIyIiwieSI6IjIxIiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjkiLCJzaWRlIjoiQiIsIngiOiIxMiIsInkiOiIxMCIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IkV4dGVuc2lvbjF4MiIsInNpZGUiOiJCIiwieCI6IjEzIiwieSI6IjE0IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjI4Iiwic2lkZSI6IkIiLCJ4IjoiMTMiLCJ5IjoiMTUiLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiRXh0ZW5zaW9uMXgyIiwic2lkZSI6IkIiLCJ4IjoiMTUiLCJ5IjoiMTciLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiMjEiLCJzaWRlIjoiQiIsIngiOiIxNCIsInkiOiIxOCIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjE3Iiwic2lkZSI6IkIiLCJ4IjoiMTYiLCJ5IjoiOSIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIyIiwic2lkZSI6IkIiLCJ4IjoiMTYiLCJ5IjoiMyIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiJFeHRlbnNpb24yeDIiLCJzaWRlIjoiQiIsIngiOiIxOCIsInkiOiIxIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiIxOCIsInkiOiIwIiwiYW5nbGUiOiIxODAifV0sImRvb3JzIjpbeyJ0aXRsZSI6IlJlZCBSdW5lIEJsb2NrZWQiLCJ2ZXJ0aWNhbCI6dHJ1ZSwieCI6IjYiLCJ5IjoiNCJ9LHsidGl0bGUiOiJSZWQgUnVuZSBCbG9ja2VkIiwidmVydGljYWwiOmZhbHNlLCJ4IjoiNyIsInkiOiIxMCJ9XSwieHMiOltdfQ=="],
 	['TSR','The Ritual of Shadows - E1', "eyJtb25zdGVycyI6W3sidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjp0cnVlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI1IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjpmYWxzZSwieCI6IjYiLCJ5IjoiMTMiLCJ2ZXJ0aWNhbCI6ZmFsc2UsImhwIjoiNCIsImNvbmRpdGlvbnMiOnt9fSx7InRpdGxlIjoiRmxlc2ggTW91bGRlciIsIm1hc3RlciI6ZmFsc2UsIngiOiI2IiwieSI6IjEzIiwidmVydGljYWwiOmZhbHNlLCJocCI6IjQiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkZsZXNoIE1vdWxkZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI0IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJPcGVuIEdyb3VwIiwibWFzdGVyIjp0cnVlLCJ4IjoiNCIsInkiOiI2IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjAiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6Ik9wZW4gR3JvdXAiLCJtYXN0ZXIiOnRydWUsIngiOiIxMSIsInkiOiI2IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjAiLCJjb25kaXRpb25zIjp7fX1dLCJoZXJvMSI6eyJ0aXRsZSI6IkFzaHJpYW4iLCJ4IjoiMTIiLCJ5IjoiOCIsImhwIjoiMTAiLCJzdGFtaW5hIjoiNCIsImNsYXNzTmFtZSI6IkRpc2NpcGxlIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFybW9yIE9mIEZhaXRoIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCbGVzc2VkIFN0cmlrZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQ2xlYW5zaW5nIFRvdWNoIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEaXZpbmUgRnVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiSG9seSBQb3dlciIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUHJheWVyIE9mIEhlYWxpbmciLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUHJheWVyIE9mIFBlYWNlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSYWRpYW50IExpZ2h0IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJUaW1lIE9mIE5lZWQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJJcm9uIE1hY2UiLCJoYW5kMiI6Ildvb2RlbiBTaGllbGQiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvMiI6eyJ0aXRsZSI6IlN5bmRyYWVsIiwieCI6IjEyIiwieSI6IjkiLCJocCI6IjEyIiwic3RhbWluYSI6IjQiLCJjbGFzc05hbWUiOiJLbmlnaHQiLCJmZWF0VXNlZCI6ZmFsc2UsInNraWxscyI6W1siQWR2YW5jZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQ2hhbGxlbmdlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEZWZlbmQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkRlZmVuc2UgVHJhaW5pbmciLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkd1YXJkIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJbnNwaXJhdGlvbiIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiT2F0aCBPZiBIb25vciIsdHJ1ZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJTaGllbGQgU2xhbSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiU3RhbHdhcnQiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJJcm9uIExvbmdzd29yZCIsImhhbmQyIjoiV29vZGVuIFNoaWVsZCIsImFybW9yIjoiIiwiaXRlbSI6IiIsIml0ZW0yIjoiIn0sInNhY2siOltdLCJjb25kaXRpb25zIjp7fX0sImhlcm8zIjp7InRpdGxlIjoiTGVvcmljIG9mIHRoZSBCb29rIiwieCI6IjEyIiwieSI6IjEwIiwiaHAiOiI4Iiwic3RhbWluYSI6IjUiLCJjbGFzc05hbWUiOiJSdW5lbWFzdGVyIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkJyZWFrIFRoZSBSdW5lIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJFeHBsb2RpbmcgUnVuZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiR2hvc3QgQXJtb3IiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkluc2NyaWJlIFJ1bmUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIklyb24gV2lsbCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUXVpY2sgQ2FzdGluZyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuZSBNYXN0ZXJ5IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSdW5pYyBLbm93bGVkZ2UiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuaWMgU29yY2VyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdXSwiaXRlbXMiOnsiaGFuZCI6IkFyY2FuZSBCb2x0IiwiaGFuZDIiOiIiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvNCI6eyJ0aXRsZSI6IkphaW4gRmFpcndvb2QiLCJ4IjoiMTIiLCJ5IjoiMTEiLCJocCI6IjgiLCJzdGFtaW5hIjoiNSIsImNsYXNzTmFtZSI6IldpbGRsYW5kZXIiLCJmZWF0VXNlZCI6ZmFsc2UsInNraWxscyI6W1siQWNjdXJhdGUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkJsYWNrIEFycm93IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCb3cgTWFzdGVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGFuZ2VyIFNlbnNlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJFYWdsZSBFeWVzIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJGaXJzdCBTdHJpa2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkZsZWV0IE9mIEZvb3QiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIk5pbWJsZSIsdHJ1ZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJSdW5uaW5nIFNob3QiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJZZXcgU2hvcnRib3ciLCJoYW5kMiI6IiIsImFybW9yIjoiIiwiaXRlbSI6IiIsIml0ZW0yIjoiIn0sInNhY2siOltdLCJjb25kaXRpb25zIjp7fX0sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkIiLCJ4IjoiNCIsInkiOiIwIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxIiwic2lkZSI6IkIiLCJ4IjoiMiIsInkiOiIyIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQiIsIngiOiIxIiwieSI6IjUiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IjE5Iiwic2lkZSI6IkIiLCJ4IjoiOCIsInkiOiI1IiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiMTciLCJzaWRlIjoiQiIsIngiOiIxNCIsInkiOiI1IiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiMjciLCJzaWRlIjoiQiIsIngiOiIxNCIsInkiOiI5IiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiMTMiLCJzaWRlIjoiQiIsIngiOiI0IiwieSI6IjExIiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiRXhpdCIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiMTMiLCJhbmdsZSI6IiJ9LHsidGl0bGUiOiIyNSIsInNpZGUiOiJCIiwieCI6IjEwIiwieSI6IjExIiwiYW5nbGUiOiIxODAifV0sImRvb3JzIjpbXSwieHMiOltdLCJhbGxpZXMiOltdLCJmYW1pbGlhcnMiOltdLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlNlYXJjaCIsIngiOiIyIiwieSI6IjkifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjE1IiwieSI6IjEyIn0seyJ0aXRsZSI6IlNlYXJjaCIsIngiOiI1IiwieSI6IjExIn0seyJ0aXRsZSI6IlNlYXJjaCIsIngiOiI3IiwieSI6IjE2In1dLCJvdmVybG9yZCI6eyJjYXJkcyI6W119LCJsaWV1dGVuYW50cyI6W3sidGl0bGUiOiJMb3JkIE1lcmljayBGYXJyb3ciLCJ4IjoiNSIsInkiOiIxNCIsImhwIjoiMTMiLCJjb25kaXRpb25zIjp7fSwiaGFzQmFjayI6dHJ1ZSwidmVydGljYWwiOmZhbHNlLCJyZWxpY3MiOlsiU3RhZmYgT2YgU2hhZG93cyJdLCJza2lsbHMiOltdfV0sImFjdE9uZSI6dHJ1ZSwibWFwV2lkdGgiOjQwLCJtYXBIZWlnaHQiOjUwLCJxdWVzdE9iamVjdGl2ZXMiOnsiaGVyb2VzVmljdG9yeSI6IiIsIm92ZWxvcmRWaWN0b3J5IjoiIiwiY3VycmVudFN0YXR1cyI6IiIsInJlaW5mb3JjZW1lbnRzIjoiIn0sInZpbGxhZ2VycyI6W10sInBsb3QiOnsidGl0bGUiOiIifSwibW9uc3RlclRyYWl0cyI6eyJjdXJzZWQiOiJjdXJzZWQifSwiZXhwYW5zaW9ucyI6eyJzZWNvbmRlZGl0aW9uYmFzZWdhbWUiOiJzZWNvbmRlZGl0aW9uYmFzZWdhbWUiLCJib25kc29mdGhld2lsZCI6ImJvbmRzb2Z0aGV3aWxkIiwiY3Jvd25vZmRlc3RpbnkiOiJjcm93bm9mZGVzdGlueSIsImNydXNhZGVvZnRoZWZvcmdvdHRlbiI6ImNydXNhZGVvZnRoZWZvcmdvdHRlbiIsImd1YXJkaWFuc29mZGVlcGhhbGwiOiJndWFyZGlhbnNvZmRlZXBoYWxsIiwibGFieXJpbnRob2ZydWluIjoibGFieXJpbnRob2ZydWluIiwibGFpcm9mdGhld3lybSI6ImxhaXJvZnRoZXd5cm0iLCJtYW5vcm9mcmF2ZW5zIjoibWFub3JvZnJhdmVucyIsIm9hdGhvZnRoZW91dGNhc3QiOiJvYXRob2Z0aGVvdXRjYXN0Iiwic2hhcmRzb2ZldmVyZGFyayI6InNoYXJkc29mZXZlcmRhcmsiLCJzaGFkb3dvZm5hcmVraGFsbCI6InNoYWRvd29mbmFyZWtoYWxsIiwic3Rld2FyZHNvZnRoZXNlY3JldCI6InN0ZXdhcmRzb2Z0aGVzZWNyZXQiLCJ0aGV0cm9sbGZlbnMiOiJ0aGV0cm9sbGZlbnMiLCJ0cmVhdHlvZmNoYW1waW9ucyI6InRyZWF0eW9mY2hhbXBpb25zIiwidmlzaW9uc29mZGF3biI6InZpc2lvbnNvZmRhd24iLCJjb252ZXJzaW9ua2l0IjoiY29udmVyc2lvbmtpdCIsIm1pc3Rzb2ZiaWxlaGFsbCI6Im1pc3Rzb2ZiaWxlaGFsbCIsImNoYWluc3RoYXRydXN0IjoiY2hhaW5zdGhhdHJ1c3QifX0="],
 
-    ['TSR','The Ritual of Shadows - E2', "eyJtb25zdGVycyI6W3sidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjp0cnVlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI1IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjpmYWxzZSwieCI6IjYiLCJ5IjoiMTMiLCJ2ZXJ0aWNhbCI6ZmFsc2UsImhwIjoiNCIsImNvbmRpdGlvbnMiOnt9fSx7InRpdGxlIjoiRmxlc2ggTW91bGRlciIsIm1hc3RlciI6ZmFsc2UsIngiOiI2IiwieSI6IjEzIiwidmVydGljYWwiOmZhbHNlLCJocCI6IjQiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkZsZXNoIE1vdWxkZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI0IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJPcGVuIEdyb3VwIiwibWFzdGVyIjp0cnVlLCJ4IjoiNCIsInkiOiI2IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjAiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6Ik9wZW4gR3JvdXAiLCJtYXN0ZXIiOnRydWUsIngiOiIxMyIsInkiOiIxMSIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiIwIiwiY29uZGl0aW9ucyI6e319XSwiaGVybzEiOnsidGl0bGUiOiJBc2hyaWFuIiwieCI6IjEyIiwieSI6IjgiLCJocCI6IjEwIiwic3RhbWluYSI6IjQiLCJjbGFzc05hbWUiOiJEaXNjaXBsZSIsImZlYXRVc2VkIjpmYWxzZSwic2tpbGxzIjpbWyJBcm1vciBPZiBGYWl0aCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQmxlc3NlZCBTdHJpa2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkNsZWFuc2luZyBUb3VjaCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGl2aW5lIEZ1cnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkhvbHkgUG93ZXIiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlByYXllciBPZiBIZWFsaW5nIix0cnVlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlByYXllciBPZiBQZWFjZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUmFkaWFudCBMaWdodCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiVGltZSBPZiBOZWVkIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiSXJvbiBNYWNlIiwiaGFuZDIiOiJXb29kZW4gU2hpZWxkIiwiYXJtb3IiOiIiLCJpdGVtIjoiIiwiaXRlbTIiOiIifSwic2FjayI6W10sImNvbmRpdGlvbnMiOnt9fSwiaGVybzIiOnsidGl0bGUiOiJTeW5kcmFlbCIsIngiOiIxMiIsInkiOiI5IiwiaHAiOiIxMiIsInN0YW1pbmEiOiI0IiwiY2xhc3NOYW1lIjoiS25pZ2h0IiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFkdmFuY2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkNoYWxsZW5nZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGVmZW5kIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEZWZlbnNlIFRyYWluaW5nIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJHdWFyZCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiSW5zcGlyYXRpb24iLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIk9hdGggT2YgSG9ub3IiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiU2hpZWxkIFNsYW0iLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlN0YWx3YXJ0IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiSXJvbiBMb25nc3dvcmQiLCJoYW5kMiI6Ildvb2RlbiBTaGllbGQiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvMyI6eyJ0aXRsZSI6Ikxlb3JpYyBvZiB0aGUgQm9vayIsIngiOiIxMiIsInkiOiIxMCIsImhwIjoiOCIsInN0YW1pbmEiOiI1IiwiY2xhc3NOYW1lIjoiUnVuZW1hc3RlciIsImZlYXRVc2VkIjpmYWxzZSwic2tpbGxzIjpbWyJCcmVhayBUaGUgUnVuZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRXhwbG9kaW5nIFJ1bmUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkdob3N0IEFybW9yIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJbnNjcmliZSBSdW5lIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJcm9uIFdpbGwiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlF1aWNrIENhc3RpbmciLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlJ1bmUgTWFzdGVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuaWMgS25vd2xlZGdlIix0cnVlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlJ1bmljIFNvcmNlcnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJBcmNhbmUgQm9sdCIsImhhbmQyIjoiIiwiYXJtb3IiOiIiLCJpdGVtIjoiIiwiaXRlbTIiOiIifSwic2FjayI6W10sImNvbmRpdGlvbnMiOnt9fSwiaGVybzQiOnsidGl0bGUiOiJKYWluIEZhaXJ3b29kIiwieCI6IjEyIiwieSI6IjExIiwiaHAiOiI4Iiwic3RhbWluYSI6IjUiLCJjbGFzc05hbWUiOiJXaWxkbGFuZGVyIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFjY3VyYXRlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCbGFjayBBcnJvdyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQm93IE1hc3RlcnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkRhbmdlciBTZW5zZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRWFnbGUgRXllcyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRmlyc3QgU3RyaWtlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJGbGVldCBPZiBGb290IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJOaW1ibGUiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVubmluZyBTaG90IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiWWV3IFNob3J0Ym93IiwiaGFuZDIiOiIiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJ0aWxlcyI6W3sidGl0bGUiOiJFbnRyYW5jZSIsInNpZGUiOiJCIiwieCI6IjQiLCJ5IjoiMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiMSIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiMiIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMSIsInkiOiI1IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxOSIsInNpZGUiOiJCIiwieCI6IjgiLCJ5IjoiNSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjE3Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiNSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjI3Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiOSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjEzIiwic2lkZSI6IkIiLCJ4IjoiNCIsInkiOiIxMSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4aXQiLCJzaWRlIjoiQiIsIngiOiIyIiwieSI6IjEzIiwiYW5nbGUiOiIifSx7InRpdGxlIjoiMjUiLCJzaWRlIjoiQiIsIngiOiIxMCIsInkiOiIxMSIsImFuZ2xlIjoiMTgwIn1dLCJkb29ycyI6W3sidGl0bGUiOiJSZWQgUnVuZSBCbG9ja2VkIiwidmVydGljYWwiOnRydWUsIngiOiI3IiwieSI6IjUiLCJvcGVuZWQiOmZhbHNlfSx7InRpdGxlIjoiUmVkIFJ1bmUgQmxvY2tlZCIsInZlcnRpY2FsIjpmYWxzZSwieCI6IjE1IiwieSI6IjciLCJvcGVuZWQiOmZhbHNlfSx7InRpdGxlIjoiWWVsbG93IFJ1bmUgQmxvY2tlZCIsInZlcnRpY2FsIjp0cnVlLCJ4IjoiOSIsInkiOiIxMCIsIm9wZW5lZCI6dHJ1ZX1dLCJ4cyI6W10sImFsbGllcyI6W10sImZhbWlsaWFycyI6W10sIm9iamVjdGl2ZXMiOlt7InRpdGxlIjoiU2VhcmNoIiwieCI6IjIiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTUiLCJ5IjoiMTIifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjUiLCJ5IjoiMTEifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjciLCJ5IjoiMTYifV0sIm92ZXJsb3JkIjp7ImNhcmRzIjpbXX0sImxpZXV0ZW5hbnRzIjpbeyJ0aXRsZSI6IkxvcmQgTWVyaWNrIEZhcnJvdyIsIngiOiI1IiwieSI6IjE0IiwiaHAiOiIxMyIsImNvbmRpdGlvbnMiOnt9LCJoYXNCYWNrIjp0cnVlLCJ2ZXJ0aWNhbCI6ZmFsc2UsInJlbGljcyI6WyJTdGFmZiBPZiBTaGFkb3dzIl0sInNraWxscyI6W119XSwiYWN0T25lIjp0cnVlLCJtYXBXaWR0aCI6NDAsIm1hcEhlaWdodCI6NTAsInZpbGxhZ2VycyI6W10sInF1ZXN0T2JqZWN0aXZlcyI6eyJoZXJvZXNWaWN0b3J5IjoiIiwib3ZlbG9yZFZpY3RvcnkiOiIiLCJjdXJyZW50U3RhdHVzIjoiIiwicmVpbmZvcmNlbWVudHMiOiIifSwibW9uc3RlclRyYWl0cyI6eyJjdXJzZWQiOiJjdXJzZWQifSwicGxvdCI6eyJ0aXRsZSI6IiJ9LCJleHBhbnNpb25zIjp7InNlY29uZGVkaXRpb25iYXNlZ2FtZSI6InNlY29uZGVkaXRpb25iYXNlZ2FtZSIsImJvbmRzb2Z0aGV3aWxkIjoiYm9uZHNvZnRoZXdpbGQiLCJjcm93bm9mZGVzdGlueSI6ImNyb3dub2ZkZXN0aW55IiwiY3J1c2FkZW9mdGhlZm9yZ290dGVuIjoiY3J1c2FkZW9mdGhlZm9yZ290dGVuIiwiZ3VhcmRpYW5zb2ZkZWVwaGFsbCI6Imd1YXJkaWFuc29mZGVlcGhhbGwiLCJsYWJ5cmludGhvZnJ1aW4iOiJsYWJ5cmludGhvZnJ1aW4iLCJsYWlyb2Z0aGV3eXJtIjoibGFpcm9mdGhld3lybSIsIm1hbm9yb2ZyYXZlbnMiOiJtYW5vcm9mcmF2ZW5zIiwib2F0aG9mdGhlb3V0Y2FzdCI6Im9hdGhvZnRoZW91dGNhc3QiLCJzaGFyZHNvZmV2ZXJkYXJrIjoic2hhcmRzb2ZldmVyZGFyayIsInNoYWRvd29mbmFyZWtoYWxsIjoic2hhZG93b2ZuYXJla2hhbGwiLCJzdGV3YXJkc29mdGhlc2VjcmV0Ijoic3Rld2FyZHNvZnRoZXNlY3JldCIsInRoZXRyb2xsZmVucyI6InRoZXRyb2xsZmVucyIsInRyZWF0eW9mY2hhbXBpb25zIjoidHJlYXR5b2ZjaGFtcGlvbnMiLCJ2aXNpb25zb2ZkYXduIjoidmlzaW9uc29mZGF3biIsImNvbnZlcnNpb25raXQiOiJjb252ZXJzaW9ua2l0IiwibWlzdHNvZmJpbGVoYWxsIjoibWlzdHNvZmJpbGVoYWxsIiwiY2hhaW5zdGhhdHJ1c3QiOiJjaGFpbnN0aGF0cnVzdCJ9fQ=="],
-    ['LoR','Ruinous Whispers', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMTQiLCJ5IjoiMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiOSIsInNpZGUiOiJBIiwieCI6IjEzIiwieSI6IjIiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiI4Iiwic2lkZSI6IkEiLCJ4IjoiMTMiLCJ5IjoiNiIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjM2Iiwic2lkZSI6IkEiLCJ4IjoiNSIsInkiOiIyIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiI3IiwieSI6IjEiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIyNiIsInNpZGUiOiJBIiwieCI6IjIiLCJ5IjoiNCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiI1IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxMiIsInNpZGUiOiJBIiwieCI6IjUiLCJ5IjoiMTAiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiJFeGl0Iiwic2lkZSI6IkEiLCJ4IjoiMyIsInkiOiIxMiIsImFuZ2xlIjoiMCJ9XSwiZG9vcnMiOltdLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlNlYXJjaCIsIngiOiIxIiwieSI6IjYifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjUiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTIiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiNyIsInkiOiIxIn0seyJ0aXRsZSI6IlJlZCIsIngiOiIxNSIsInkiOiI4In1dfQ=="],
+	['TSR','The Ritual of Shadows - E2', "eyJtb25zdGVycyI6W3sidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjp0cnVlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI1IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJGbGVzaCBNb3VsZGVyIiwibWFzdGVyIjpmYWxzZSwieCI6IjYiLCJ5IjoiMTMiLCJ2ZXJ0aWNhbCI6ZmFsc2UsImhwIjoiNCIsImNvbmRpdGlvbnMiOnt9fSx7InRpdGxlIjoiRmxlc2ggTW91bGRlciIsIm1hc3RlciI6ZmFsc2UsIngiOiI2IiwieSI6IjEzIiwidmVydGljYWwiOmZhbHNlLCJocCI6IjQiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6IkZsZXNoIE1vdWxkZXIiLCJtYXN0ZXIiOmZhbHNlLCJ4IjoiNiIsInkiOiIxMyIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiI0IiwiY29uZGl0aW9ucyI6e319LHsidGl0bGUiOiJPcGVuIEdyb3VwIiwibWFzdGVyIjp0cnVlLCJ4IjoiNCIsInkiOiI2IiwidmVydGljYWwiOmZhbHNlLCJocCI6IjAiLCJjb25kaXRpb25zIjp7fX0seyJ0aXRsZSI6Ik9wZW4gR3JvdXAiLCJtYXN0ZXIiOnRydWUsIngiOiIxMyIsInkiOiIxMSIsInZlcnRpY2FsIjpmYWxzZSwiaHAiOiIwIiwiY29uZGl0aW9ucyI6e319XSwiaGVybzEiOnsidGl0bGUiOiJBc2hyaWFuIiwieCI6IjEyIiwieSI6IjgiLCJocCI6IjEwIiwic3RhbWluYSI6IjQiLCJjbGFzc05hbWUiOiJEaXNjaXBsZSIsImZlYXRVc2VkIjpmYWxzZSwic2tpbGxzIjpbWyJBcm1vciBPZiBGYWl0aCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQmxlc3NlZCBTdHJpa2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkNsZWFuc2luZyBUb3VjaCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGl2aW5lIEZ1cnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkhvbHkgUG93ZXIiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlByYXllciBPZiBIZWFsaW5nIix0cnVlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlByYXllciBPZiBQZWFjZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUmFkaWFudCBMaWdodCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiVGltZSBPZiBOZWVkIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiSXJvbiBNYWNlIiwiaGFuZDIiOiJXb29kZW4gU2hpZWxkIiwiYXJtb3IiOiIiLCJpdGVtIjoiIiwiaXRlbTIiOiIifSwic2FjayI6W10sImNvbmRpdGlvbnMiOnt9fSwiaGVybzIiOnsidGl0bGUiOiJTeW5kcmFlbCIsIngiOiIxMiIsInkiOiI5IiwiaHAiOiIxMiIsInN0YW1pbmEiOiI0IiwiY2xhc3NOYW1lIjoiS25pZ2h0IiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFkdmFuY2UiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkNoYWxsZW5nZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRGVmZW5kIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJEZWZlbnNlIFRyYWluaW5nIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJHdWFyZCIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiSW5zcGlyYXRpb24iLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIk9hdGggT2YgSG9ub3IiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiU2hpZWxkIFNsYW0iLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlN0YWx3YXJ0IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiSXJvbiBMb25nc3dvcmQiLCJoYW5kMiI6Ildvb2RlbiBTaGllbGQiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJoZXJvMyI6eyJ0aXRsZSI6Ikxlb3JpYyBvZiB0aGUgQm9vayIsIngiOiIxMiIsInkiOiIxMCIsImhwIjoiOCIsInN0YW1pbmEiOiI1IiwiY2xhc3NOYW1lIjoiUnVuZW1hc3RlciIsImZlYXRVc2VkIjpmYWxzZSwic2tpbGxzIjpbWyJCcmVhayBUaGUgUnVuZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRXhwbG9kaW5nIFJ1bmUiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkdob3N0IEFybW9yIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJbnNjcmliZSBSdW5lIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJJcm9uIFdpbGwiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlF1aWNrIENhc3RpbmciLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlJ1bmUgTWFzdGVyeSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVuaWMgS25vd2xlZGdlIix0cnVlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIlJ1bmljIFNvcmNlcnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXV0sIml0ZW1zIjp7ImhhbmQiOiJBcmNhbmUgQm9sdCIsImhhbmQyIjoiIiwiYXJtb3IiOiIiLCJpdGVtIjoiIiwiaXRlbTIiOiIifSwic2FjayI6W10sImNvbmRpdGlvbnMiOnt9fSwiaGVybzQiOnsidGl0bGUiOiJKYWluIEZhaXJ3b29kIiwieCI6IjEyIiwieSI6IjExIiwiaHAiOiI4Iiwic3RhbWluYSI6IjUiLCJjbGFzc05hbWUiOiJXaWxkbGFuZGVyIiwiZmVhdFVzZWQiOmZhbHNlLCJza2lsbHMiOltbIkFjY3VyYXRlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJCbGFjayBBcnJvdyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiQm93IE1hc3RlcnkiLGZhbHNlLGZhbHNlLGZhbHNlLGZhbHNlXSxbIkRhbmdlciBTZW5zZSIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRWFnbGUgRXllcyIsZmFsc2UsZmFsc2UsZmFsc2UsZmFsc2VdLFsiRmlyc3QgU3RyaWtlIixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJGbGVldCBPZiBGb290IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV0sWyJOaW1ibGUiLHRydWUsZmFsc2UsZmFsc2UsZmFsc2VdLFsiUnVubmluZyBTaG90IixmYWxzZSxmYWxzZSxmYWxzZSxmYWxzZV1dLCJpdGVtcyI6eyJoYW5kIjoiWWV3IFNob3J0Ym93IiwiaGFuZDIiOiIiLCJhcm1vciI6IiIsIml0ZW0iOiIiLCJpdGVtMiI6IiJ9LCJzYWNrIjpbXSwiY29uZGl0aW9ucyI6e319LCJ0aWxlcyI6W3sidGl0bGUiOiJFbnRyYW5jZSIsInNpZGUiOiJCIiwieCI6IjQiLCJ5IjoiMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiMSIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiMiIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMSIsInkiOiI1IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxOSIsInNpZGUiOiJCIiwieCI6IjgiLCJ5IjoiNSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjE3Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiNSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjI3Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiOSIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IjEzIiwic2lkZSI6IkIiLCJ4IjoiNCIsInkiOiIxMSIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4aXQiLCJzaWRlIjoiQiIsIngiOiIyIiwieSI6IjEzIiwiYW5nbGUiOiIifSx7InRpdGxlIjoiMjUiLCJzaWRlIjoiQiIsIngiOiIxMCIsInkiOiIxMSIsImFuZ2xlIjoiMTgwIn1dLCJkb29ycyI6W3sidGl0bGUiOiJSZWQgUnVuZSBCbG9ja2VkIiwidmVydGljYWwiOnRydWUsIngiOiI3IiwieSI6IjUiLCJvcGVuZWQiOmZhbHNlfSx7InRpdGxlIjoiUmVkIFJ1bmUgQmxvY2tlZCIsInZlcnRpY2FsIjpmYWxzZSwieCI6IjE1IiwieSI6IjciLCJvcGVuZWQiOmZhbHNlfSx7InRpdGxlIjoiWWVsbG93IFJ1bmUgQmxvY2tlZCIsInZlcnRpY2FsIjp0cnVlLCJ4IjoiOSIsInkiOiIxMCIsIm9wZW5lZCI6dHJ1ZX1dLCJ4cyI6W10sImFsbGllcyI6W10sImZhbWlsaWFycyI6W10sIm9iamVjdGl2ZXMiOlt7InRpdGxlIjoiU2VhcmNoIiwieCI6IjIiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTUiLCJ5IjoiMTIifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjUiLCJ5IjoiMTEifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjciLCJ5IjoiMTYifV0sIm92ZXJsb3JkIjp7ImNhcmRzIjpbXX0sImxpZXV0ZW5hbnRzIjpbeyJ0aXRsZSI6IkxvcmQgTWVyaWNrIEZhcnJvdyIsIngiOiI1IiwieSI6IjE0IiwiaHAiOiIxMyIsImNvbmRpdGlvbnMiOnt9LCJoYXNCYWNrIjp0cnVlLCJ2ZXJ0aWNhbCI6ZmFsc2UsInJlbGljcyI6WyJTdGFmZiBPZiBTaGFkb3dzIl0sInNraWxscyI6W119XSwiYWN0T25lIjp0cnVlLCJtYXBXaWR0aCI6NDAsIm1hcEhlaWdodCI6NTAsInZpbGxhZ2VycyI6W10sInF1ZXN0T2JqZWN0aXZlcyI6eyJoZXJvZXNWaWN0b3J5IjoiIiwib3ZlbG9yZFZpY3RvcnkiOiIiLCJjdXJyZW50U3RhdHVzIjoiIiwicmVpbmZvcmNlbWVudHMiOiIifSwibW9uc3RlclRyYWl0cyI6eyJjdXJzZWQiOiJjdXJzZWQifSwicGxvdCI6eyJ0aXRsZSI6IiJ9LCJleHBhbnNpb25zIjp7InNlY29uZGVkaXRpb25iYXNlZ2FtZSI6InNlY29uZGVkaXRpb25iYXNlZ2FtZSIsImJvbmRzb2Z0aGV3aWxkIjoiYm9uZHNvZnRoZXdpbGQiLCJjcm93bm9mZGVzdGlueSI6ImNyb3dub2ZkZXN0aW55IiwiY3J1c2FkZW9mdGhlZm9yZ290dGVuIjoiY3J1c2FkZW9mdGhlZm9yZ290dGVuIiwiZ3VhcmRpYW5zb2ZkZWVwaGFsbCI6Imd1YXJkaWFuc29mZGVlcGhhbGwiLCJsYWJ5cmludGhvZnJ1aW4iOiJsYWJ5cmludGhvZnJ1aW4iLCJsYWlyb2Z0aGV3eXJtIjoibGFpcm9mdGhld3lybSIsIm1hbm9yb2ZyYXZlbnMiOiJtYW5vcm9mcmF2ZW5zIiwib2F0aG9mdGhlb3V0Y2FzdCI6Im9hdGhvZnRoZW91dGNhc3QiLCJzaGFyZHNvZmV2ZXJkYXJrIjoic2hhcmRzb2ZldmVyZGFyayIsInNoYWRvd29mbmFyZWtoYWxsIjoic2hhZG93b2ZuYXJla2hhbGwiLCJzdGV3YXJkc29mdGhlc2VjcmV0Ijoic3Rld2FyZHNvZnRoZXNlY3JldCIsInRoZXRyb2xsZmVucyI6InRoZXRyb2xsZmVucyIsInRyZWF0eW9mY2hhbXBpb25zIjoidHJlYXR5b2ZjaGFtcGlvbnMiLCJ2aXNpb25zb2ZkYXduIjoidmlzaW9uc29mZGF3biIsImNvbnZlcnNpb25raXQiOiJjb252ZXJzaW9ua2l0IiwibWlzdHNvZmJpbGVoYWxsIjoibWlzdHNvZmJpbGVoYWxsIiwiY2hhaW5zdGhhdHJ1c3QiOiJjaGFpbnN0aGF0cnVzdCJ9fQ=="],
+	['LoR','Ruinous Whispers', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMTQiLCJ5IjoiMCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiOSIsInNpZGUiOiJBIiwieCI6IjEzIiwieSI6IjIiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiI4Iiwic2lkZSI6IkEiLCJ4IjoiMTMiLCJ5IjoiNiIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjM2Iiwic2lkZSI6IkEiLCJ4IjoiNSIsInkiOiIyIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiI3IiwieSI6IjEiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIyNiIsInNpZGUiOiJBIiwieCI6IjIiLCJ5IjoiNCIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiI1IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxMiIsInNpZGUiOiJBIiwieCI6IjUiLCJ5IjoiMTAiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiJFeGl0Iiwic2lkZSI6IkEiLCJ4IjoiMyIsInkiOiIxMiIsImFuZ2xlIjoiMCJ9XSwiZG9vcnMiOltdLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlNlYXJjaCIsIngiOiIxIiwieSI6IjYifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjUiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTIiLCJ5IjoiOSJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiNyIsInkiOiIxIn0seyJ0aXRsZSI6IlJlZCIsIngiOiIxNSIsInkiOiI4In1dfQ=="],
 	['LoR','Gathering Foretold - E1', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiI0IiwiYW5nbGUiOiIwIn0seyJ0aXRsZSI6IjM4Iiwic2lkZSI6IkEiLCJ4IjoiMyIsInkiOiIyIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiNSIsInkiOiIxIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiNDMiLCJzaWRlIjoiQSIsIngiOiI4IiwieSI6IjAiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IkVuZCIsInNpZGUiOiJBIiwieCI6IjEwIiwieSI6IjAiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiIxMCIsInkiOiI0IiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiNDAiLCJzaWRlIjoiQSIsIngiOiI1IiwieSI6IjgiLCJhbmdsZSI6IjkwIn0seyJ0aXRsZSI6IkVuZCIsInNpZGUiOiJBIiwieCI6IjQiLCJ5IjoiOSIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkEiLCJ4IjoiOCIsInkiOiIxNCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxMyIsInNpZGUiOiJBIiwieCI6IjEwIiwieSI6IjgiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiIyMSIsInNpZGUiOiJBIiwieCI6IjE2IiwieSI6IjExIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRXhpdCIsInNpZGUiOiJBIiwieCI6IjIyIiwieSI6IjExIiwiYW5nbGUiOiIxODAifV0sImRvb3JzIjpbXSwib2JqZWN0aXZlcyI6W3sidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTAiLCJ5IjoiMCJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiOCIsInkiOiIxNCJ9LHsidGl0bGUiOiJTZWFyY2giLCJ4IjoiMTkiLCJ5IjoiMTMifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjYiLCJ5IjoiMSJ9XX0="],
 	['LoR','Gathering Foretold - E2', "eyJ4cyI6W10sInRpbGVzIjpbeyJ0aXRsZSI6IkVudHJhbmNlIiwic2lkZSI6IkEiLCJ4IjoiMyIsInkiOiIwIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIyIiwic2lkZSI6IkEiLCJ4IjoiMSIsInkiOiIyIiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiNCIsInNpZGUiOiJBIiwieCI6IjEiLCJ5IjoiOCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxNCIsInNpZGUiOiJBIiwieCI6IjciLCJ5IjoiOSIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiIxOCIsInNpZGUiOiJBIiwieCI6IjExIiwieSI6IjgiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiI1Iiwic2lkZSI6IkEiLCJ4IjoiMTEiLCJ5IjoiNCIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiI0MyIsInNpZGUiOiJBIiwieCI6IjkiLCJ5IjoiNSIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQSIsIngiOiI5IiwieSI6IjQiLCJhbmdsZSI6IjE4MCJ9LHsidGl0bGUiOiIxMCIsInNpZGUiOiJBIiwieCI6IjE3IiwieSI6IjQiLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiRXhpdCIsInNpZGUiOiJBIiwieCI6IjIxIiwieSI6IjUiLCJhbmdsZSI6IjE4MCJ9XSwiZG9vcnMiOltdLCJvYmplY3RpdmVzIjpbeyJ0aXRsZSI6IlNlYXJjaCIsIngiOiI5IiwieSI6IjQifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjE0IiwieSI6IjExIn0seyJ0aXRsZSI6IlNlYXJjaCIsIngiOiI2IiwieSI6IjIifSx7InRpdGxlIjoiU2VhcmNoIiwieCI6IjIiLCJ5IjoiMTIifV19"],
 	['LoR','Honor Among Thieves - E2', "eyJ0aWxlcyI6W3sidGl0bGUiOiI4Iiwic2lkZSI6IkIiLCJ4IjoiMTQiLCJ5IjoiNiIsImFuZ2xlIjoiMCJ9LHsidGl0bGUiOiI1Iiwic2lkZSI6IkIiLCJ4IjoiOSIsInkiOiIxIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQiIsIngiOiIxNSIsInkiOiI1IiwiYW5nbGUiOiIxODAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMTAiLCJ5IjoiMCIsImFuZ2xlIjoiMTgwIn0seyJ0aXRsZSI6IkVuZCIsInNpZGUiOiJCIiwieCI6IjgiLCJ5IjoiMyIsImFuZ2xlIjoiOTAifSx7InRpdGxlIjoiMzAiLCJzaWRlIjoiQiIsIngiOiI0IiwieSI6IjciLCJhbmdsZSI6IjAifSx7InRpdGxlIjoiRW5kIiwic2lkZSI6IkIiLCJ4IjoiMyIsInkiOiI3IiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiIxMyIsInNpZGUiOiJCIiwieCI6IjIiLCJ5IjoiMTAiLCJhbmdsZSI6IjI3MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQiIsIngiOiIxIiwieSI6IjEyIiwiYW5nbGUiOiI5MCJ9LHsidGl0bGUiOiJFbmQiLCJzaWRlIjoiQiIsIngiOiIxNCIsInkiOiIxMCIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IkV4dGVuc2lvbjJ4MiIsInNpZGUiOiJCIiwieCI6IjEwIiwieSI6IjE0IiwiYW5nbGUiOiIyNzAifSx7InRpdGxlIjoiRW50cmFuY2UiLCJzaWRlIjoiQSIsIngiOiIxMCIsInkiOiIxNiIsImFuZ2xlIjoiMjcwIn0seyJ0aXRsZSI6IjM4Iiwic2lkZSI6IkIiLCJ4IjoiOCIsInkiOiI3IiwiYW5nbGUiOiI5MCJ9XSwiZG9vcnMiOlt7InRpdGxlIjoiU2hydWJiZXJ5IiwidmVydGljYWwiOmZhbHNlLCJ4IjoiOSIsInkiOiI2In0seyJ0aXRsZSI6IkRvb3IiLCJ2ZXJ0aWNhbCI6dHJ1ZSwieCI6IjciLCJ5IjoiNiJ9LHsidGl0bGUiOiJEb29yIiwidmVydGljYWwiOnRydWUsIngiOiIxMyIsInkiOiI2In0seyJ0aXRsZSI6IlNocnViYmVyeSIsInZlcnRpY2FsIjpmYWxzZSwieCI6IjkiLCJ5IjoiMTQifV0sInhzIjpbeyJ0aXRsZSI6IjJ4MiIsIngiOiIxNSIsInkiOiI3In0seyJ0aXRsZSI6IjJ4MiIsIngiOiIzIiwieSI6IjEyIn1dfQ=="],
