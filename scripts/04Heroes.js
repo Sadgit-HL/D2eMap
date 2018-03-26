@@ -107,7 +107,10 @@ function createClassSelectContent(hybrid) {
 	for (var i = 0; i < ARCHETYPES_LIST.length; i++) {
 		for (var j = 0; j < ARCHETYPES_LIST[i].classes.length; j++) {
 			var title = ARCHETYPES_LIST[i].classes[j].title;
-			html += addOption(title + ' ', ARCHETYPES_LIST[i].title, 'updateClass(this, \'' + title + '\', false, ' + hybrid.toString() + ');');
+			if (hybrid == false || CLASSES[title].allowHybrid != true)
+			{
+				html += addOption(title + ' ', ARCHETYPES_LIST[i].title, 'updateClass(this, \'' + title + '\', false, ' + hybrid.toString() + ');');
+			}
 		}
 	}
 	return html;
