@@ -131,7 +131,13 @@ function clearDirection(element) {
 
 function createConditionSelectContent() {
 	var html = addOption('Remove condition', '', 'removeCondition(this);');
+	var switched = CONDITIONS[CONDITIONS_LIST[0]].hasConditionCard;
 	for (var i = 0; i < CONDITIONS_LIST.length; i++) {
+		if (switched != CONDITIONS[CONDITIONS_LIST[i]].hasConditionCard)
+		{
+			switched = CONDITIONS[CONDITIONS_LIST[i]].hasConditionCard;
+			html += '<li role="separator" class="divider"></li>';
+		}
 		html += addOption(CONDITIONS_LIST[i] + ' ', '', 'updateCondition(this, \'' + CONDITIONS_LIST[i] + '\')');
 	}
 	return html;
@@ -1178,4 +1184,9 @@ $(function() {
 	$('#map').click(function() {
 		switchToMap();
 	});
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { // esc keycode
+			switchToMap();
+        }
+    });
 });
