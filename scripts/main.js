@@ -130,7 +130,7 @@ function clearDirection(element) {
 }
 
 function createConditionSelectContent() {
-	var html = addOption('Remove condition', '', 'removeCondition(this);');
+	var html = addOption('Remove token', '', 'removeCondition(this);');
 	var switched = CONDITIONS[CONDITIONS_LIST[0]].hasConditionCard;
 	for (var i = 0; i < CONDITIONS_LIST.length; i++) {
 		if (switched != CONDITIONS[CONDITIONS_LIST[i]].hasConditionCard)
@@ -281,7 +281,7 @@ function clearHeroesConditions() {
 }
 
 function addCondition(button) {
-	var condition = $(createInputSelect('Select condition', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
+	var condition = $(createInputSelect('Select token', 'condition-title', 'select-condition')).attr('id', 'condition' + conditionNumber.toString());
 	condition.find('ul').append(createConditionSelectContent());
 	var buttonObject = $(button);
 	buttonObject.before(condition);

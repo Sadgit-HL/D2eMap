@@ -10,7 +10,7 @@ function listsort(a, b) {
 var bg2e = 'Second Edition Base Game', BoW = 'Bonds of the Wild', CoD = 'Crown of Destiny', CotF = 'Crusade of the Forgotten', GoD = 'Guardians of Deephall',
 	LoR = 'Labyrinth of Ruin', LoW = 'Lair of the Wyrm', MoR = 'Manor of Ravens', OotO = 'Oath of the Outcast',
 	SoE = 'Shards of Everdark', SoN = 'Shadow of Narekhall', SotS = 'Stewards of the Secret', TF = 'The Trollfens', ToC = 'Treaty of Champions',
-	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall', CtR = 'Chains that Rust';
+	VoD = 'Visions of Dawn', CK = 'Conversion Kit', MoB = 'Mists of Bilehall', CtR = 'The Chains that Rust';
 var Building = 'Building',
 	Cave = 'Cave',
 	Civilized = 'Civilized',
@@ -1149,13 +1149,11 @@ for (var i = 0; i < MAP_TILES_LIST_COMPLETE.length; i++) {
 }
 
 DOORS_LIST = [
-	'Blue Rune Blocked',
-	'Door',
-	'Red Rune Blocked',
-	'Shrubbery',
-	'Yellow Rune Blocked',
+	'Yellow Door',
+	'Red Door',
+	'Overgrowth',
 	'Portcullis',
-	'Wall'
+	'Old Wall'
 ];
 
 BLOCKS_LIST = [
