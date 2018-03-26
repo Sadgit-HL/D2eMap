@@ -1354,6 +1354,7 @@ for (var i = 0; i < OVERLORD_CARDS_LIST.length; i++) {
 	var card = {};
 	card.title = OVERLORD_CARDS_LIST[i][0];
 	card.number = OVERLORD_CARDS_LIST[i][2];
+	card.xp = OVERLORD_CARDS_LIST[i][3];
 	if (OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] == undefined) {
 		OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] = [];
 	}

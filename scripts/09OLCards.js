@@ -1,6 +1,7 @@
 function createOverlordCardsBlock() {
 	var html = $('<div>').addClass('overlord-cards-container');
 	var cardsImages = $('<div>').addClass('overlord-cards-images-container');
+	var cardXP = '';
 	for (var cardType in OVERLORD_CARDS) {
 		if (OVERLORD_CARDS[cardType] == undefined) continue;
 		var cardClass = $('<div>').addClass('overlord-cards-class');
@@ -10,7 +11,11 @@ function createOverlordCardsBlock() {
 			var card = cardsOfType[i];
 			if (true || cardType != 'Basic' && cardType != 'Basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
-				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
+				cardXP = card.xp;
+				if (cardXP != '') {
+					cardXP = ' (' + cardXP + ' XP)'
+				}
+				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + cardXP + '</label>'));
 				cardClass.append(cardCheckbox);
 			}
 			for (var j = 0; j < card.number; j++) {
