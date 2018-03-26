@@ -851,11 +851,11 @@ function setShortLink() {
 	for (var i = 0; i < charCnt; i += 1) {
 		string += characters[Math.floor(Math.random() * characters.length)];
 	}
-	uri = 'http://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
+	uri = 'https://tinyurl.com/create.php?source=indexpage&url=' + encodeURIComponent(location.href) + '&alias=' + string;
 	$('body').append('<img src="' + uri + '" style="height: 1px; width: 1px; position: absolute; z-index: -999; opacity: 0;" />');
 	var tinyUrl = $('#tinyUrl');
-    tinyUrl.html('Tiny link: http://tinyurl.com/' + string);
-    tinyUrl.attr('href', 'http://tinyurl.com/' + string);
+    tinyUrl.html('Tiny link: https://tinyurl.com/' + string);
+    tinyUrl.attr('href', 'https://tinyurl.com/' + string);
 }
 
 function getMapHash() {

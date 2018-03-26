@@ -8,7 +8,7 @@ function createOverlordCardsBlock() {
 		var cardsOfType = OVERLORD_CARDS[cardType];
 		for (var i = 0; i < cardsOfType.length; i++) {
 			var card = cardsOfType[i];
-			if (true || cardType != 'basic' && cardType != 'basic2') {
+			if (true || cardType != 'Basic' && cardType != 'Basic2') {
 				var cardCheckbox = $('<div>').addClass('checkbox');
 				cardCheckbox.append($('<label><input type="checkbox" name="' + card.title + '" onClick="adjustOverlordCardsImages();"/> ' + card.title + '</label>'));
 				cardClass.append(cardCheckbox);
@@ -58,11 +58,11 @@ function selectBasic2OverlordDeck() {
 }
 
 function switchBasicOverlordDeck(first) {
-	for (var i = 0; i < OVERLORD_CARDS['basic'].length; i++) {
-		updateOverlordCard(OVERLORD_CARDS['basic'][i].title, first);
+	for (var i = 0; i < OVERLORD_CARDS['Basic'].length; i++) {
+		updateOverlordCard(OVERLORD_CARDS['Basic'][i].title, first);
 	}
-	for (var i = 0; i < OVERLORD_CARDS['basic2'].length; i++) {
-		updateOverlordCard(OVERLORD_CARDS['basic2'][i].title, !first);
+	for (var i = 0; i < OVERLORD_CARDS['Basic2'].length; i++) {
+		updateOverlordCard(OVERLORD_CARDS['Basic2'][i].title, !first);
 	}
 	adjustOverlordCardsImages();
 }
