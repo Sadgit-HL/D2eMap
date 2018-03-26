@@ -383,26 +383,32 @@ function createHandSelectContent() {
 		var item = ITEMS['hand'][i];
 		html += addOption(item[0] + ' ', 'hand tierone', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMS['hand2'].length; i++) {
 		var item = ITEMS['hand2'][i];
 		html += addOption(item[0] + ' ', 'hand twohand tierone', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMS2['hand'].length; i++) {
 		var item = ITEMS2['hand'][i];
 		html += addOption(item[0] + ' ', 'hand tiertwo', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMS2['hand2'].length; i++) {
 		var item = ITEMS2['hand2'][i];
 		html += addOption(item[0] + ' ', 'hand twohand tiertwo', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMSR['hand'].length; i++) {
 		var item = ITEMSR['hand'][i];
 		html += addOption(item[0] + ' ', 'hand relic', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMSR['hand2'].length; i++) {
 		var item = ITEMSR['hand2'][i];
 		html += addOption(item[0] + ' ', 'hand twohand relic', 'updateHand(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	var classItems = getSkillsItems(hand);
 	for (var i = 0; i < classItems.length; i++) {
 		html += addOption(classItems[i][0] + ' ', 'hand classitem ' + classItems[i][1], 'updateHand(this, \'' + classItems[i][0] + '\')');
@@ -483,14 +489,17 @@ function createArmorSelectContent() {
 		var item = ITEMS['armor'][i];
 		html += addOption(item[0] + ' ', 'armor tierone', 'updateArmor(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMS2['armor'].length; i++) {
 		var item = ITEMS2['armor'][i];
 		html += addOption(item[0] + ' ', 'armor tiertwo', 'updateArmor(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < ITEMSR['armor'].length; i++) {
 		var item = ITEMSR['armor'][i];
 		html += addOption(item[0] + ' ', 'armor relic', 'updateArmor(this, \'' + item[0] + '\')');
 	}
+	html += '<li role="separator" class="divider"></li>';
 	var classItems = getSkillsItems(armor);
 	for (var i = 0; i < classItems.length; i++) {
 		html += addOption(classItems[i][0] + ' ', 'armor classitem ' + classItems[i][1], 'updateArmor(this, \'' + classItems[i][0] + '\')');
