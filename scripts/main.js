@@ -58,6 +58,9 @@ function updateOption(element, value, isMonster) {
 			xYSelects = otherElementThanCleared;
 			value = container.find('.monster-title').html();
 			value = value.substring(0, value.length - 1);
+			//remove type : master / minion
+			value = value.replace(" master", "");
+			value = value.replace(" minion", "");
 		}
 
 		var firstClass = SHOWING_CLASSES[MONSTERS[value].width];
