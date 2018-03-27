@@ -55,7 +55,7 @@ function updateObjective(element, value) {
 
 function clearObjective(element) {
 	var container = $(element).parents('.select-row');
-	container.find('.objective-title').html('Select Objective ');
+	container.find('.objective-title').html('Select Token ');
 	container.find('input[name="objective-title"]').attr('value','');
 }
 
