@@ -4,7 +4,7 @@ function constructMiscellaneousObjectsTabFromConfig() {
 		for (var i = 0 ; i < config.objectives.length; i++) {
 			var container = addObjectiveLine();
 			var objective = config.objectives[i];
-			updateObjective(container.find('.select-objective li')[0], objective.title);
+			updateObjective(container.find('.select-maptoken li')[0], objective.title);
 			container.find('[name="objective-x"]').val(objective.x);
 			container.find('.x-title').html(getAlphabetChar(objective.x - 1) + ' ');
 			container.find('[name="objective-y"]').val(objective.y);
@@ -35,28 +35,28 @@ function clearMiscellaneousObjectsTab() {
 
 function addObjectiveLine() {
 	var objective = $('<div>');
-	addUnitLine(objective, 'Objective');
+	addUnitLine(objective, 'Map Token');
 	objective.find('input[type="text"]').remove();
 
-	objective.find('.select-objective ul').append(createObjectiveSelectContent());
+	objective.find('.select-maptoken ul').append(createObjectiveSelectContent());
 	objective.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
 	objective.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
 	objective.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addHpInput(this);">Add HP</button>'));
-	objective.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove row</button>'));
+	objective.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove map token</button>'));
 	$('#objective-container').append(objective);
 	return objective;
 }
 
 function updateObjective(element, value) {
 	var container = $(element).parents('.select-row');
-	container.find('.objective-title').html(value + ' ');
-	container.find('input[name="objective-title"]').attr('value',value);
+	container.find('.maptoken-title').html(value + ' ');
+	container.find('input[name="maptoken-title"]').attr('value',value);
 }
 
 function clearObjective(element) {
 	var container = $(element).parents('.select-row');
-	container.find('.objective-title').html('Select Token ');
-	container.find('input[name="objective-title"]').attr('value','');
+	container.find('.maptoken-title').html('Select Map Token ');
+	container.find('input[name="maptoken-title"]').attr('value','');
 }
 
 function getObjectives() {
@@ -65,7 +65,7 @@ function getObjectives() {
 	for (var i = 0; i < objectives.length; i++) {
 		var container = $(objectives[i]);
 		var objective = {};
-		objective.title = container.find('[name="objective-title"]').val();
+		objective.title = container.find('[name="maptoken-title"]').val();
 		objective.x = container.find('[name="objective-x"]').val();
 		objective.y = container.find('[name="objective-y"]').val();
 		var objectiveHp = container.find('[name="hp"]');

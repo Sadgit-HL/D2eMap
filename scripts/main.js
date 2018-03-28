@@ -11,6 +11,15 @@ function addOption(title, optionClass, functionCallback, additionalAttribute, at
 	return '<li class="' + optionClass + '"' + (additionalAttribute != undefined ? ' ' + additionalAttribute + '="' + attributeValue + '"' : '') + '><a onclick="' + functionCallback + '">' + title + '</a></li>';
 }
 
+function addTextareaWithLabel(labelText, link) {
+	var html;
+	html = '<label for="' + link +'">' + labelText + '</label>'
+	html += '<textarea class="form-control" rows="5" id="' + link +'"></textarea>'
+	return html;
+}
+
+
+
 function updateCoordinate(element, value) {
 	updateOption(element, value, false);
 }
@@ -295,7 +304,7 @@ function addCondition(button) {
 
 function addUnitLine(line, title) {
 	line.addClass('select-row');
-	line.append(createInputSelect('Select ' + title, title.toLowerCase() + '-title', 'select-' + title.toLowerCase()));
+	line.append(createInputSelect('Select ' + title, folderize(title).toLowerCase() + '-title', 'select-' + folderize(title).toLowerCase()));
 	line.append(createInputSelect('Select X coordinate', 'x-title', 'select-x'));
 	line.append(createInputSelect('Select Y coordinate', 'y-title', 'select-y'));
 	line.append($('<input type="text" name="' + title.toLowerCase() + '-hp" class="form-control" placeholder="Set HP" value=""/>'));
@@ -1156,6 +1165,7 @@ function dropToken(target, data) {
 $(function() {
 //	LoadSubScripts();
 
+	InitializeWindowQuestObjectives()
 	addMonsterLine();
 	for (var i = 1; i <= 4; i++) {
 		addHeroLine(i);

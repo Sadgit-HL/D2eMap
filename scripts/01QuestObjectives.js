@@ -1,3 +1,12 @@
+function InitializeWindowQuestObjectives() {
+	var html = "";
+	html += addTextareaWithLabel("Heroes victory conditions:", "heroes-victory");
+	html += addTextareaWithLabel("Overlord victory conditions:", "overlord-victory");
+	html += addTextareaWithLabel("Current quest status:", "current-status");
+	html += addTextareaWithLabel("Reinforcements:", "reinforcements");
+	$('#quest-objectives').append(html);
+}
+
 function getQuestObjectives() {
 	var questObjectives = {};
 	questObjectives.heroesVictory = $('#heroes-victory').val();
