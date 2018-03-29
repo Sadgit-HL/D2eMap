@@ -1,3 +1,13 @@
+function InitializeWindowFor_MapControls() {
+	var html = $('#map-controls');
+	html.append('<div id="full-maps-container"><h1>Full maps</h1></div>');
+	html.append('<div id="tiles-container"><h1>Map tiles</h1></div>');
+	html.append('<button type="button" class="btn btn-success" aria-expanded="false" onclick="addMapTileLine();">Add map tile</button>');
+	html.append('<div id="doors-container"><h1>Doors</h1></div>');
+	html.append('<button type="button" class="btn btn-success" aria-expanded="false" onclick="addDoorLine();">Add door</button>');
+	html.append('<div id="xs-container"><h1>Xs</h1></div>');
+	html.append('<button type="button" class="btn btn-success" aria-expanded="false" onclick="addXsLine();">Add X</button>');
+}
 
 function createFullMapsBlock() {
 	var html = $('<div>').addClass('full-maps-container');

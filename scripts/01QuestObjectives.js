@@ -1,10 +1,9 @@
-function InitializeWindowQuestObjectives() {
-	var html = "";
-	html += addTextareaWithLabel("Heroes victory conditions:", "heroes-victory");
-	html += addTextareaWithLabel("Overlord victory conditions:", "overlord-victory");
-	html += addTextareaWithLabel("Current quest status:", "current-status");
-	html += addTextareaWithLabel("Reinforcements:", "reinforcements");
-	$('#quest-objectives').append(html);
+function InitializeWindowFor_QuestObjectives() {
+	var html = $('#quest-objectives');
+	html.append(addTextareaWithLabel("Heroes victory conditions:", "heroes-victory"));
+	html.append(addTextareaWithLabel("Overlord victory conditions:", "overlord-victory"));
+	html.append(addTextareaWithLabel("Current quest status:", "current-status"));
+	html.append(addTextareaWithLabel("Reinforcements:", "reinforcements"));
 }
 
 function getQuestObjectives() {

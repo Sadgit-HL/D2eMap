@@ -304,13 +304,14 @@ function addCondition(button) {
 
 function addUnitLine(line, title) {
 	line.addClass('select-row');
+
 	line.append(createInputSelect('Select ' + title, folderize(title).toLowerCase() + '-title', 'select-' + folderize(title).toLowerCase()));
 	line.append(createInputSelect('Select X coordinate', 'x-title', 'select-x'));
 	line.append(createInputSelect('Select Y coordinate', 'y-title', 'select-y'));
-	line.append($('<input type="text" name="' + title.toLowerCase() + '-hp" class="form-control" placeholder="Set HP" value=""/>'));
-	line.append($('<input type="hidden" name="' + title.toLowerCase() + '-title" value=""/>'));
-	line.append($('<input type="hidden" name="' + title.toLowerCase() + '-x" value=""/>'));
-	line.append($('<input type="hidden" name="' + title.toLowerCase() + '-y" value=""/>'));
+	line.append($('<input type="text" name="' + folderize(title).toLowerCase() + '-hp" class="form-control" placeholder="Set HP" value=""/>'));
+	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-title" value=""/>'));
+	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-x" value=""/>'));
+	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-y" value=""/>'));
 }
 
 function addHpInput(element) {
@@ -1165,7 +1166,11 @@ function dropToken(target, data) {
 $(function() {
 //	LoadSubScripts();
 
-	InitializeWindowQuestObjectives()
+	InitializeWindowFor_QuestObjectives();
+	InitializeWindowFor_MapControls();
+	InitializeWindowFor_MapTokens();
+
+
 	addMonsterLine();
 	for (var i = 1; i <= 4; i++) {
 		addHeroLine(i);
