@@ -95,7 +95,7 @@ function updateOption(element, value, isMonster) {
 			container.find('input[name="ally-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="familiar-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="villager-x"]').attr('value',selectedCoordinate);
-			container.find('input[name="objective-x"]').attr('value',selectedCoordinate);
+			container.find('input[name="maptoken-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="lieutenant-x"]').attr('value',selectedCoordinate);
 			container.find('input[name="monster-x-size"]').attr('value',selectedSize);
 			container.find('.x-title').html($(element).html() + ' ');
@@ -112,7 +112,7 @@ function updateOption(element, value, isMonster) {
 			container.find('input[name="ally-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="familiar-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="villager-y"]').attr('value',selectedCoordinate);
-			container.find('input[name="objective-y"]').attr('value',selectedCoordinate);
+			container.find('input[name="maptoken-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="lieutenant-y"]').attr('value',selectedCoordinate);
 			container.find('input[name="monster-y-size"]').attr('value',selectedSize);
 			if (!parent.hasClass('squared')) {
