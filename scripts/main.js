@@ -28,7 +28,10 @@ function updateOption(element, value, isMonster) {
 	var container = $(element).parents('.select-row');
 	if (isMonster || value == 'Clear') { //monster select or clearing cordinates
 		var monsterTitle = $(element).html();
-		container.find('input[name="master"]').attr('value', monsterTitle.indexOf('master') > -1);
+		if (value != 'Clear')
+		{
+			container.find('input[name="master"]').attr('value', monsterTitle.indexOf('master') > -1);
+		}
 		var xYSelects = $(container).find('.select-x, .select-y');
 
 		if (isMonster) {
