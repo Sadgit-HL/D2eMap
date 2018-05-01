@@ -256,7 +256,7 @@ function createDirectionSelectContent() {
 }
 
 function rebuildMap(element, mapNb) {
-	var mapConfig = JSON.parse(Base64.decode(MAP_HASES_LIST[mapNb][2]));
+	var mapConfig = JSON.parse(Base64.decode(MAP_HASES_LIST[mapNb][3]));
 	config.tiles = mapConfig.tiles;
 	config.doors = mapConfig.doors;
 	config.xs = mapConfig.xs;
