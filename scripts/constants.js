@@ -1157,8 +1157,14 @@ DOORS_LIST = [
 ];
 
 BLOCKS_LIST = [
-	'1x1',
-	'2x2'
+	'1x1 blue',
+	'1x1 green',
+	'1x1 red',
+	'1x1 yellow',
+	'2x2 blue',
+	'2x2 green',
+	'2x2 red',
+	'2x2 yellow'
 ];
 
 OBJECTIVES_LIST = [
