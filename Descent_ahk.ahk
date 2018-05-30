@@ -1,9 +1,13 @@
 #IfWinActive BoardGameGeek
+#KeyHistory 0 ;500
+#Hotstring NoMouse
 
 ;c-> case sensitive
 ;?-> even inside a word
 ;*-> ending caracter not needed (spase,return)  
 ;o-> ommit ending caracter
+
+#Hotstring SEK1
 
 ;----------;
 ;---dice---;
@@ -19,16 +23,20 @@
 :co:DDa::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}{+}1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
 
 :co:DDby::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDb2v::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
 :co:DDb2y::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
 :co:DDbr::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
 :co:DDb2r::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
 :co:DDbry::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDbrv::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
 
 :co:DD2m::2custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DD2g::2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
 :co:DDgm::1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DDg2m::1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}2custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DDngm::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}{+}1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
+
+#Hotstring SIK-1
 
 ;----------------;
 ;---attributes---;
@@ -228,7 +236,7 @@
 :c*:DMbar::Barghest
 :c*:DMbe::Beastman
 :c*:DMba::Blood Ape
-:c*:DMbo::Bone Horror
+:c*:DMbh::Bone Horror
 :c*:DMbr::Broodwalker
 :c*:DMcad::Carrion Drake
 :c*:DMcs::Cave Spider
@@ -311,37 +319,37 @@
 ;--- Events -;
 ;----------;
 
-:c:DE1::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/01.png[/IMG]		;base game(10)
-:c:DE2::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/02.png[/IMG]
-:c:DE3::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/03.png[/IMG]
-:c:DE4::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/04.png[/IMG]
-:c:DE5::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/05.png[/IMG]
-:c:DE6::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/06.png[/IMG]
-:c:DE7::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/07.png[/IMG]
-:c:DE8::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/08.png[/IMG]
-:c:DE9::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/09.png[/IMG]
-:c:DE10::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/10.png[/IMG]
-:c:DE11::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/11.png[/IMG]		;lair-of-the-wyrm(3)
-:c:DE12::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/12.png[/IMG]
-:c:DE13::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/13.png[/IMG]
-:c:DE14::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/14.png[/IMG]		;labyrinth-of-ruin(8)
-:c:DE15::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/15.png[/IMG]
-:c:DE16::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/16.png[/IMG]
-:c:DE17::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/17.png[/IMG]
-:c:DE18::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/18.png[/IMG]
-:c:DE19::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/19.png[/IMG]
-:c:DE20::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/20.png[/IMG]
-:c:DE21::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/21.png[/IMG]
-:c:DE22::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/22.png[/IMG]		;the-trollfens (3)
-:c:DE23::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/23.png[/IMG]
-:c:DE24::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/24.png[/IMG]
-:c:DE25::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/25.png[/IMG]		;mists-of-bilehall (5)
-:c:DE26::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/26.png[/IMG]
-:c:DE27::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/27.png[/IMG]
-:c:DE28::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/28.png[/IMG]
-:c:DE29::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/29.png[/IMG]
-:c:DE30::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/30.png[/IMG]		;the-chains-that-rust(2)
-:c:DE31::[IMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/31.png[/IMG]
+:c:DE1::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/01.png[/InlineIMG]		;base game(10)
+:c:DE2::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/02.png[/InlineIMG]
+:c:DE3::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/03.png[/InlineIMG]
+:c:DE4::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/04.png[/InlineIMG]
+:c:DE5::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/05.png[/InlineIMG]
+:c:DE6::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/06.png[/InlineIMG]
+:c:DE7::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/07.png[/InlineIMG]
+:c:DE8::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/08.png[/InlineIMG]
+:c:DE9::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/09.png[/InlineIMG]
+:c:DE10::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/10.png[/InlineIMG]
+:c:DE11::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/11.png[/InlineIMG]		;lair-of-the-wyrm(3)
+:c:DE12::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/12.png[/InlineIMG]
+:c:DE13::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/13.png[/InlineIMG]
+:c:DE14::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/14.png[/InlineIMG]		;labyrinth-of-ruin(8)
+:c:DE15::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/15.png[/InlineIMG]
+:c:DE16::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/16.png[/InlineIMG]
+:c:DE17::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/17.png[/InlineIMG]
+:c:DE18::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/18.png[/InlineIMG]
+:c:DE19::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/19.png[/InlineIMG]
+:c:DE20::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/20.png[/InlineIMG]
+:c:DE21::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/21.png[/InlineIMG]
+:c:DE22::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/22.png[/InlineIMG]		;the-trollfens (3)
+:c:DE23::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/23.png[/InlineIMG]
+:c:DE24::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/24.png[/InlineIMG]
+:c:DE25::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/25.png[/InlineIMG]		;mists-of-bilehall (5)
+:c:DE26::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/26.png[/InlineIMG]
+:c:DE27::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/27.png[/InlineIMG]
+:c:DE28::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/28.png[/InlineIMG]
+:c:DE29::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/29.png[/InlineIMG]
+:c:DE30::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/30.png[/InlineIMG]		;the-chains-that-rust(2)
+:c:DE31::[InlineIMG]https://sadgit-hl.github.io/D2eMap/images/travel_cards/31.png[/InlineIMG]
 
 ;----------;
 ;--- Objects -;
