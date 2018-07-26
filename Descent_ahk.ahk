@@ -1,5 +1,5 @@
 #IfWinActive BoardGameGeek
-#KeyHistory 0 ;500
+#KeyHistory 500
 #Hotstring NoMouse
 
 ;c-> case sensitive
@@ -16,25 +16,35 @@
 :co:DDr::1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
 :co:DDy::1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
 :co:DDv::1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+
+:co:DDby::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDb2y::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDb2yv::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}{+}1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+:co:DDbv::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+:co:DDb2v::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+:co:DDbr::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
+:co:DDb2r::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
+:co:DDbry::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDbr2y::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}2custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
+:co:DDbrv::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+:co:DDbr2v::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}2custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+:co:DD2r::2custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
+:co:DD2r2v::2custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}2custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
+
 :co:DDm::1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DDg::1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
 :co:DDn::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}
 
 :co:DDa::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}{+}1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
 
-:co:DDby::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
-:co:DDb2v::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
-:co:DDb2y::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
-:co:DDbr::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
-:co:DDb2r::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}2custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}
-:co:DDbry::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1311411;iid:1311412;iid:1311413;iid:1311414;iid:1311415;iid:1311416{}}
-:co:DDbrv::1custom6{{}iid:1311394;iid:1311395;iid:1311396;iid:1311397;iid:1311398;iid:1311399{}}{+}1custom6{{}iid:1311403;iid:1311403;iid:1311403;iid:1311404;iid:1311405;iid:1311406{}}{+}1custom6{{}iid:1774141;iid:1774142;iid:1774143;iid:1774144;iid:1774145;iid:1774146{}}
-
 :co:DD2m::2custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
-:co:DD2g::2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
 :co:DDgm::1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DDg2m::1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}2custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
+:co:DD2g::2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}
+:co:DD2gm::2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
+:co:DD2g2m::2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}2custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 :co:DDngm::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}{+}1custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
+:co:DDn2gm::1custom6{{}iid:1311390;iid:1311390;iid:1311390;iid:1311391;iid:1311392;iid:1311393{}}{+}2custom6{{}iid:1311407;iid:1311407;iid:1311407;iid:1311408;iid:1311409;iid:1311410{}}{+}1custom6{{}iid:1311400;iid:1311400;iid:1311401;iid:1311401;iid:1311401;iid:1311402{}}
 
 #Hotstring SIK-1
 
@@ -233,7 +243,7 @@
 :c*:DMa::Arachyura
 :c*:DMbn::Bandit		;exception
 :c*:DMbs::Bane Spider
-:c*:DMbar::Barghest
+:c*:DMbg::Barghest		;exception
 :c*:DMbe::Beastman
 :c*:DMba::Blood Ape
 :c*:DMbh::Bone Horror
@@ -493,8 +503,8 @@
 :c*:DTri::Reinforcements : 
 
 :c*:DTa::[b]Activating[/b]
-:co:DTCb::[COLOR={#}0000FF]-Minion[/COLOR]
-:co:DTCr::[COLOR={#}FF0000]-Master[/COLOR]
+:co:DTm::[COLOR={#}0000FF]-Minion[/COLOR]
+:co:DTM::[COLOR={#}FF0000]-Master[/COLOR]
 :c*:DT1l::(1[ImageID=2625359 original inline] Left)
 :c*:DT2l::(2[ImageID=2625359 original inline] Left)
 :c*:DT3l::(3[ImageID=2625359 original inline] Left)
