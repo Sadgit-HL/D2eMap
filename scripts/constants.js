@@ -1037,7 +1037,6 @@ VILLAGERS_LIST = [
 ];
 
 MAP_TILES_LIST_COMPLETE = [
-	['GH_test',11,14],
 	['1',8,6],
 	['2',6,6],
 	['3',6,4],
