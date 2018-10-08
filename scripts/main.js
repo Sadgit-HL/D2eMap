@@ -253,23 +253,48 @@ function createDirectionSelectContent() {
 
 function recoverConfig(Base64Data) {
 	var dataTemp = JSON.parse(Base64.decode(Base64Data));
-	//initialize values if needed
-	if (dataTemp.currentAct == undefined) {
-		dataTemp.currentAct = 'I';
-	}
+	dataTemp = RetroCompatibility(dataTemp);
+
 	return dataTemp;
 }
 
-function RetroCompatibility(mapConfig) {
+function RetroCompatibility(OldConfig) {
 	//update Recovered config based on Version
-	//if (mapConfig.mapVersion == "")
-	//...
+	var NewConfig = OldConfig
+
+	//initialize values if needed
+	if (NewConfig.currentAct == undefined) {
+		NewConfig.currentAct = 'I';
+	}
+
+	// previous to 1.5.0
+	if (NewConfig.mapVersion == undefined) {
+		//change monsters data
+		// FROM "title":"Wraith","master":true TO "title":"Wraith master"
+		// AND FROM "title":"Wraith","master":false TO "title":"Wraith minion"
+		if (NewConfig.monsters != undefined) {
+
+
+			for (var i = 0; NewConfig.monsters != undefined && i < NewConfig.monsters.length; i++) {
+				if (NewConfig.monsters[i].master) {
+					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " master";
+				}
+				else {
+					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " minion";
+				}
+//				if (monster.vertical) folder += 'vertical/';
+//				if (monster.direction == "V") folder += 'vertical/';
+
+			}
+		}
+	}
+
+	return NewConfig;
 }
 
 function rebuildMap(element, mapNb) {
 	var mapConfig = recoverConfig(MAP_HASES_LIST[mapNb][3]);
 
-	RetroCompatibility(mapConfig);
 
 
 	config.tiles = mapConfig.tiles;
