@@ -285,6 +285,7 @@ function RetroCompatibility(OldConfig) {
 
 			}
 		}
+
 		//change Doors Direction
 		// FROM "vertical":true TO "direction":"V"
 		// FROM "vertical":false TO "direction":"H"
@@ -298,6 +299,21 @@ function RetroCompatibility(OldConfig) {
 				}
 			}
 		}
+
+		//change Act
+		// FROM "actOne":true TO "currentAct":"I"
+		// FROM "actOne":false TO "currentAct":"II"
+		if (NewConfig.actOne != undefined) {
+			if (NewConfig.actOne) {
+				NewConfig.currentAct = "I";
+			}
+			else {
+				NewConfig.currentAct = "II";
+			}
+		}
+
+
+
 	}
 
 	return NewConfig;
