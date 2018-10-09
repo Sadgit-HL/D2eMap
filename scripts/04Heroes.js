@@ -692,7 +692,7 @@ function updateSackItem(element, value) {
 	var elementAttr = $(element).parents('.select-sack').attr('sack');
 	var folder = search ? 'search_cards' : 'items_cards/' + (tierOne ? 'tier_one' : relic ? 'relic' : 'tier_two');
 	if (classItem) {
-		folder = 'classes_cards/' + parent.attr('class').replace(new RegExp("classitem",'g'), '').replace(new RegExp("twohand",'g'), '').replace(new RegExp(" ",'g'), '');
+		folder = 'classes_cards/' + parent.attr('class').replace(new RegExp("classitem",'g'), '').replace(new RegExp("tierone",'g'), '').replace(new RegExp("twohand",'g'), '').replace(new RegExp(" ",'g'), '');
 	}
 	container.find('img[sack="' + elementAttr + '"]').attr('src', 'images/' + folder + '/' + urlize(value) + '.png').attr('item', value);
 	container.find('div[sack="' + elementAttr + '"]').find('.sack-title').html(value + ' ');
