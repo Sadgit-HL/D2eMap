@@ -273,8 +273,6 @@ function RetroCompatibility(OldConfig) {
 		// FROM "title":"Wraith","master":true TO "title":"Wraith master"
 		// AND FROM "title":"Wraith","master":false TO "title":"Wraith minion"
 		if (NewConfig.monsters != undefined) {
-
-
 			for (var i = 0; NewConfig.monsters != undefined && i < NewConfig.monsters.length; i++) {
 				if (NewConfig.monsters[i].master) {
 					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " master";
@@ -287,6 +285,35 @@ function RetroCompatibility(OldConfig) {
 
 			}
 		}
+
+		//change Doors Direction
+		// FROM "vertical":true TO "direction":"V"
+		// FROM "vertical":false TO "direction":"H"
+		if (NewConfig.doors != undefined) {
+			for (var i = 0; NewConfig.doors != undefined && i < NewConfig.doors.length; i++) {
+				if (NewConfig.doors[i].vertical) {
+					NewConfig.doors[i].direction = "V";
+				}
+				else {
+					NewConfig.doors[i].direction = "H";
+				}
+			}
+		}
+
+		//change Act
+		// FROM "actOne":true TO "currentAct":"I"
+		// FROM "actOne":false TO "currentAct":"II"
+		if (NewConfig.actOne != undefined) {
+			if (NewConfig.actOne) {
+				NewConfig.currentAct = "I";
+			}
+			else {
+				NewConfig.currentAct = "II";
+			}
+		}
+
+
+
 	}
 
 	return NewConfig;
