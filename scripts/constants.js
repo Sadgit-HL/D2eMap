@@ -587,10 +587,10 @@ var apothecary = {},
 	];
 
 	avenger.skills = [
-		['h10', 3],
-		['h11', 1],
 		['h12', 0],
-		['h13', 2]
+		['Death From Above', 3],
+		['Holy Champion', 1],
+		['Vengeful Smite', 2]
 	];
 
 	bard.skills = [
@@ -684,10 +684,10 @@ var apothecary = {},
 	];
 
 	crusader.skills = [
-		['h20', 3],
-		['h21', 1],
 		['h22', 0],
-		['h23', 2]
+		['Divini Light', 3],
+		['Righteous', 2],
+		['Zealous Aura', 1]
 	];
 
 	disciple.skills = [
@@ -705,16 +705,21 @@ var apothecary = {},
 	];
 
 	elementalist.skills = [
-		['el1', 0, twohand],
-		['el2', 3],
-		['el3', 1],
-		['el4', 1],
-		['el5', 1],
-		['el6', 2],
-		['el7', 3],
-		['el8', 2],
-		['el9', 0],
-		['el10', 2]
+		['Blaze', 1],
+		['Earth and Sky', 1],
+		['Elemental Focus', 0],
+		['Grasp', 1],
+		['Gust', 1],
+		['Natures Embrace', 3],
+		['Natures Fury', 3],
+		['Primal Harmony', 1],
+		['Runeshard Cache', 0, item],
+		['Spire of Conflux', 0, twohand],
+		['Spiritual Balance', 2],
+		['Storms Fury', 2],
+		['Sun and Sea', 1],
+		['Tide', 1],
+		['Volcanic Might', 2]
 	];
 
 	geomancer.skills = [
@@ -732,10 +737,10 @@ var apothecary = {},
 	];
 
 	heretic.skills = [
-		['h30', 3],
-		['h31', 1],
 		['h32', 0],
-		['h33', 2]
+		['Arcane Healing', 1],
+		['Dark Recovery', 2],
+		['Forbidden Arts', 3]
 	];
 
 	hexer.skills = [
@@ -766,10 +771,10 @@ var apothecary = {},
 	];
 
 	lorekeeper.skills = [
-		['h40', 3],
-		['h41', 1],
 		['h42', 0],
-		['h43', 2]
+		['All Knowing', 3],
+		['Ancient Remedy', 1],
+		['Careful Balance', 2]
 	];
 
 	marshal.skills = [
@@ -822,17 +827,17 @@ var apothecary = {},
 	];
 
 	raider.skills = [
-		['h50', 3],
-		['h51', 1],
 		['h52', 0],
-		['h53', 2]
+		['Close the Gap', 3],
+		['Divide the Spoils', 2],
+		['Surprise Assault', 1]
 	];
 
 	ravager.skills = [
-		['h60', 3],
-		['h61', 1],
 		['h62', 0],
-		['h63', 2]
+		['Charging Assault', 2],
+		['Momentum', 1],
+		['Vicious Throw', 3]
 	];
 
 	runemaster.skills = [
@@ -878,16 +883,18 @@ var apothecary = {},
 	];
 
 	soulReaper.skills = [
-		['sr1', 0, twohand],
-		['sr2', 3],
-		['sr3', 1],
-		['sr4', 1],
-		['sr5', 1],
-		['sr6', 2],
-		['sr7', 3],
-		['sr8', 2],
-		['sr9', 0],
-		['sr10', 2]
+		['Blight Extraction', 1],
+		['Cursed Soul', 2],
+		['Essence Harvest', 0],
+		['Ethereal Armor', 2],
+		['Font of Vitality', 3],,
+		['Galvanize', 2]
+		['Harvester Scythe', 0, hand],
+		['Mirror of Souls', 0, item],
+		['Reapers Pact', 3],
+		['Spirit Link', 1],
+		['Stream of Life', 0],
+		['Unholy Bond', 1]
 	];
 
 	spiritspeaker.skills = [
@@ -953,17 +960,17 @@ var apothecary = {},
 	];
 
 	trickster.skills = [
-		['h70', 3],
-		['h71', 1],
 		['h72', 0],
-		['h73', 2]
+		['Arcane Fusion', 3],
+		['Now You See Me', 2],
+		['Private Collection', 1]
 	];
 
 	truthseer.skills = [
-		['h80', 3],
-		['h81', 1],
 		['h82', 0],
-		['h83', 2]
+		['Premonition', 3],
+		['Translocation', 2],
+		['True Sight', 1]
 	];
 
 	watchman.skills = [
