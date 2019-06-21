@@ -507,38 +507,70 @@ var apothecary = {},
 	thief = {},
 	treasureHunter = {},
 	wildlander = {},
-	shadowwalker = {};
+	shadowwalker = {},
+	crusader = {},
+	heretic = {},
+	avenger = {},
+	raider = {},
+	lorekeeper = {},
+	truthseer = {},
+	ravager = {},
+	trickster = {},
+	soulReaper = {},
+	elementalist = {};
 
 	apothecary.title = 'Apothecary';
 	bard.title = 'Bard';
+	crusader.title = 'Crusader';
+	crusader.allowHybrid = true;
 	disciple.title = 'Disciple';
+	heretic.title = 'Heretic';
+	heretic.allowHybrid = true;
 	prophet.title = 'Prophet';
+	soulReaper.title = 'Soul Reaper';
 	spiritspeaker.title = 'Spiritspeaker';
 	watchman.title = 'Watchman';
 	watchman.allowHybrid = true;
+
+	avenger.title = 'Avenger';
+	avenger.allowHybrid = true;
 	beastmaster.title = 'Beastmaster';
 	berserker.title = 'Berserker';
 	champion.title = 'Champion';
 	knight.title = 'Knight';
 	marshal.title = 'Marshal';
+	raider.title = 'Raider';
+	raider.allowHybrid = true;
 	skirmisher.title = 'Skirmisher';
 	steelcaster.title= 'Steelcaster';
 	steelcaster.allowHybrid = true;
+
 	battlemage.title= 'Battlemage';
 	battlemage.allowHybrid = true;
 	conjurer.title = 'Conjurer';
+	elementalist.title = 'Elementalist';
 	geomancer.title = 'Geomancer';
 	hexer.title = 'Hexer';
+	lorekeeper.title = 'Lorekeeper';
+	lorekeeper.allowHybrid = true;
 	necromancer.title = 'Necromancer';
 	runemaster.title = 'Runemaster';
+	truthseer.title = 'Truthseer';
+	truthseer.allowHybrid = true;
+
 	bountyHunter.title = 'Bounty Hunter';
 	shadowwalker.title = 'Shadow Walker';
 	monk.title = 'Monk';
 	monk.allowHybrid = true;
+	ravager.title = 'Ravager';
+	ravager.allowHybrid = true;
 	stalker.title = 'Stalker';
 	thief.title = 'Thief';
 	treasureHunter.title = 'Treasure Hunter';
+	trickster.title = 'Trickster';
+	trickster.allowHybrid = true;
 	wildlander.title = 'Wildlander';
+
 
 	//Skills
 	apothecary.skills = [
@@ -552,6 +584,13 @@ var apothecary = {},
 		['Secret Formula', 2],
 		['Hidden Stash', 3],
 		['Potent Remedies', 3]
+	];
+
+	avenger.skills = [
+		['h10', 3],
+		['h11', 1],
+		['h12', 0],
+		['h13', 2]
 	];
 
 	bard.skills = [
@@ -644,6 +683,13 @@ var apothecary = {},
 		['Vortex', 3]
 	];
 
+	crusader.skills = [
+		['h20', 3],
+		['h21', 1],
+		['h22', 0],
+		['h23', 2]
+	];
+
 	disciple.skills = [
 		['Armor Of Faith', 1],
 		['Blessed Strike', 1],
@@ -658,6 +704,19 @@ var apothecary = {},
 		['Wooden Shield', 0, hand]
 	];
 
+	elementalist.skills = [
+		['el1', 0, twohand],
+		['el2', 3],
+		['el3', 1],
+		['el4', 1],
+		['el5', 1],
+		['el6', 2],
+		['el7', 3],
+		['el8', 2],
+		['el9', 0],
+		['el10', 2]
+	];
+
 	geomancer.skills = [
 		['Cataclysm', 3],
 		['Earthen Anguish', 1],
@@ -670,6 +729,13 @@ var apothecary = {},
 		['Summoned Stone', 0],
 		['Terracall', 0],
 		['Ways Of Stone', 2]
+	];
+
+	heretic.skills = [
+		['h30', 3],
+		['h31', 1],
+		['h32', 0],
+		['h33', 2]
 	];
 
 	hexer.skills = [
@@ -697,6 +763,13 @@ var apothecary = {},
 		['Shield Slam', 2],
 		['Stalwart', 3],
 		['Wooden Shield', 0, hand]
+	];
+
+	lorekeeper.skills = [
+		['h40', 3],
+		['h41', 1],
+		['h42', 0],
+		['h43', 2]
 	];
 
 	marshal.skills = [
@@ -748,6 +821,20 @@ var apothecary = {},
 		['Victory Foretold', 2]
 	];
 
+	raider.skills = [
+		['h50', 3],
+		['h51', 1],
+		['h52', 0],
+		['h53', 2]
+	];
+
+	ravager.skills = [
+		['h60', 3],
+		['h61', 1],
+		['h62', 0],
+		['h63', 2]
+	];
+
 	runemaster.skills = [
 		['Arcane Bolt', 0, twohand],
 		['Break The Rune', 3],
@@ -788,6 +875,19 @@ var apothecary = {},
 		['Rusted Handaxe', 0, hand],
 		['Unrelenting', 2],
 		['Unstoppable', 3]
+	];
+
+	soulReaper.skills = [
+		['sr1', 0, twohand],
+		['sr2', 3],
+		['sr3', 1],
+		['sr4', 1],
+		['sr5', 1],
+		['sr6', 2],
+		['sr7', 3],
+		['sr8', 2],
+		['sr9', 0],
+		['sr10', 2]
 	];
 
 	spiritspeaker.skills = [
@@ -852,6 +952,20 @@ var apothecary = {},
 		['Trail Of Riches', 3]
 	];
 
+	trickster.skills = [
+		['h70', 3],
+		['h71', 1],
+		['h72', 0],
+		['h73', 2]
+	];
+
+	truthseer.skills = [
+		['h80', 3],
+		['h81', 1],
+		['h82', 0],
+		['h83', 2]
+	];
+
 	watchman.skills = [
 		['Quick Recovery', 1],
 		['Trailblazer', 2],
@@ -872,6 +986,7 @@ var apothecary = {},
 		['Yew Shortbow', 0, twohand]
 	];
 
+
 //Archetypes
 var wiz = {},
 	war = {},
@@ -879,13 +994,13 @@ var wiz = {},
 	sup = {};
 
 	wiz.title = 'Mage';
-	wiz.classes = [battlemage, conjurer, geomancer, hexer, necromancer, runemaster];
+	wiz.classes = [battlemage, conjurer, elementalist, geomancer, heretic, hexer, necromancer, runemaster, trickster];
 	war.title = 'Warrior';
-	war.classes = [beastmaster, berserker, champion, knight, marshal, skirmisher, steelcaster];
+	war.classes = [beastmaster, berserker, champion, crusader, knight, marshal, ravager, skirmisher, steelcaster];
 	rog.title = 'Scout';
-	rog.classes = [bountyHunter, monk, shadowwalker, stalker, thief, treasureHunter, wildlander];
+	rog.classes = [bountyHunter, monk, raider, shadowwalker, stalker, thief, treasureHunter, truthseer, wildlander];
 	sup.title = 'Healer';
-	sup.classes = [apothecary, bard, disciple, prophet, spiritspeaker, watchman];
+	sup.classes = [apothecary, avenger, bard, disciple, lorekeeper, prophet, soulReaper, spiritspeaker, watchman];
 
 var ARCHETYPE_CLASSES = 'mage warrior scout healer';
 var ARCHETYPES_LIST = [wiz, war, rog, sup];
@@ -913,11 +1028,20 @@ for (var i = 0; i < ARCHETYPES_LIST.length; i++) {
 }
 
 // Hybrid classes options
+avenger.newArchetype = sup;
+lorekeeper.newArchetype = sup;
 monk.newArchetype = sup;
+raider.newArchetype = rog;
+truthseer.newArchetype = rog;
 watchman.newArchetype = rog;
+heretic.newArchetype = wiz;
 steelcaster.newArchetype = wiz;
+trickster.newArchetype = wiz;
 battlemage.newArchetype = war;
-var HYBRID_CLASSES = [monk, steelcaster, battlemage, watchman];
+crusader.newArchetype = war;
+ravager.newArchetype = war;
+
+var HYBRID_CLASSES = [avenger, lorekeeper, monk, raider, truthseer, watchman, heretic, steelcaster, trickster, battlemage, crusader, ravager];
 
 var HEROES_LIST = [
 	['Ronan of the Wild',10,5,rog],
