@@ -587,9 +587,9 @@ var apothecary = {},
 	];
 
 	avenger.skills = [
-		['h12', 0],
 		['Death From Above', 3],
 		['Holy Champion', 1],
+		['Justicar', 0],
 		['Vengeful Smite', 2]
 	];
 
@@ -684,7 +684,7 @@ var apothecary = {},
 	];
 
 	crusader.skills = [
-		['h22', 0],
+		['Chosen of Kellos', 0],
 		['Divini Light', 3],
 		['Righteous', 2],
 		['Zealous Aura', 1]
@@ -737,9 +737,9 @@ var apothecary = {},
 	];
 
 	heretic.skills = [
-		['h32', 0],
 		['Arcane Healing', 1],
 		['Dark Recovery', 2],
+		['Exiled Visionary', 0],
 		['Forbidden Arts', 3]
 	];
 
@@ -771,10 +771,10 @@ var apothecary = {},
 	];
 
 	lorekeeper.skills = [
-		['h42', 0],
 		['All Knowing', 3],
 		['Ancient Remedy', 1],
-		['Careful Balance', 2]
+		['Careful Balance', 2],
+		['Interdisciplinary', 0]
 	];
 
 	marshal.skills = [
@@ -827,14 +827,14 @@ var apothecary = {},
 	];
 
 	raider.skills = [
-		['h52', 0],
 		['Close the Gap', 3],
 		['Divide the Spoils', 2],
+		['Intro the Fray', 0],
 		['Surprise Assault', 1]
 	];
 
 	ravager.skills = [
-		['h62', 0],
+		['Battle Hardened', 0],
 		['Charging Assault', 2],
 		['Momentum', 1],
 		['Vicious Throw', 3]
@@ -960,10 +960,10 @@ var apothecary = {},
 	];
 
 	trickster.skills = [
-		['h72', 0],
 		['Arcane Fusion', 3],
 		['Now You See Me', 2],
-		['Private Collection', 1]
+		['Private Collection', 1],
+		['Razzle Dazzle', 0]
 	];
 
 	truthseer.skills = [
