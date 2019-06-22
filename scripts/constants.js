@@ -967,7 +967,7 @@ var apothecary = {},
 	];
 
 	truthseer.skills = [
-		['h82', 0],
+		['Clairvoyance', 0],
 		['Premonition', 3],
 		['Translocation', 2],
 		['True Sight', 1]
