@@ -685,7 +685,7 @@ var apothecary = {},
 
 	crusader.skills = [
 		['Chosen of Kellos', 0],
-		['Divini Light', 3],
+		['Divine Light', 3],
 		['Righteous', 2],
 		['Zealous Aura', 1]
 	];
@@ -829,7 +829,7 @@ var apothecary = {},
 	raider.skills = [
 		['Close the Gap', 3],
 		['Divide the Spoils', 2],
-		['Intro the Fray', 0],
+		['Into the Fray', 0],
 		['Surprise Assault', 1]
 	];
 
@@ -1001,13 +1001,13 @@ var wiz = {},
 	sup = {};
 
 	wiz.title = 'Mage';
-	wiz.classes = [battlemage, conjurer, elementalist, geomancer, heretic, hexer, necromancer, runemaster, trickster];
+	wiz.classes = [battlemage, conjurer, elementalist, geomancer, hexer, lorekeeper, necromancer, runemaster, truthseer];
 	war.title = 'Warrior';
-	war.classes = [beastmaster, berserker, champion, crusader, knight, marshal, ravager, skirmisher, steelcaster];
+	war.classes = [avenger, beastmaster, berserker, champion, knight, marshal, raider, skirmisher, steelcaster];
 	rog.title = 'Scout';
-	rog.classes = [bountyHunter, monk, raider, shadowwalker, stalker, thief, treasureHunter, truthseer, wildlander];
+	rog.classes = [bountyHunter, monk, ravager, shadowwalker, stalker, thief, treasureHunter, trickster, wildlander];
 	sup.title = 'Healer';
-	sup.classes = [apothecary, avenger, bard, disciple, lorekeeper, prophet, soulReaper, spiritspeaker, watchman];
+	sup.classes = [apothecary, bard, crusader, disciple, heretic, prophet, soulReaper, spiritspeaker, watchman];
 
 var ARCHETYPE_CLASSES = 'mage warrior scout healer';
 var ARCHETYPES_LIST = [wiz, war, rog, sup];
