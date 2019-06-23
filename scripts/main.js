@@ -260,6 +260,7 @@ function recoverConfig(Base64Data) {
 
 function RetroCompatibility(OldConfig) {
 	//update Recovered config based on Version
+	var AndOlder = false
 	var NewConfig = OldConfig
 
 	//initialize values if needed
@@ -311,9 +312,70 @@ function RetroCompatibility(OldConfig) {
 				NewConfig.currentAct = "II";
 			}
 		}
+		AndOlder = true;
+	}
 
 
+	// previous to 1.5.1
+	if (NewConfig.mapVersion == "1.5.0" || AndOlder==true) {
+		//wording changes
+		for (var i=1; i <= 4; i++) {
+			var heroConfig = NewConfig['hero' + i.toString()];
+			if (heroConfig.title != "" && heroConfig.title != undefined) {
+				if (heroConfig.items != undefined) {
+					if (heroConfig.items.item != undefined) {
+						if (heroConfig.items.item == 'Lucky Charm ') {
+							heroConfig.items.item = 'Lucky Charm';
+						}
+						if (heroConfig.items.item == 'Mist Bane') {
+							heroConfig.items.item = 'Mistbane';
+						}
+					}
+					if (heroConfig.items.item2 != undefined) {
+						if (heroConfig.items.item2 == 'Lucky Charm ') {
+							heroConfig.items.item2 = 'Lucky Charm';
+						}
+						if (heroConfig.items.item2 == 'Mist Bane') {
+							heroConfig.items.item2 = 'Mistbane';
+						}
+					}
+				}
+				if (heroConfig.sack != undefined) {
+					for (var j = 0; j < heroConfig.sack.length; j++) {
+						if (heroConfig.sack[j] == 'Lucky Charm ') {
+							heroConfig.sack[j] = 'Lucky Charm';
+						}
+						if (heroConfig.sack[j] == 'Mist Bane') {
+							heroConfig.sack[j] = 'Mistbane';
+						}
+					}
+				}
+				if (heroConfig.skills != undefined) {
+					for (var j = 0; j < heroConfig.skills.length; j++) {
+						if (heroConfig.skills[j] == 'Bushwack') {
+							heroConfig.skills[j] = 'Bushwhack';
+						}
+					}
+				}
+			}
+		}
 
+		if (NewConfig.overlord != undefined) {
+			for (var i = 0; NewConfig.overlord.cards != undefined && i < NewConfig.overlord.cards.length; i++) {
+				if (NewConfig.overlord.cards[i] == 'Dance Macabre') {
+					NewConfig.overlord.cards[i] = 'Danse Macabre';
+				}
+			}
+		}
+		if (NewConfig.plot != undefined) {
+			if (NewConfig.plot.title != undefined && NewConfig.plot.title != '') {
+				for (var i = 0; i < NewConfig.plot.cards.length; i++) {
+					if (NewConfig.plot.cards[i] == 'Loyality Rewarded') {
+						NewConfig.plot.cards[i] = 'Loyalty Rewarded';
+					}
+				}
+			}
+		}
 	}
 
 	return NewConfig;
