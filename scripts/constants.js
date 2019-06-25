@@ -886,18 +886,19 @@ var apothecary = {},
 	];
 
 	psychic.skills = [
-		['Clairvoyance', 1],
-		['Clairvoyance Coop', 1],
-		['Empathic Resolve', 1],
 		['Mental Assault', 0],
-		['Mental Fortitude', 2],
-		['Mind over Matter', 3],
-		['Minds Eye Turban', 0, item],
+		['Prescience', 1],
+		['Prescience Coop', 1],
+		['Empathic Resolve', 1],
 		['Overload', 1],
 		['Possession', 2],
 		['Reaching Out', 2],
-		['Shadow Darts', 0, hand],
-		['Towering Intellect', 3]
+		['Mental Fortitude', 2],
+		['Mind over Matter', 3],
+		['Towering Intellect', 3],
+		['Minds Eye Turban', 0, item],
+		['Shadow Darts', 0, hand]
+
 
 	];
 
