@@ -321,7 +321,7 @@ function RetroCompatibility(OldConfig) {
 		//wording changes
 		for (var i=1; i <= 4; i++) {
 			var heroConfig = NewConfig['hero' + i.toString()];
-			if (heroConfig.title != "" && heroConfig.title != undefined) {
+			if (heroConfig != undefined && heroConfig.title != "" && heroConfig.title != undefined) {
 				if (heroConfig.items != undefined) {
 					if (heroConfig.items.item != undefined) {
 						if (heroConfig.items.item == 'Lucky Charm ') {
