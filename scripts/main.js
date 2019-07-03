@@ -323,20 +323,24 @@ function RetroCompatibility(OldConfig) {
 			var heroConfig = NewConfig['hero' + i.toString()];
 			if (heroConfig != undefined && heroConfig.title != "" && heroConfig.title != undefined) {
 				if (heroConfig.items != undefined) {
+					if (heroConfig.items.hand != undefined) {
+						if (heroConfig.items.hand == 'Mist Bane') {
+							heroConfig.items.hand = 'Mistbane';
+						}
+					}
+					if (heroConfig.items.hand2 != undefined) {
+						if (heroConfig.items.hand2 == 'Mist Bane') {
+							heroConfig.items.hand2 = 'Mistbane';
+						}
+					}
 					if (heroConfig.items.item != undefined) {
 						if (heroConfig.items.item == 'Lucky Charm ') {
 							heroConfig.items.item = 'Lucky Charm';
-						}
-						if (heroConfig.items.item == 'Mist Bane') {
-							heroConfig.items.item = 'Mistbane';
 						}
 					}
 					if (heroConfig.items.item2 != undefined) {
 						if (heroConfig.items.item2 == 'Lucky Charm ') {
 							heroConfig.items.item2 = 'Lucky Charm';
-						}
-						if (heroConfig.items.item2 == 'Mist Bane') {
-							heroConfig.items.item2 = 'Mistbane';
 						}
 					}
 				}
