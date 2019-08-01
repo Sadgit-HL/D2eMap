@@ -160,10 +160,10 @@ function Set_X(element, value) {
 	}
 	switch (NumCells) {
 		case "2":
-			titleTemp = titleTemp + '-' + getAlphabetChar(value);
+			titleTemp = titleTemp + '-' + getAlphabetChar(Number(value));
 			break;
 		case "3":
-			titleTemp = titleTemp + '-' + getAlphabetChar(value+1);
+			titleTemp = titleTemp + '-' + getAlphabetChar(Number(value)+1);
 			break;
 	}
 
