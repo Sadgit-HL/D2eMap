@@ -312,6 +312,21 @@ function RetroCompatibility(OldConfig) {
 				NewConfig.currentAct = "II";
 			}
 		}
+
+		//change xs set default color to red
+		if (NewConfig.xs != undefined) {
+			for (var i = 0; NewConfig.xs != undefined && i < NewConfig.xs.length; i++) {
+				if (NewConfig.xs[i].title == "1x1") {
+					NewConfig.xs[i].title = NewConfig.xs[i].title + " red";
+				}
+				if (NewConfig.xs[i].title == "2x2") {
+					NewConfig.xs[i].title = NewConfig.xs[i].title + " red";
+				}
+			}
+		}
+
+
+
 		AndOlder = true;
 	}
 
