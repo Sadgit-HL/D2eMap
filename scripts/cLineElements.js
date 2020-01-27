@@ -39,7 +39,18 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 			}
 			lineHTML.append('<div style="clear:both"></div>');
 
-			lineHTML.append(Create_MainElementList(this.elementName, this.elementID, this.NameListValues));
+			var AdditionalCallBacks = "";		//Mainly for Images Updates
+			if (this.needRemoveButton == true) {
+				if (this.needAddTokenButton == true && this.TokenCommonImageContainer != "") {
+					AdditionalCallBacks = AdditionalCallBacks + "Update_TokenImages(this.parentElement);";
+				}
+				if (this.needAddRelicButton == true && this.RelicCommonImageContainer != "") {
+					AdditionalCallBacks = AdditionalCallBacks + "Update_RelicImages(this.parentElement);";
+				}
+				//lineHTML.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="RemoveOneRow(this);' + AdditionalCallBacks + RemoveCallBack + '">Remove ' + this.elementName + '</button>'));
+			}
+
+			lineHTML.append(Create_MainElementList(this.elementName, this.elementID, this.NameListValues, this.needRemoveButton, AdditionalCallBacks, RemoveCallBack));
 
 			if (this.needSideList == true) {
 				lineHTML.append(Create_SideList());
@@ -71,16 +82,6 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 			}
 			if (this.needAddAuraButton == true) {
 				lineHTML.append(Create_AuraButton());
-			}
-			if (this.needRemoveButton == true) {
-				var AdditionalCallBacks = "";		//Mainly for Images Updates
-				if (this.needAddTokenButton == true && this.TokenCommonImageContainer != "") {
-					AdditionalCallBacks = AdditionalCallBacks + "Update_TokenImages(this.parentElement);";
-				}
-				if (this.needAddRelicButton == true && this.RelicCommonImageContainer != "") {
-					AdditionalCallBacks = AdditionalCallBacks + "Update_RelicImages(this.parentElement);";
-				}
-				lineHTML.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="RemoveOneRow(this);' + AdditionalCallBacks + RemoveCallBack + '">Remove ' + this.elementName + '</button>'));
 			}
 			return lineHTML;
 		};
@@ -190,8 +191,14 @@ function RemoveOneRow(element) {
 }
 
 // Main Element
-function Create_MainElementList(elementTitle, elementID, MainElementListValues) {
-	var html = createInputSelect('Select ' + elementTitle, elementID + '-title', 'select-' + elementID);
+function Create_MainElementList(elementTitle, elementID, MainElementListValues, needRemoveButton, AdditionalCallBacks, RemoveCallBack) {
+    var html = createInputSelect('Select ' + elementTitle, elementID + '-title', 'select-' + elementID);
+
+    if (needRemoveButton == true) {
+        var removeButton = $('<a class="boxclose" id="boxclose" onclick="RemoveOneRow(this);' + AdditionalCallBacks + RemoveCallBack + '"></a>');
+        html.find('.btn').prepend(removeButton);
+    }
+
 	html.find('ul').append(MainElementListValues);
 	html.append($('<input type="hidden" name="MainElement-Value" class="MainElement-Value" value=""/>'));
 	html.append($('<input type="hidden" name="MainElement-ID" class="MainElement-ID" value="' + elementID + '"/>'));

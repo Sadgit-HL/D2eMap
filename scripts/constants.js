@@ -1,6 +1,14 @@
 var MAPVERSION = "1.5.1";
+var MAPGAME = "Descent2Ed";
+
+var mapWidth = 40;
+var mapHeight = 50;
 
 var ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+var HCellSize = 64;
+var VCellSize = 64;
+var cellType = "SQUARE"; // SQUARE - HEX
 
 var cellSize = 64;
 
@@ -2076,8 +2084,6 @@ var MAP_HASES_LIST = [
 	['HM','VoD - Visions of Dawn *NOT AVAILABLE YET**','II', ""],
 ];
 
-var mapWidth = 40;
-var mapHeight = 50;
 
 var monsterList = [];
 var mapObjects = [];
