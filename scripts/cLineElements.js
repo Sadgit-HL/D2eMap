@@ -7,8 +7,13 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 	this.needCoordinates = false;
 	this.needAngleList = false;
 	this.needOpenedCheckbox = false;
-	this.needHPInput = false;
-	this.needFatigueInput = false;
+
+	//Custom Inputs
+	this.needCustomInput = [];			//will include array [Used (true/false),using Add Button (true/false)]
+	for (i = 0; i < MAX_CustomInputs; i++) {
+		this.needCustomInput[i] = [false, false];
+	}
+
 	this.needArchetypeList = false;
 	this.needClassList = false;
 	this.UsesMainCommonImages = false;
@@ -64,11 +69,15 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 			if (this.needAngleList == true) {
 				lineHTML.append(Create_AngleList());
 			}
-			if (this.needHPInput == true) {
-				lineHTML.append(Create_HPInput());
-			}
-			if (this.needFatigueInput == true) {
-				lineHTML.append(Create_FatigueInput());
+			for (i = 0; i < MAX_CustomInputs; i++) {
+				if (this.needCustomInput[i][0] == true) {
+					if (this.needCustomInput[i][1] == true) {
+						lineHTML.append(Create_CustomInputButton(i));
+					}
+					else {
+						lineHTML.append(Create_CustomInput(i));
+					}
+				}
 			}
 			if (this.needArchetypeList == true) {
 			}
@@ -115,11 +124,12 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 			if (this.needAngleList == true) {
 				Set_Angle(lineHTMLwithData, NewData.angle);
 			}
-			if (this.needHPInput == true) {
-				Set_HP(lineHTMLwithData, NewData.hp);
-			}
-			if (this.needFatigueInput == true) {
-				Set_Fatigue(lineHTMLwithData, NewData.stamina);
+			for (i = 0; i < MAX_CustomInputs; i++) {
+				if (this.needCustomInput[i][0] == true) {
+					if (NewData.ci != undefined && NewData.ci.length > i && NewData.ci[i] != undefined) {
+						Set_CustomInput(i, this.needCustomInput[i][1], lineHTMLwithData, NewData.ci[i]);
+					}
+				}
 			}
 			if (this.needArchetypeList == true) {
 			}
@@ -160,11 +170,11 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 			if (this.needAngleList == true) {
 				LineData.angle = Get_Angle(RowElement);
 			}
-			if (this.needHPInput == true) {
-				LineData.hp = Get_HP(RowElement);
-			}
-			if (this.needFatigueInput == true) {
-				LineData.stamina = Get_Fatigue(RowElement);
+			LineData.ci = [];
+			for (i = 0; i < MAX_CustomInputs; i++) {
+				if (this.needCustomInput[i][0] == true) {
+					LineData.ci[i] = Get_CustomInput(i, RowElement);
+				}
 			}
 			if (this.needArchetypeList == true) {
 			}
@@ -348,45 +358,43 @@ function Get_Angle(RowElement) {
 	return RowElement.find('.Angle-Value').val();
 }
 
-// HP Element
-function Create_HPInput(elementTitle) {
-	var html = $('<input type="text" name="HP-Value" class="form-control HP-Value" placeholder="Set HP" value=""/>');
+
+// Custom Input x -> cf constants for definition
+function Create_CustomInputButton(nb) {
+	var html = $('<div>');
+	html.addClass('ci' + nb + '-container');
+	html.addClass('btn-group');
+	html.append($('<button type="button" class="btn btn-warning CI' + nb + 'Button" aria-expanded="false" onclick="Add_CustomInput(' + nb + ',this);">' + CustomInput_ButtonTexts[nb] + '</button>'));
 	return html;
 }
 
-function Set_HP(element, value) {
-	var container;
-	if ($(element).hasClass('select-row')) {
-		container = element
-	}
-	else {
-		container = $(element).parents('.select-row');
-	}
-	container.find('.HP-Value').attr('value',value);
+function Add_CustomInput(nb, ButtonElement) {
+	var CustomInputText = $('<input type="text" name="CI' + nb + '-Value" class="form-control CI' + nb + '-Value" placeholder="' + CustomInput_SetTexts[nb] + '" value=""/>');
+	var removeButton = $('<a class="boxcloseinput CI' + nb + '-remove" id="boxcloseinput" onclick="Remove_CustomInput(' + nb + ',this)"></a>');
+
+	var buttonObject = $(ButtonElement);
+	buttonObject.before(CustomInputText);
+	buttonObject.before(removeButton);
+	buttonObject.hide();
+	return CustomInputText;
 }
 
-function UnSet_HP(element) {
-	var container;
-	if ($(element).hasClass('select-row')) {
-		container = element
-	}
-	else {
-		container = $(element).parents('.select-row');
-	}
-	container.find('.HP-Value').attr('value','');
+function Remove_CustomInput(nb, element) {
+	var container = $(element).parents('.select-row');
+	var CustomInputText = $(container).find('.CI' + nb + '-Value');
+	CustomInputText.remove();
+	var removeButton = $(container).find('.CI' + nb + '-remove');
+	removeButton.remove();
+	var buttonObject = $(container).find('.CI' + nb + 'Button');
+	buttonObject.show();
 }
 
-function Get_HP(RowElement) {
-	return RowElement.find('.HP-Value').val();
-}
-
-// Fatigue Element
-function Create_FatigueInput(elementTitle) {
-	var html = $('<input type="text" name="Stamina-Value" class="form-control Stamina-Value" placeholder="Set stamina" value=""/>');
+function Create_CustomInput(nb, elementTitle) {
+	var html = $('<input type="text" name="CI' + nb + '-Value" class="form-control CI' + nb + '-Value" placeholder="' + CustomInput_SetTexts[nb] + '" value=""/>');
 	return html;
 }
 
-function Set_Fatigue(element, value) {
+function Set_CustomInput(nb, UsingButton, element, value) {
 	var container;
 	if ($(element).hasClass('select-row')) {
 		container = element
@@ -394,10 +402,17 @@ function Set_Fatigue(element, value) {
 	else {
 		container = $(element).parents('.select-row');
 	}
-	container.find('.Stamina-Value').attr('value',value);
+	if (UsingButton == true) {
+		var Button = $(container.find('.CI' + nb + 'Button'))
+		CustomInputText = Add_CustomInput(nb, $(Button))
+		CustomInputText.attr('value', value);
+	}
+	else {
+		container.find('.CI' + nb + '-Value').attr('value', value);
+	}
 }
 
-function UnSet_Fatigue(element) {
+function UnSet_CustomInput(nb, element) {
 	var container;
 	if ($(element).hasClass('select-row')) {
 		container = element
@@ -405,11 +420,11 @@ function UnSet_Fatigue(element) {
 	else {
 		container = $(element).parents('.select-row');
 	}
-	container.find('.Stamina-Value').attr('value','');
+	container.find('.CI' + nb + '-Value').attr('value', '');
 }
 
-function Get_Fatigue(RowElement) {
-	return RowElement.find('.Stamina-Value').val();
+function Get_CustomInput(nb, RowElement) {
+	return RowElement.find('.CI' + nb + '-Value').val();
 }
 
 // Archetype Element
@@ -494,8 +509,14 @@ function Set_Token(element, value) {
 function Set_Tokens(RowElement, ConfigData) {
 	var Button = $(RowElement.find('.TokenButton'))
 	for (var OneToken in ConfigData) {
-		OneTokenItem = Add_OneEmptyToken(Button);
-		Set_Token(OneTokenItem, OneToken);
+		var NbSameToken = 1;
+		if (CONDITIONS[OneToken].canApplyMultipleTimes && ConfigData[OneToken] != undifined) {
+			NbSameToken = ConfigData[OneToken];
+		}
+		for (var i = 0; i < NbSameToken; i++) {
+			OneTokenItem = Add_OneEmptyToken(Button);
+			Set_Token(OneTokenItem, OneToken);
+		}
 	}
 	Update_TokenImages(RowElement);
 }
@@ -574,7 +595,6 @@ function Create_RelicButton(RelicImageContainer) {
 	html.append($('<button type="button" class="btn btn-info RelicButton" aria-expanded="false" onclick="Add_OneEmptyRelic(this);">Add relic</button>'));
 	return html;
 }
-
 
 function Add_OneEmptyRelic(ButtonElement) {
 	var relic = $(createInputSelect('Select relic', 'Relic-Title', 'select-relic')).attr('id', relicNumber.toString());

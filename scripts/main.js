@@ -281,6 +281,7 @@ function RetroCompatibility(OldConfig) {
 				else {
 					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " minion";
 				}
+				delete NewConfig.monsters[i].master;
 //				if (monster.vertical) folder += 'vertical/';
 //				if (monster.direction == "V") folder += 'vertical/';
 
@@ -298,6 +299,7 @@ function RetroCompatibility(OldConfig) {
 				else {
 					NewConfig.doors[i].direction = "H";
 				}
+				delete NewConfig.doors[i].vertical;
 			}
 		}
 
@@ -311,6 +313,7 @@ function RetroCompatibility(OldConfig) {
 			else {
 				NewConfig.currentAct = "II";
 			}
+			delete NewConfig.actOne;
 		}
 
 		//change xs set default color to red
@@ -325,6 +328,15 @@ function RetroCompatibility(OldConfig) {
 			}
 		}
 
+		//change Familiars name
+		for (var i = 0; NewConfig.familiars != undefined && i < NewConfig.familiars.length; i++) {
+			if (NewConfig.familiars[i].title == 'Raven') {
+				NewConfig.familiars[i].title = 'Raven Flock';
+			}
+			if (NewConfig.familiars[i].title == 'Shadow') {
+				NewConfig.familiars[i].title = 'Shadow Soul';
+			}
+		}
 
 
 		AndOlder = true;
@@ -395,6 +407,63 @@ function RetroCompatibility(OldConfig) {
 				}
 			}
 		}
+
+		AndOlder = true;
+	}
+	// previous to 1.5.2
+	if (NewConfig.mapVersion == "1.5.1" || AndOlder==true) {
+		//rename objectives to maptokens
+		NewConfig.maptokens = NewConfig.objectives;
+		delete NewConfig.objectives;
+
+		//change hp to ci[0] and stamina to ci[1]
+
+		for (var i = 0; NewConfig.monsters != undefined && i < NewConfig.monsters.length; i++) {
+			NewConfig.monsters[i].ci = [];
+			NewConfig.monsters[i].ci[0] = NewConfig.monsters[i].hp;
+			delete NewConfig.monsters[i].hp;
+		}
+		for (var i = 0; NewConfig.lieutenants != undefined && i < NewConfig.lieutenants.length; i++) {
+			NewConfig.lieutenants[i].ci = [];
+			NewConfig.lieutenants[i].ci[0] = NewConfig.lieutenants[i].hp;
+			delete NewConfig.lieutenants[i].hp;
+		}
+		for (var i = 0; NewConfig.agents != undefined && i < NewConfig.agents.length; i++) {
+			NewConfig.agents[i].ci = [];
+			NewConfig.agents[i].ci[0] = NewConfig.agents[i].hp;
+			delete NewConfig.agents[i].hp;
+		}
+		for (var i = 1; i <= 4; i++) {
+			var heroConfig = NewConfig['hero' + i.toString()];
+			heroConfig.ci = [];
+			heroConfig.ci[0] = heroConfig.hp;
+			heroConfig.ci[1] = heroConfig.stamina;
+			delete heroConfig.hp;
+			delete heroConfig.stamina;
+		}
+
+		for (var i = 0; NewConfig.familiars != undefined && i < NewConfig.familiars.length; i++) {
+			NewConfig.familiars[i].ci = [];
+			NewConfig.familiars[i].ci[0] = NewConfig.familiars[i].hp;
+			delete NewConfig.familiars[i].hp;
+		}
+		for (var i = 0; NewConfig.allies != undefined && i < NewConfig.allies.length; i++) {
+			NewConfig.allies[i].ci = [];
+			NewConfig.allies[i].ci[0] = NewConfig.allies[i].hp;
+			delete NewConfig.allies[i].hp;
+		}
+		for (var i = 0; NewConfig.villagers != undefined && i < NewConfig.villagers.length; i++) {
+			NewConfig.villagers[i].ci = [];
+			NewConfig.villagers[i].ci[0] = NewConfig.villagers[i].hp;
+			delete NewConfig.villagers[i].hp;
+		}
+		for (var i = 0; NewConfig.maptokens != undefined && i < NewConfig.maptokens.length; i++) {
+			NewConfig.maptokens[i].ci = [];
+			NewConfig.maptokens[i].ci[0] = NewConfig.maptokens[i].hp;
+			delete NewConfig.maptokens[i].hp;
+		}
+
+		AndOlder = true;
 	}
 
 	return NewConfig;
@@ -412,6 +481,7 @@ function rebuildMap(element, mapNb) {
 	config.lieutenants = mapConfig.lieutenants;
 	config.allies = mapConfig.allies;
 	config.villagers = mapConfig.villagers;
+	config.maptokens = mapConfig.maptokens;
 	config.currentAct = mapConfig.currentAct;
 	config.questObjectives = mapConfig.questObjectives;
 	config.monsterTraits = mapConfig.monsterTraits;
@@ -424,14 +494,9 @@ function rebuildMap(element, mapNb) {
 	FillWindow_QuestObjectives(config, true);
 	FillWindow_MapDesign(config, true);
 	FillWindow_OLFigures(config, true);
+	FillWindow_Familiars(config, true)
+	FillWindow_MapTokens(config, true);
 
-	constructAlliesTabFromConfig();
-	constructVillagersTabFromConfig();
-	if (mapConfig.objectives != undefined) {
-		config.objectives = mapConfig.objectives;
-		clearMiscellaneousObjectsTab();
-		constructMiscellaneousObjectsTabFromConfig();
-	}
 	switchToMap();
 	UnSet_Campaign(element);
 }
@@ -457,7 +522,7 @@ function addUnitLine(line, title) {
 	line.append(createInputSelect('Select ' + title, folderize(title).toLowerCase() + '-title', 'select-' + folderize(title).toLowerCase()));
 	line.append(createInputSelect('Select X coordinate', 'x-title', 'select-x'));
 	line.append(createInputSelect('Select Y coordinate', 'y-title', 'select-y'));
-	line.append($('<input type="text" name="' + folderize(title).toLowerCase() + '-hp" class="form-control" placeholder="Set HP" value=""/>'));
+	line.append(Create_CustomInput(0));
 	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-title" value=""/>'));
 	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-x" value=""/>'));
 	line.append($('<input type="hidden" name="' + folderize(title).toLowerCase() + '-y" value=""/>'));
@@ -607,8 +672,8 @@ function constructMapFromConfig() {
         map.append(xsObject);
 	}
 
-	for (var i = 0; config.objectives != undefined && i < config.objectives.length; i++) {
-		var objective = config.objectives[i];
+	for (var i = 0; config.maptokens != undefined && i < config.maptokens.length; i++) {
+		var objective = config.maptokens[i];
 		var objectiveObject = $('<div>');
 		var objectiveImage = $('<img>');
 		var folder = 'images/misc/';
@@ -621,10 +686,14 @@ function constructMapFromConfig() {
 		});
 		objectiveImage.attr('src', folder + urlize(objective.title) + '.png');
 		objectiveObject.append(objectiveImage);
-		if (objective.hp != undefined) {
-			var objectiveHp = $('<div>').addClass('hit-points');
-			objectiveHp.html(objective.hp.toString());
-			objectiveObject.append(objectiveHp);
+		if (objective.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				if (objective.ci[j] != undefined) {
+					var objectiveCustomInputTemp = $('<div>').addClass('ci' + j);	
+					objectiveCustomInputTemp.html((objective.ci == undefined || objective.ci[j] == undefined) ? '' : objective.ci[j].toString());
+					objectiveObject.append(objectiveCustomInputTemp);
+				}
+			}
 		}
 		addMapObject(objective.x, objective.y, objectiveObject, z_index);
         map.append(objectiveObject);
@@ -644,10 +713,14 @@ function constructMapFromConfig() {
 		});
 		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
 		familiarObject.append(familiarImage);
-		if (familiar.hp != undefined && familiar.hp != '') {
-			var familiarHp = $('<div>').addClass('hit-points');
-			familiarHp.html(familiar.hp.toString());
-			familiarObject.append(familiarHp);
+		if (familiar.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				if (familiar.ci[j] != undefined) {
+					var familiarCustomInputTemp = $('<div>').addClass('ci' + j);			//HP
+					familiarCustomInputTemp.html((familiar.ci == undefined || familiar.ci[j] == undefined) ? '' : familiar.ci[j].toString());
+					familiarObject.append(familiarCustomInputTemp);
+				}
+			}
 		}
 		addConditionsToImage(familiarObject, familiar.conditions);
 		addMapObject(familiar.x, familiar.y, familiarObject, z_index);
@@ -668,10 +741,14 @@ function constructMapFromConfig() {
 		});
 		villagerImage.attr('src', folder + urlize(villager.title) + '.png');
 		villagerObject.append(villagerImage);
-		if (villager.hp != undefined && villager.hp != '') {
-			var villagerHp = $('<div>').addClass('hit-points');
-			villagerHp.html(villager.hp.toString());
-			villagerObject.append(villagerHp);
+		if (villager.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				if (villager.ci[j] != undefined) {
+					var villagerCustomInputTemp = $('<div>').addClass('ci' + j);
+					villagerCustomInputTemp.html((villager.ci == undefined || villager.ci[j] == undefined) ? '' : villager.ci[j].toString());
+					villagerObject.append(villagerCustomInputTemp);
+				}
+			}
 		}
 		addConditionsToImage(villagerObject, villager.conditions);
 		addMapObject(villager.x, villager.y, villagerObject, z_index);
@@ -682,9 +759,7 @@ function constructMapFromConfig() {
 		var monster = config.monsters[i];
 		var monsterObject = $('<div>');
 		var monsterImage = $('<img>');
-		var monsterHp = $('<div>').addClass('hit-points');
 		var z_index = 2;
-		monsterHp.html(monster.hp == undefined ? '' : monster.hp.toString());
 		var folder = 'images/monster_tokens/';
 		if (monster.vertical) folder += 'vertical/';
 		if (monster.direction == "V") folder += 'vertical/';
@@ -734,8 +809,19 @@ function constructMapFromConfig() {
 		}
 		monsterImage.attr('src', folder + urlize(monster.title.replace(' master','').replace(' minion','')) + ((monster.master || monster.title.indexOf(" master") > 0) ? '_master.png' : '.png'));
 		monsterObject.append(monsterImage);
-		monsterObject.append(monsterHp);
-		addConditionsToImage(monsterObject, monster.conditions);
+		if (monster.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				//0 -> HP
+				if (monster.ci[j] != undefined) {
+					var monsterCustomInputTemp = $('<div>').addClass('ci' + j);
+					monsterCustomInputTemp.html((monster.ci == undefined || monster.ci[j] == undefined) ? '' : monster.ci[j].toString());
+					monsterObject.append(monsterCustomInputTemp);
+				}
+			}
+		}
+		if (monsterLine.needAddTokenButton == true) {
+			addConditionsToImage(monsterObject, monster.conditions);
+		}
 		addMapObject(monster.x, monster.y, monsterObject, z_index);
         figures.append(monsterObject);
 	}
@@ -744,8 +830,6 @@ function constructMapFromConfig() {
 		var ally = config.allies[i];
 		var allyObject = $('<div>');
 		var allyImage = $('<img>');
-		var allyHp = $('<div>').addClass('hit-points');
-		allyHp.html(ally.hp.toString());
 		var folder = 'images/allies_tokens/';
 		var z_index = 2;
 		allyObject.css({
@@ -756,8 +840,19 @@ function constructMapFromConfig() {
 		});
 		allyImage.attr('src', folder + urlize(ally.title) + '.png');
 		allyObject.append(allyImage);
-		allyObject.append(allyHp);
-		addConditionsToImage(allyObject, ally.conditions);
+		if (ally.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				//0 -> HP
+				if (ally.ci[j] != undefined) {
+					var allyCustomInputTemp = $('<div>').addClass('ci' + j);
+					allyCustomInputTemp.html((ally.ci == undefined || ally.ci[j] == undefined) ? '' : ally.ci[j].toString());
+					allyObject.append(allyCustomInputTemp);
+				}
+			}
+		}
+		if (allyLine.needAddTokenButton == true) {
+			addConditionsToImage(allyObject, ally.conditions);
+		}
 		addMapObject(ally.x, ally.y, allyObject, z_index);
         figures.append(allyObject);
 	}
@@ -766,8 +861,6 @@ function constructMapFromConfig() {
 		var lieutenant = config.lieutenants[i];
 		var lieutenantObject = $('<div>');
 		var lieutenantImage = $('<img>');
-		var lieutenantHp = $('<div>').addClass('hit-points');
-		lieutenantHp.html(lieutenant.hp.toString());
 		var folder = 'images/monster_tokens/';
 		var z_index = 2;
 		if (lieutenant.vertical != undefined && lieutenant.vertical) folder += 'vertical/';
@@ -818,7 +911,16 @@ function constructMapFromConfig() {
 		}
 		lieutenantImage.attr('src', folder + urlize(lieutenant.title) + '.png');
 		lieutenantObject.append(lieutenantImage);
-		lieutenantObject.append(lieutenantHp);
+		if (lieutenant.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				//0 -> HP
+				if (lieutenant.ci[j] != undefined) {
+					var lieutenantCustomInputTemp = $('<div>').addClass('ci' + j);
+					lieutenantCustomInputTemp.html((lieutenant.ci == undefined || lieutenant.ci[j] == undefined) ? '' : lieutenant.ci[j].toString());
+					lieutenantObject.append(lieutenantCustomInputTemp);
+				}
+			}
+		}
 		addConditionsToImage(lieutenantObject, lieutenant.conditions);
 		addMapObject(lieutenant.x, lieutenant.y, lieutenantObject, z_index);
         figures.append(lieutenantObject);
@@ -828,8 +930,6 @@ function constructMapFromConfig() {
 		var agent = config.agents[i];
 		var agentObject = $('<div>');
 		var agentImage = $('<img>');
-		var agentHp = $('<div>').addClass('hit-points');
-		agentHp.html(agent.hp.toString());
 		var folder = 'images/monster_tokens/';
 		var z_index = 2;
 		if (agent.vertical != undefined && agent.vertical) folder += 'vertical/';
@@ -880,7 +980,16 @@ function constructMapFromConfig() {
 		}
 		agentImage.attr('src', folder + urlize(agent.title.replace('Agent ', '')) + '.png');
 		agentObject.append(agentImage);
-		agentObject.append(agentHp);
+		if (agent.ci != undefined) {
+			for (j = 0; j < MAX_CustomInputs; j++) {
+				//0 -> HP
+				if (agent.ci[j] != undefined) {
+					var agentCustomInputTemp = $('<div>').addClass('ci' + j);
+					agentCustomInputTemp.html((agent.ci == undefined || agent.ci[j] == undefined) ? '' : agent.ci[j].toString());
+					agentObject.append(agentCustomInputTemp);
+				}
+			}
+		}
 		addConditionsToImage(agentObject, agent.conditions);
 		addMapObject(agent.x, agent.y, agentObject, z_index);
         figures.append(agentObject);
@@ -931,10 +1040,6 @@ function addHeroToMap(hero) {
 	var heroObject = $('<div>');
 	var heroImage = $('<img>');
 	var z_index = 2;
-	var heroHp = $('<div>').addClass('hit-points');
-	heroHp.html(hero.hp.toString());
-	var heroStamina = $('<div>').addClass('stamina');
-	heroStamina.html(hero.stamina.toString());
 	var folder = 'images/heroes_tokens/';
 	heroObject.css({
 		'position' : 'absolute',
@@ -959,9 +1064,18 @@ function addHeroToMap(hero) {
 		heroObject.append(aura);
 	}
 	heroObject.append(heroImage);
-	heroObject.append(heroHp);
-	heroObject.append(heroStamina);
-	if (hero.hp == 0) heroObject.addClass('secondary');
+	if (hero.ci != undefined) {
+		for (j = 0; j < MAX_CustomInputs; j++) {
+			//0 -> HP
+			//1 -> Fatigue
+			if (hero.ci[j] != undefined) {
+				var heroCustomInputTemp = $('<div>').addClass('ci' + j);
+				heroCustomInputTemp.html((hero.ci == undefined || hero.ci[j] == undefined) ? '' : hero.ci[j].toString());
+				heroObject.append(heroCustomInputTemp);
+				if (j==0 && hero.ci[j] == 0) heroObject.addClass('secondary');	//drowned
+			}
+		}
+	}
 	addConditionsToImage(heroObject, hero.conditions);
 	addMapObject(hero.x, hero.y, heroObject, z_index);
 	$('#map .figures').append(heroObject);
@@ -993,8 +1107,10 @@ function constructSettingsFromConfig() {
 	FillWindow_OLFigures(config, false);
 
 	constructHeroesTabsFromConfig();
-	constructAlliesAndFamiliarsTabFromConfig();
-	constructMiscellaneousObjectsTabFromConfig();
+	FillWindow_Familiars(config, false);
+
+	FillWindow_MapTokens(config, false);
+
 	constructOverlordCardsTabFromConfig();
 	constructPlotDeckTabFromConfig();
 	constructMapSize();
@@ -1107,10 +1223,9 @@ function collectData() {
 	config.hero2 = hero($('#hero2 .select-row'));
 	config.hero3 = hero($('#hero3 .select-row'));
 	config.hero4 = hero($('#hero4 .select-row'));
-	config.allies = getAllies();
-	config.familiars = getFamiliars();
-	config.villagers = getVillagers();
-	config.objectives = getObjectives();
+	config = GetWindow_Familiars(config);
+	config = GetWindow_MapTokens(config);
+
 	config.overlord = {};
 	config.overlord.cards = getOverlordCards();
 	config.plot = getPlotInfo();
@@ -1164,13 +1279,12 @@ function switchToMap() {
 function clearAdditionalElements() {
 	ResetWindow_MapDesign();
 	ResetWindow_OLFigures();
-
+	ResetWindow_MapTokens();
 //	clearLieutenants();
 //	clearAgents();
-	clearMiscellaneousObjectsTab();
 	clearHeroesSackAndSearchItems();
 	clearHeroesConditions();
-	clearFamiliarsAndAllies();
+	ResetWindow_Familiars();
 }
 
 function updateMapSize() {
@@ -1218,6 +1332,11 @@ function LoadOneSubScripts(scriptFile){
     document.head.appendChild(script);
 }
 function LoadSubScripts(){
+	LoadOneSubScripts("scripts/base_functions.js");
+	LoadOneSubScripts("scripts/cCoordinatesElements.js");
+	LoadOneSubScripts("scripts/cLineElements.js");
+	LoadOneSubScripts("scripts/cOtherElements.js");
+	LoadOneSubScripts("scripts/constants.js");
 	LoadOneSubScripts("scripts/00MapControls.js");
 	LoadOneSubScripts("scripts/01QuestObjectives.js");
 	LoadOneSubScripts("scripts/02MapDesign.js");
@@ -1229,7 +1348,14 @@ function LoadSubScripts(){
 	LoadOneSubScripts("scripts/11PlotCards.js");
 }
 
-
+function getScripts(scripts, callback) {
+	var progress = 0;
+	scripts.forEach(function (script) {
+		$.getScript(script, function () {
+			if (++progress == scripts.length) callback();
+		});
+	});
+}
 
 function InitializeAllWindows() {
 	Initialize_MapControls();
@@ -1245,14 +1371,31 @@ function InitializeAllWindows() {
 }
 
 $(function() {
-//	LoadSubScripts();
+	//LoadSubScripts();
+	//getScripts([
+	//	"scripts/base_functions.js"
+	//	, "scripts/cCoordinatesElements.js"
+	//	, "scripts/cLineElements.js"
+	//	, "scripts/cOtherElements.js"
+	//	, "scripts/constants.js"
+	//	, "scripts/00MapControls.js"
+	//	, "scripts/01QuestObjectives.js"
+	//	, "scripts/02MapDesign.js"
+	//	, "scripts/03OLFigures.js"
+	//	, "scripts/04Heroes.js"
+	//	, "scripts/08Familiers.js"
+	//	, "scripts/09OLCards.js"
+	//	, "scripts/10Tokens.js"
+	//	, "scripts/11PlotCards.js"], function () {
+	//	// do something...
+
+	//});
 
 	InitializeAllWindows();
 
 	for (var i = 1; i <= 4; i++) {
 		addHeroLine(i);
 	}
-	createFamiliarsImagesBlock();
 	createOverlordCardsBlock();
 	createPlotDeckBlock();
 
@@ -1279,10 +1422,10 @@ $(function() {
 	$('#map').click(function() {
 		switchToMap();
 	});
-    $(document).keyup(function(e) {
-        if (e.keyCode == 27) { // esc keycode
+	$(document).keyup(function(e) {
+		if (e.keyCode == 27) { // esc keycode
 			switchToMap();
-        }
-    });
+		}
+	});
 });
 

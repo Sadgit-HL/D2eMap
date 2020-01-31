@@ -1,4 +1,4 @@
-var MAPVERSION = "1.5.1";
+var MAPVERSION = "1.5.2";
 var MAPGAME = "Descent2Ed";
 
 var mapWidth = 40;
@@ -10,7 +10,20 @@ var HCellSize = 64;
 var VCellSize = 64;
 var cellType = "SQUARE"; // SQUARE - HEX
 
-var cellSize = 64;
+//Custom Inputs
+var MAX_CustomInputs = 5
+var CustomInput_SetTexts = [MAX_CustomInputs - 1];
+CustomInput_SetTexts[0] = 'Set HP';
+CustomInput_SetTexts[1] = 'Set Init';
+CustomInput_SetTexts[2] = 'Set Seq nb';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
+CustomInput_SetTexts[3] = 'Set Coins';
+CustomInput_SetTexts[4] = 'Set XP';
+var CustomInput_ButtonTexts = [MAX_CustomInputs - 1];
+CustomInput_ButtonTexts[0] = 'Add HP';
+CustomInput_ButtonTexts[1] = 'Add Init';
+CustomInput_ButtonTexts[2] = 'Add Seq nb';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
+CustomInput_ButtonTexts[3] = 'Add Coins';
+CustomInput_ButtonTexts[4] = 'Add XP';
 
 function listsort(a, b) {
 	if(a[0] < b[0]) return -1;
@@ -1234,7 +1247,7 @@ ALLIES_SKILLS = {};
 ALLIES_SKILLS['Serena'] = ['Aura Of Might', 'Healing Aura', 'Holy Hammer'];
 ALLIES_SKILLS['Raythen'] = ['Back Strike', 'Night Prowler', 'Sharp Eyes'];
 
-FAMILIARS_LIST = [
+FAMILIARS_INITIAL = [
 	['Brightblaze',true],
 	['Mirror Image',true],
 	['Pico',true],
@@ -1248,6 +1261,14 @@ FAMILIARS_LIST = [
 	['Wolf',true],
 	['Bandaged Servant',true]
 ];
+
+var FAMILIARS = {};
+var FAMILIARS_LIST = [];
+
+for (var i = 0; i < FAMILIARS_INITIAL.length; i++) {
+	FAMILIARS_LIST.push(FAMILIARS_INITIAL[i][0]);
+	FAMILIARS[FAMILIARS_INITIAL[i][0]] = { 'hasCard': FAMILIARS_INITIAL[i][1] };
+}
 
 VILLAGERS_LIST = [
 	['Villager Female',false],
@@ -1425,31 +1446,31 @@ MISCELLANEOUS_LIST = [
 ];
 
 CONDITIONS_INITIAL = [
-	['Bleeding',true],
-	['Blind',true],
-	['Burning',true],
-	['Cursed',true],
-	['Diseased',true],
-	['Doomed',true],
-	['Immobilized',true],
-	['Poisoned',true],
-	['Stunned',true],
-	['Terrified',true],
-	['Weakened',true],
-	['Elixir',false],
-	['Fortune',false],
-	['Hexed',false],
-	['Infected',false],
-	['Insight',false],
-	['Timmorran Shard',false],
-	['Tracked',false],
-	['Objective',false],
-	['Threat',false],
-	['Valor',false],
-	['Healer',false],
-	['Mage',false],
-	['Scout',false],
-	['Warrior',false]
+	['Bleeding', true, false],
+	['Blind', true, false],
+	['Burning', true, false],
+	['Cursed', true, false],
+	['Diseased', true, false],
+	['Doomed', true, false],
+	['Immobilized', true, false],
+	['Poisoned', true, false],
+	['Stunned', true, false],
+	['Terrified', true, false],
+	['Weakened', true, false],
+	['Elixir', false, true],
+	['Fortune', false, true],
+	['Hexed', false, true],
+	['Infected', false, true],
+	['Insight', false, false],
+	['Timmorran Shard', false, true],
+	['Tracked', false, false],
+	['Objective', false, true],
+	['Threat', false, true],
+	['Valor', false, true],
+	['Healer', false, true],
+	['Mage', false, true],
+	['Scout', false, true],
+	['Warrior', false, true]
 ];
 
 var CONDITIONS = {};
@@ -1457,35 +1478,36 @@ var CONDITIONS_LIST = [];
 
 for (var i = 0; i < CONDITIONS_INITIAL.length; i++) {
 	CONDITIONS_LIST.push(CONDITIONS_INITIAL[i][0]);
-	CONDITIONS[CONDITIONS_INITIAL[i][0]] = {'hasConditionCard' : CONDITIONS_INITIAL[i][1]};
+	CONDITIONS[CONDITIONS_INITIAL[i][0]] = { 'hasConditionCard': CONDITIONS_INITIAL[i][1], 'canApplyMultipleTimes': CONDITIONS_INITIAL[i][2]};
 }
 
+//Name, has image, can have many
 TRACKING_TOKENS_INITIAL = [
-	['Bleeding',true],
-	['Blind',true],
-	['Burning',true],
-	['Cursed',true],
-	['Diseased',true],
-	['Doomed',true],
-	['Immobilized',true],
-	['Poisoned',true],
-	['Stunned',true],
-	['Terrified',true],
-	['Weakened',true],
-	['Elixir',false],
-	['Fortune',false],
-	['Hexed',false],
-	['Infected',false],
-	['Insight',false],
-	['Timmorran Shard',false],
-	['Tracked',false],
-	['Objective',false],
-	['Threat',false],
-	['Valor',false],
-	['Healer',false],
-	['Mage',false],
-	['Scout',false],
-	['Warrior',false]
+	['Bleeding',true,false],
+	['Blind', true, false],
+	['Burning', true, false],
+	['Cursed', true, false],
+	['Diseased', true, false],
+	['Doomed', true, false],
+	['Immobilized', true, false],
+	['Poisoned', true, false],
+	['Stunned', true, false],
+	['Terrified', true, false],
+	['Weakened', true, false],
+	['Elixir', false, true],
+	['Fortune',false,true],
+	['Hexed',false,true],
+	['Infected',false,true],
+	['Insight',false,false],
+	['Timmorran Shard',false,true],
+	['Tracked',false,false],
+	['Objective',false,true],
+	['Threat',false,true],
+	['Valor',false,true],
+	['Healer',false,true],
+	['Mage',false,true],
+	['Scout',false,true],
+	['Warrior',false,true]
 ];
 
 var TRACKING_TOKENS = {};
@@ -1493,7 +1515,7 @@ var TRACKING_TOKENS_LIST = [];
 
 for (var i = 0; i < TRACKING_TOKENS_INITIAL.length; i++) {
 	TRACKING_TOKENS_LIST.push(TRACKING_TOKENS_INITIAL[i][0]);
-	TRACKING_TOKENS[TRACKING_TOKENS_INITIAL[i][0]] = {'hasConditionCard' : TRACKING_TOKENS_INITIAL[i][1]};
+	TRACKING_TOKENS[TRACKING_TOKENS_INITIAL[i][0]] = { 'hasConditionCard': TRACKING_TOKENS_INITIAL[i][1], 'canApplyMultipleTimes': TRACKING_TOKENS_INITIAL[i][2]};
 }
 
 
@@ -2114,7 +2136,7 @@ xMarkLine.needRemoveButton = true;
 var monsterLine = new LineClass('monster','monster','RemoveLine_Monster(this);');
 monsterLine.needCoordinates = true;
 monsterLine.XYBase = '1x1';		//DefaultValue
-monsterLine.needHPInput = true;
+monsterLine.needCustomInput[0][0] = true;
 monsterLine.needAddTokenButton = true;
 monsterLine.needAddRelicButton = true;
 monsterLine.needAddAuraButton = true;
@@ -2123,7 +2145,7 @@ monsterLine.needRemoveButton = true;
 var lieutenantLine = new LineClass('lieutenant','lieutenant','RemoveLine_Lieutenant(this);');
 lieutenantLine.needCoordinates = true;
 lieutenantLine.XYBase = '1x1';		//DefaultValue
-lieutenantLine.needHPInput = true;
+lieutenantLine.needCustomInput[0][0] = true;
 lieutenantLine.needAddTokenButton = true;
 lieutenantLine.needAddRelicButton = true;
 lieutenantLine.needAddAuraButton = true;
@@ -2133,11 +2155,43 @@ lieutenantLine.UsesMainCommonImages = true;
 var agentLine = new LineClass('agent','agent','RemoveLine_Agent(this);');
 agentLine.needCoordinates = true;
 agentLine.XYBase = '1x1';		//DefaultValue
-agentLine.needHPInput = true;
+agentLine.needCustomInput[0][0] = true;
 agentLine.needAddTokenButton = true;
 agentLine.needAddAuraButton = true;
 agentLine.needRemoveButton = true;
 agentLine.UsesMainCommonImages = true;
 
 
+var allyLine = new LineClass('ally', 'ally', '');
+allyLine.needCoordinates = true;
+allyLine.XYBase = '1x1';		//DefaultValue
+allyLine.needCustomInput[0][0] = true;
+//allyLine.needCustomInput[0][1] = true; // Using Add Button
+allyLine.needAddTokenButton = true;
+allyLine.needAddAuraButton = true;
+allyLine.needRemoveButton = true;
+allyLine.UsesMainCommonImages = true;
+
+var familiarLine = new LineClass('familiar', 'familiar', 'RemoveLine_Familiar(this);');
+familiarLine.needCoordinates = true;
+familiarLine.XYBase = '1x1';		//DefaultValue
+familiarLine.needCustomInput[0][0] = true;
+familiarLine.needCustomInput[0][1] = true; // Using Add Button
+familiarLine.needAddTokenButton = true;
+familiarLine.needRemoveButton = true;
+
+var villagerLine = new LineClass('villager', 'villager', '');
+villagerLine.needCoordinates = true;
+villagerLine.XYBase = '1x1';		//DefaultValue
+villagerLine.needCustomInput[0][0] = true;
+villagerLine.needCustomInput[0][1] = true; // Using Add Button
+villagerLine.needAddTokenButton = true;
+villagerLine.needRemoveButton = true;
+
+var maptokenLine = new LineClass('maptoken', 'maptoken', '');
+maptokenLine.needCoordinates = true;
+maptokenLine.XYBase = '1x1';		//DefaultValue
+maptokenLine.needCustomInput[0][0] = true;
+maptokenLine.needCustomInput[0][1] = true; // Using Add Button
+maptokenLine.needRemoveButton = true;
 

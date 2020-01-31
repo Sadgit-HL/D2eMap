@@ -1,84 +1,97 @@
 function InitializeWindowFor_MapTokens() {
 	var html = $('#map-tokens');
-	html.append('<div id="maptoken-container"><h1>Map Tokens</h1></div>');
-	html.append('<button type="button" class="btn btn-success" aria-expanded="false" onclick="addObjectiveLine();">Add map token</button>');
+
+	//tiles zone
+	html.append(CreateZone_MapTokens());
+}
+
+function UpdateWindow_MapTokens() {
+	//after Act Set for example
+}
+
+function GetWindow_MapTokens(DataToUpdate) {
+	DataToUpdate = GetZone_MapTokens(DataToUpdate);
+	return DataToUpdate;
+}
+
+function FillWindow_MapTokens(NewData, FromPreFilledMaps) {
+	//Fill_ActButton(); -> Common not Filled Here
+	FillZone_MapTokens(NewData, FromPreFilledMaps);
+}
+
+function ResetWindow_MapTokens(FromPreFilledMaps) {
+	ResetZone_MapTokens(FromPreFilledMaps);
 }
 
 
-function constructMiscellaneousObjectsTabFromConfig() {
-	if (config.objectives != undefined) {
-		for (var i = 0 ; i < config.objectives.length; i++) {
-			var container = addObjectiveLine();
-			var objective = config.objectives[i];
-			updateObjective(container.find('.select-maptoken li')[0], objective.title);
-			container.find('[name="maptoken-x"]').val(objective.x);
-			container.find('.x-title').html(getAlphabetChar(objective.x - 1) + ' ');
-			container.find('[name="maptoken-y"]').val(objective.y);
-			container.find('.y-title').html(objective.y.toString() + ' ');
-			if (objective.hp != undefined) {
-				addHpInput(container.find('[onclick="addHpInput(this);"]'));
-				container.find('input[name="hp"]').val(objective.hp);
-			}
+//Map Tokens zone
+function CreateZone_MapTokens() {
+	var html = $('<div>');
+	var container = $('<div>').addClass('maptokens-container');
+	container.append('<h1>Map tokens</h1>');
+	html.append(container);
+	html.append('<button type="button" class="btn btn-success" aria-expanded="false" onclick="AddLine_MapToken();">Add map token</button>');
+	//initialize LineClass
+	maptokenLine.NameListValues = Create_MapTokenListValues();
+
+	return html;
+}
+
+function GetZone_MapTokens(DataToUpdate) {
+	var result = [];
+	var maptokens = $('.maptokens-container .select-row');
+	for (var i = 0; i < maptokens.length; i++) {
+		var container = $(maptokens[i]);
+		var maptoken = {};
+		maptoken = maptokenLine.GetOneLineData(container);
+		result.push(maptoken);
+	}
+	DataToUpdate.maptokens = result;
+	return DataToUpdate;
+}
+
+function FillZone_MapTokens(NewData, FromPreFilledMaps) {
+	ResetZone_MapTokens(FromPreFilledMaps);
+	if (NewData.maptokens != undefined) {
+		for (var i = 0; i < NewData.maptokens.length; i++) {
+			maptokenLine.XYBase = "1x1";
+			var html = maptokenLine.AddOneLineWithData(NewData.maptokens[i]);
+			$('.maptokens-container').append(html);
 		}
 	}
 }
 
-function createObjectiveSelectContent() {
-	var html = addOption('Clear', '', 'clearObjective(this);');
+function ResetZone_MapTokens(FromPreFilledMaps) {
+	$('.maptokens-container .select-row').remove();
+}
+
+function AddLine_MapToken() {
+	maptokenLine.XYBase = "1x1";
+	var html = maptokenLine.AddOneEmptyLine();
+	$('.maptokens-container').append(html);
+	return html;
+}
+
+function Create_MapTokenListValues() {
+	var html = addOption('Clear', '', 'UnSet_MapToken(this);');
 	for (var i = 0; i < OBJECTIVES_LIST.length; i++) {
-		html += addOption(OBJECTIVES_LIST[i] + ' ', '', 'updateObjective(this, \'' + OBJECTIVES_LIST[i] + '\')');
+		html += addOption(OBJECTIVES_LIST[i] + ' ', '', 'Set_MapToken(this, \'' + OBJECTIVES_LIST[i] + '\')');
 	}
 	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < MISCELLANEOUS_LIST.length; i++) {
-		html += addOption(MISCELLANEOUS_LIST[i] + ' ', '', 'updateObjective(this, \'' + MISCELLANEOUS_LIST[i] + '\')');
+		html += addOption(MISCELLANEOUS_LIST[i] + ' ', '', 'Set_MapToken(this, \'' + MISCELLANEOUS_LIST[i] + '\')');
 	}
 	return html;
 }
 
-function clearMiscellaneousObjectsTab() {
-	$('#maptoken-container .select-row').remove();
-}
-
-function addObjectiveLine() {
-	var objective = $('<div>');
-	addUnitLine(objective, 'Map Token');
-	objective.find('input[type="text"]').remove();
-
-	objective.find('.select-maptoken ul').append(createObjectiveSelectContent());
-	objective.find('.select-x ul').addClass('showOneCell').append(createXSelectContent(true));
-	objective.find('.select-y ul').addClass('showOneCell').append(createYSelectContent(true));
-	objective.append($('<button type="button" class="btn btn-warning" aria-expanded="false" onclick="addHpInput(this);">Add HP</button>'));
-	objective.append($('<button type="button" class="btn btn-danger" aria-expanded="false" onclick="removeRow(this);">Remove map token</button>'));
-	$('#maptoken-container').append(objective);
-	return objective;
-}
-
-function updateObjective(element, value) {
+function Set_MapToken(element, value) {
+	maptokenLine.XYBase = "1x1";
 	var container = $(element).parents('.select-row');
-	container.find('.maptoken-title').html(value + ' ');
-	container.find('input[name="maptoken-title"]').attr('value',value);
+	maptokenLine.Set_MainElement(container, value);
 }
 
-function clearObjective(element) {
+function UnSet_MapToken(element) {
 	var container = $(element).parents('.select-row');
-	container.find('.maptoken-title').html('Select Map Token ');
-	container.find('input[name="maptoken-title"]').attr('value','');
+	maptokenLine.UnSet_MainElement(container);
 }
 
-function getObjectives() {
-	var result = [];
-	var objectives = $('#maptoken-container .select-row');
-	for (var i = 0; i < objectives.length; i++) {
-		var container = $(objectives[i]);
-		var objective = {};
-		objective.title = container.find('[name="maptoken-title"]').val();
-		objective.x = container.find('[name="maptoken-x"]').val();
-		objective.y = container.find('[name="maptoken-y"]').val();
-		var objectiveHp = container.find('[name="hp"]');
-		if (objectiveHp.length > 0) {
-			objective.hp = $(objectiveHp[0]).val();
-		}
-		result.push(objective);
-	}
-	return result;
-}

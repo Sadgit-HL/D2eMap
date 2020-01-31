@@ -482,8 +482,7 @@ li.H, li.V
 	max-width: 600px;
 }
 
-.imagescontainer img,
-.ally-skills-images-container img {
+.imagescontainer img {
 	margin: 10px;
 	width: 200px;
 }
@@ -506,7 +505,7 @@ li.H, li.V
 
 .tainted-container img,
 .familiar-image {
-	display: block;
+	display: inline-block;
 	height: 255px;
 	margin: 0 0 20px 0;
 }
@@ -529,8 +528,20 @@ img.familiar-image {
 	display: inline-block;
 }
 
-.hit-points,
-.stamina {
+.ci0,
+.ci1,
+.ci2,
+.ci3,
+.ci4,
+.ci5,
+.ci6,
+.ci7,
+.ci8,
+.ci9,
+.ci10,
+.ci11,
+.ci12,
+.xy {
 	position: absolute;
 	left: 0;
 	color: white;
@@ -543,12 +554,12 @@ img.familiar-image {
 	border-radius: 10px;
 }
 
-.hit-points {
+.ci0 {
 	top: 0;
 	background: red;
 }
 
-.stamina {
+.ci1 {
 	bottom: 0;
 	background: rgb(184, 157, 10);
 }
@@ -565,32 +576,42 @@ img.familiar-image {
 }
 
 
-.row-cards img, .row-relicscards img, .row-tokenscards img, 
-.monsters-cards img, .monsters-relicscards img, .monsters-tokenscards img {
+.row-cards img, .row-relicscards img, .row-tokenscards img,
+.monsters-cards img, .monsters-relicscards img, .monsters-tokenscards img,
+.familiars-cards img, .familiars-tokenscards img,
+.ally-skills-images-container img {
 	margin-left: 0px;
 	margin-top: 0px;
 	margin-right: 10px;
 	margin-bottom: 25px;
 	max-height: 300px;
-	display :inline;
+	display: inline;
 }
 
 .row-cards,
-.monsters-cards {
-/*	float:left;*/
-	display :inline;
+.monsters-cards,
+.familiars-cards,
+.ally-skills-images-container {
+	/*	float:left;*/
+	display: inline;
+}
+
+.ally-skills-container {
+	margin-top: -45px;
+	margin-bottom: 30px;
 }
 
 .row-relicscards,
 .monsters-relicscards {
-/*	float:left;*/
-	display :inline;
+	/*	float:left;*/
+	display: inline;
 }
 
 .row-tokenscards,
-.monsters-tokenscards {
-/*	float:left;*/
-	display :inline;
+.monsters-tokenscards,
+.familiars-tokenscards {
+	/*	float:left;*/
+	display: inline;
 }
 
 .conditions {
@@ -919,23 +940,28 @@ img.relic {
 }
 
 
-a.boxclose{
-    float:right;
-    margin-top:-14px;
-    margin-right:-20px;
-    cursor:pointer;
-    color: #fff;
-    border: 3px solid #AEAEAE;
-    border-radius: 10px;
-    background: #605F61;
-    font-size: 10px;
-    font-weight: bold;
-    display: inline-block;
-    line-height: 0px;
-    padding: 4px 1px;       
+a.boxclose, a.boxcloseinput {
+	float: right;
+	cursor: pointer;
+	color: #fff;
+	border: 3px solid #AEAEAE;
+	border-radius: 10px;
+	background: #605F61;
+	font-size: 10px;
+	font-weight: bold;
+	display: inline-block;
+	line-height: 0px;
+	padding: 4px 1px;
 }
 
-.boxclose:before {
-    content: "X";
-
+.boxclose:before, .boxcloseinput:before {
+	content: "X";
+}
+a.boxclose{
+    margin-top:-14px;
+    margin-right:-20px;
+}
+a.boxcloseinput {
+	margin-top: -40px;
+	margin-right: -6px;
 }
