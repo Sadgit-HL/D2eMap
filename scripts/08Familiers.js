@@ -153,7 +153,7 @@ function CreateZone_AllySkills(value) {
 	for (var i = 0; i < allySkills.length; i++) {
 		var skill = allySkills[i];
 		var skillObject = $('<div ally="' + value + '">').addClass('checkbox');
-		skillObject.append($('<label><input type="checkbox" name="' + skill + '" onClick="Set_AllySkill(this, \'' + urlize(skill) + '\');"/> ' + skill + '</label>'));
+		skillObject.append($('<label><input type="checkbox" name="' + skill + '" onClick="Set_AllySkill(this, \'' + skill + '\');"/> ' + skill + '</label>'));
 		html.append(skillObject);
 	}
 	return html;
