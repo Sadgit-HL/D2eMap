@@ -554,28 +554,6 @@ function createInputSelect(title, titleClass, additionalClass) {
 	return select;
 }
 
-function hero(element) {
-	var container = $(element);
-	var hero = {};
-	hero.title = container.find('[name="hero-title"]').val();
-	if (hero.title != "") {
-		hero.x = container.find('[name="hero-x"]').val();
-		hero.y = container.find('[name="hero-y"]').val();
-		hero.hp = container.find('[name="hero-hp"]').val();
-		hero.stamina = container.find('[name="hero-stamina"]').val();
-		hero.className = container.find('[name="class-title"]').val();
-		if (CLASSES[hero.className].allowHybrid) hero.hybridClassName = container.find('[name="hybrid-class-title"]').val();
-		hero.featUsed = container.find('.hero-image-container img').parent().hasClass('feat-used');
-		hero.skills = getSkills(container, hero.className, hero.hybridClassName);
-		hero.items = getItems(container);
-		hero.sack = getSackAndSearch(container);
-		hero.conditions = getConditions(container);
-		hero.aura = getAura(container);
-		hero.tainted = getTainted(container);
-	}
-	return hero;
-}
-
 function populate() {
 	collectData();
 	updateConfig();
@@ -1122,69 +1100,6 @@ function constructMapSize() {
 	}
 	if (config.mapHeight != undefined) {
 		mapHeight = config.mapHeight;
-	}
-}
-
-function constructHeroesTabsFromConfig() {
-	for (var i=1; i <= 4; i++) {
-		var heroConfig = config['hero' + i.toString()];
-		if (heroConfig.title != "" && heroConfig.title != undefined) {
-			var heroSelector = '#hero' + i.toString();
-			updateHero($(heroSelector + ' .select-hero li')[0],heroConfig.title);
-			$(heroSelector + ' [name="hero-hp"]').val(heroConfig.hp);
-			$(heroSelector + ' [name="hero-stamina"]').val(heroConfig.stamina);
-			$(heroSelector + ' [name="hero-x"]').val(heroConfig.x);
-			$(heroSelector + ' .x-title').html(getAlphabetChar(heroConfig.x - 1) + ' ');
-			$(heroSelector + ' [name="hero-y"]').val(heroConfig.y);
-			$(heroSelector + ' .y-title').html(heroConfig.y.toString() + ' ');
-			if (heroConfig.className != undefined) {
-				updateClass($(heroSelector + ' .select-class li')[0], heroConfig.className.toString(), true, false);
-			}
-			if (heroConfig.hybridClassName != undefined) {
-				updateClass($(heroSelector + ' .select-hybrid-class li')[0], heroConfig.hybridClassName.toString(), true, true);
-			}
-			if (heroConfig.skills != undefined) {
-				updateSkills($(heroSelector + ' .skills-container'), heroConfig.skills, i);
-				adjustSkillsImages($(heroSelector + ' .skills-container'));
-				if (heroConfig.hybridClassName != undefined) {
-					adjustSkillsImages($(heroSelector + ' .skills-container'), true);
-				}
-			}
-			if (heroConfig.items != undefined && heroConfig.items.hand != undefined && heroConfig.items.hand != '') {
-				updateHand($(heroSelector + ' .select-weapon:not(.second-select) [onclick="updateHand(this, \'' + heroConfig.items.hand + '\')"]'), heroConfig.items.hand);
-			}
-			if (heroConfig.items != undefined && heroConfig.items.hand2 != undefined && heroConfig.items.hand2 != '') {
-				updateHand($(heroSelector + ' .select-weapon.second-select [onclick="updateHand(this, \'' + heroConfig.items.hand2 + '\')"]'), heroConfig.items.hand2);
-			}
-			if (heroConfig.items != undefined && heroConfig.items.armor != undefined && heroConfig.items.armor != '') {
-				updateArmor($(heroSelector + ' .select-armor [onclick="updateArmor(this, \'' + heroConfig.items.armor + '\')"]'), heroConfig.items.armor);
-			}
-			if (heroConfig.items != undefined && heroConfig.items.item != undefined && heroConfig.items.item != '') {
-				updateItem($(heroSelector + ' .select-item:not(.second-select) [onclick="updateItem(this, \'' + heroConfig.items.item + '\')"]'), heroConfig.items.item);
-			}
-			if (heroConfig.items != undefined && heroConfig.items.item2 != undefined && heroConfig.items.item2 != '') {
-				updateItem($(heroSelector + ' .select-item.second-select [onclick="updateItem(this, \'' + heroConfig.items.item2 + '\')"]'), heroConfig.items.item2);
-			}
-			if (heroConfig.sack != undefined) {
-				for (var j = 0; j < heroConfig.sack.length; j++) {
-					var sackAttribute = addToSack($(heroSelector + ' .sack-container button'));
-					updateSackItem($(heroSelector + ' [sack="' + sackAttribute + '"] [onclick="updateSackItem(this, \'' + heroConfig.sack[j] + '\')"]'), heroConfig.sack[j]);
-				}
-			}
-			if (heroConfig.featUsed != undefined && heroConfig.featUsed) {
-				$(heroSelector + '> .select-row > .hero-image-container > img').parent().addClass('feat-used');
-			}
-			updateConditionsInSettings(heroConfig.conditions, $(heroSelector));
-			if (heroConfig.aura != undefined) {
-				var aura = addAura($(heroSelector + ' [onclick="addAura(this);"]'));
-				aura.find('[name="aura-radius"]').val(heroConfig.aura.radius);
-				aura.find('[name="aura-color"]').val(heroConfig.aura.color);
-			}
-			if (heroConfig.tainted != undefined) {
-				var tainted = addTainted($(heroSelector + ' .tainted-container').find('button'));
-				updateTainted($(heroSelector + ' .tainted-container a')[0], heroConfig.tainted);
-			}
-		}
 	}
 }
 
