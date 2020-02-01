@@ -65,8 +65,7 @@ function updateOption(element, value, isMonster) {
 			value = container.find('.monster-title').html();
 			value = value.substring(0, value.length - 1);
 			//remove type : master / minion
-			value = value.replace(" master", "");
-			value = value.replace(" minion", "");
+			value = recoverMonsterBaseName(value);
 		}
 
 		var firstClass = SHOWING_CLASSES[MONSTERS[value].width];
@@ -153,6 +152,12 @@ function createConditionSelectContent() {
 	}
 	return html;
 }
+
+function recoverMonsterBaseName(MonsterFullName) {
+	var MonsterBaseName = MonsterFullName.replace(MasterSuffix, '').replace(MinionSuffix, '')
+	return MonsterBaseName;
+}
+
 
 function addConditions(conditions, container) {
 	for (var condition in conditions) {
@@ -276,10 +281,10 @@ function RetroCompatibility(OldConfig) {
 		if (NewConfig.monsters != undefined) {
 			for (var i = 0; NewConfig.monsters != undefined && i < NewConfig.monsters.length; i++) {
 				if (NewConfig.monsters[i].master) {
-					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " master";
+					NewConfig.monsters[i].title = NewConfig.monsters[i].title + MasterSuffix;
 				}
 				else {
-					NewConfig.monsters[i].title = NewConfig.monsters[i].title + " minion";
+					NewConfig.monsters[i].title = NewConfig.monsters[i].title + MinionSuffix;
 				}
 				delete NewConfig.monsters[i].master;
 //				if (monster.vertical) folder += 'vertical/';
@@ -756,20 +761,20 @@ function constructMapFromConfig() {
 				var xDelta;
 				var yDelta;
 				if (monster.vertical) {
-					xDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].width;
-					yDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].height;
+					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
+					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
 					}
 				else {
-					xDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].height;
-					yDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].width;
+					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
+					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
 					}
 				if (monster.direction == "V") {
-					xDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].width;
-					yDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].height;
+					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
+					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
 					}
 				else {
-					xDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].height;
-					yDelta = MONSTERS[monster.title.replace(' master','').replace(' minion','')].width;
+					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
+					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
 					}
 
 				aura.css({
@@ -785,7 +790,7 @@ function constructMapFromConfig() {
 				monsterObject.append(aura);
 			}
 		}
-		monsterImage.attr('src', folder + urlize(monster.title.replace(' master','').replace(' minion','')) + ((monster.master || monster.title.indexOf(" master") > 0) ? '_master.png' : '.png'));
+		monsterImage.attr('src', folder + urlize(recoverMonsterBaseName(monster.title)) + ((monster.master || monster.title.indexOf(MasterSuffix) > 0) ? '_master.png' : '.png'));
 		monsterObject.append(monsterImage);
 		if (monster.ci != undefined) {
 			for (j = 0; j < MAX_CustomInputs; j++) {

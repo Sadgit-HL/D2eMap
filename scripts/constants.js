@@ -50,6 +50,9 @@ for (var i=0; i < MONSTER_TRAITS.length; i++) {
 	monsterTraits[urlize(MONSTER_TRAITS[i])] = urlize(MONSTER_TRAITS[i]);
 }
 
+var MasterSuffix = ' master';
+var MinionSuffix = ' minion';
+
 var MONSTERS_LIST = [
 	['Arachyura',2,2,false,LoR,[Wilderness,Cursed],true],
 	['Bandit',1,1,true,MoR,[Wilderness,Building],true],

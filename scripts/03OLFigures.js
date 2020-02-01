@@ -95,7 +95,7 @@ function FillZone_Monsters(NewData, FromPreFilledMaps) {
 	ResetZone_Monsters(FromPreFilledMaps);
 	if (NewData.monsters != undefined) {
 		for (var i = 0 ; i < NewData.monsters.length; i++) {
-			monsterLine.XYBase = MONSTERS[NewData.monsters[i].title.replace(' master','').replace(' minion','')].width + 'x' + MONSTERS[NewData.monsters[i].title.replace(' master','').replace(' minion','')].height;
+			monsterLine.XYBase = MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].width + 'x' + MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].height;
 			var html = monsterLine.AddOneLineWithData(NewData.monsters[i]);
 			$('.monster-container').append(html);
 		}
@@ -128,10 +128,10 @@ function Create_MonsterListValues() {
 		}
 		var monsterTitle = MONSTERS_LIST[i][0];
 		var monsterVisible = (monsterTraits[MONSTERS[monsterTitle].traits[0]] != undefined || monsterTraits[MONSTERS[monsterTitle].traits[1]] != undefined) && selectedExpansions[MONSTERS[monsterTitle].expansion] != undefined;
-		var option = $(addOption(monsterTitle + ' master', monsterClass, 'Set_Monster(this, \'' + monsterTitle + ' master' + '\');'));
+		var option = $(addOption(monsterTitle + MasterSuffix, monsterClass, 'Set_Monster(this, \'' + monsterTitle + MasterSuffix + '\');'));
 		option.css('display', monsterVisible ? 'block' : 'none');
 		html += option[0].outerHTML;
-		option = $(addOption(monsterTitle + ' minion', monsterClass, 'Set_Monster(this, \'' + monsterTitle + ' minion' + '\');'));
+		option = $(addOption(monsterTitle + MinionSuffix, monsterClass, 'Set_Monster(this, \'' + monsterTitle + MinionSuffix + '\');'));
 		option.css('display', monsterVisible ? 'block' : 'none');
 		html += option[0].outerHTML;
 	}
@@ -141,17 +141,17 @@ function Create_MonsterListValues() {
 function Set_Monster(element, value) {
 	var container = $(element).parents('.select-row');
 	//for copatibility
-	if (value.indexOf(" minion") < 0 && value.indexOf(" master") < 0)
+	if (value.indexOf(MinionSuffix) < 0 && value.indexOf(MasterSuffix) < 0)
 	{
 		//by default minion
-		value = value + ' minion';
+		value = value + MinionSuffix;
 	}
-	var OneMonsterValue = value.replace(' master','').replace(' minion','');
+	var OneMonsterValue = recoverMonsterBaseName(value);
 	monsterLine.XYBase = MONSTERS[OneMonsterValue].width + 'x' + MONSTERS[OneMonsterValue].height;
 	monsterLine.Set_MainElement(container, value);
 
 	var monsterHp;
-	if (value.indexOf(" master") > -1) {
+	if (value.indexOf(MasterSuffix) > -1) {
 		if (CurrentAct == "I") {
 			monsterHp = MONSTERS[OneMonsterValue].masterHpActI;
 		} else {
@@ -165,7 +165,7 @@ function Set_Monster(element, value) {
 		}
 	}
 
-	Set_HP(container, monsterHp)
+	Set_CustomInput(0, false, container, monsterHp);
 	Update_MonsterImages(container);
 }
 
@@ -181,7 +181,7 @@ function Update_MonsterImages(RowElement) {
 	Reset_MonsterImages(RowElement);
 	var actAddition = (CurrentAct == "I") ? '_act1' : '_act2';
 	for (var i = 0; i < MonsterList.length; i++) {
-		var OneMonsterValue = $(MonsterList[i]).attr('value').replace(' master','').replace(' minion','');
+		var OneMonsterValue = recoverMonsterBaseName($(MonsterList[i]).attr('value'));
 		if (OneMonsterValue == undefined || OneMonsterValue == '') continue;
 		if (MonsterImageContainer.find('.' + urlize(OneMonsterValue)).length == 0)
 		{
