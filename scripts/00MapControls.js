@@ -316,3 +316,308 @@ function rotateObject(clockwise, object, height, width, canvasHeight, canvasWidt
 		rotateObjectCounterClockwise(object, width, canvasWidth);
 	}
 }
+
+
+function AddArrayObjectsOnMap(ArrayObject, ImageFolder, LineType, Layer) {
+	for (var i = 0; ArrayObject != undefined && i < ArrayObject.length; i++) {
+		var NewObject;
+		switch (cellType) {
+			case "HEX":
+						NewObject = CreateOneObjectOnHEXMap(ArrayObject[i], ImageFolder, LineType);
+						break;
+			case "SQUARE":
+						NewObject = CreateOneObjectOnSQUAREMap(ArrayObject[i], ImageFolder, LineType);
+						break;
+		}
+
+		Layer.append(NewObject);
+	}
+}
+function AddObjectsOnMap(ObjectToDisplay, ImageFolder, LineType, Layer) {
+	if (Object != undefined) {
+		var NewObject;
+		switch (cellType) {
+			case "HEX":
+				NewObject = CreateOneObjectOnHEXMap(ObjectToDisplay, ImageFolder, LineType);
+				break;
+			case "SQUARE":
+				NewObject = CreateOneObjectOnSQUAREMap(ObjectToDisplay, ImageFolder, LineType);
+				break;
+		}
+
+		Layer.append(NewObject);
+	}
+}
+function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
+	//default values
+	var ImageFullPath = ImageFolder;
+	var cssTransform = "";
+	var xToSet = OneObject.x;
+	var yToSet = OneObject.y;
+	//test angle
+	var angle = "0";
+	if (OneObject.angle != undefined) {
+		angle = OneObject.angle;
+		if (angle == '') {
+			angle = "0";
+		}
+		if (angle != "0") {
+			//Force origin to VCellSize/2 HCellSize/2
+			cssTransform = "32px 32px";
+		}
+	}
+	//test side
+	var side = "";
+	if(OneObject.side != undefined) {
+		side = OneObject.side;
+	}
+	//test direction (special doors)
+	if (OneObject.direction != undefined) {
+		switch (OneObject.direction) {
+			case "H":
+				// nothing to change
+				//cssTransform = ",'transform-origin':" + HCellSize.toString() + "'px'";
+				break;
+			case "V":
+				//Force Angle to  90
+				angle = "90";
+				//Force origin to HCellSize
+				cssTransform = HCellSize.toString() + "px";
+				break;
+		}
+	}
+	//test opened
+	var opened = false;
+	if (OneObject.opened != undefined) {
+		opened = OneObject.opened;
+	}
+	//z-index
+	var zIndex = "";
+	if (LineType.mapData.zIndex != "NA") {
+		zIndex = LineType.mapData.zIndex;
+	}
+
+	//New Image
+	var NewMapObjectImage = $('<img>');
+	ImageFullPath = ImageFullPath + urlize(OneObject.title.replace(MinionSuffix, '')) + side + '.png';
+	NewMapObjectImage.attr('src', ImageFullPath);
+	//rotation
+	if (angle != "0") {
+		NewMapObjectImage.css({
+			'-ms-transform': 'rotate(' + angle + 'deg)',
+			'-webkit-transform': 'rotate(' + angle + 'deg)',
+			'transform': 'rotate(' + angle + 'deg)',
+			'transform-origin': cssTransform
+		});
+		//update x y in function of the angle (rotation a fixed point) by default top/left
+		switch (angle) {
+			case "90":
+				//fixed point now top / right
+				// same y 
+				// x = oldX + width (wich is height before rotating 90)
+				xToSet = parseInt(xToSet) + LineType.AllData[OneObject.title].height - 1;
+				break;
+			case "180":
+				//fixed point now bottom / right
+				// y = oldY - height
+				yToSet = parseInt(yToSet) + LineType.AllData[OneObject.title].height - 1;
+				// x = oldX - width
+				xToSet = parseInt(xToSet) + LineType.AllData[OneObject.title].width - 1;
+				break;
+			case "270":
+				//fixed point now bottom / left
+				// y = oldY - height (wich is width before rotating 270)
+				yToSet = parseInt(yToSet) + LineType.AllData[OneObject.title].width - 1;
+				// same x
+				break;
+		}
+	}
+
+	//Put Image In Div + Css positioning
+	var NewMapObject = $('<div>');
+	NewMapObject.css({
+		'position': 'absolute',
+		'left': (xToSet * HCellSize).toString() + 'px',
+		'top': (yToSet * VCellSize).toString() + 'px',
+		'z-index': zIndex
+	});
+	//for doors
+	if (opened) {
+		NewMapObject.addClass('opened');
+	}
+	//add custom Inputs data
+	for (j = 0; j < MAX_CustomInputs; j++) {
+		if (LineType.mapData['DisplayCI' + j]) {
+			if (OneObject.ci != undefined) {
+				if (OneObject.ci[j] != undefined) {
+					var OneObjectCustomInputTemp = $('<div>').addClass('ci' + j);
+					OneObjectCustomInputTemp.html((OneObject.ci == undefined || OneObject.ci[j] == undefined) ? '' : OneObject.ci[j].toString());
+					NewMapObject.append(OneObjectCustomInputTemp);
+					if (LineType.mapData['SpecificClassZeroCI' + j] != '' && OneObject.ci[j] == 0) {
+						NewMapObject.addClass(LineType.mapData['SpecificClassZeroCI' + j]);	//drowned
+					}
+				}
+			}
+		}
+	}
+	//add tokens / conditions
+	if (LineType.needAddTokenButton) {
+		var conditionsDisplayContainer = $('<div>').addClass('conditions');
+
+		var updatedSourceConfig = getConditionsArrayFromObjectOrArray(OneObject.conditions);
+		var interval = updatedSourceConfig != undefined && updatedSourceConfig.length > 3 ? Math.floor(50 / updatedSourceConfig.length) : 20;
+		for (var j = 0; updatedSourceConfig != undefined && j < updatedSourceConfig.length; j++) {
+			var OneConditionToDisplay = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(updatedSourceConfig[j]) + '.png');
+			if (j > 0) OneConditionToDisplay.css({
+				'position': 'absolute',
+				'top': (interval * j).toString() + 'px'
+			});
+			conditionsDisplayContainer.append(OneConditionToDisplay);
+		}
+		NewMapObject.append(conditionsDisplayContainer);
+	}
+	//aura
+	if (LineType.needAddAuraButton) {
+		if (OneObject.auras != undefined) {
+			for (var j = 0; j < OneObject.auras.length; j++) {
+				var aura = $('<div>');
+				var auraRadius = parseInt(OneObject.auras[j].radius);
+
+				var xDelta;
+				var yDelta;
+				if (OneObject.vertical) {
+					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+				}
+				else {
+					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+				}
+				if (OneObject.direction == "V") {
+					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+				}
+				else {
+					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+				}
+
+
+				if (lieutenant.vertical) {
+					xDelta = LIEUTENANTS[lieutenant.title].width;
+					yDelta = LIEUTENANTS[lieutenant.title].height;
+				}
+				else {
+					xDelta = LIEUTENANTS[lieutenant.title].height;
+					yDelta = LIEUTENANTS[lieutenant.title].width;
+				}
+				if (lieutenant.direction == "V") {
+					xDelta = LIEUTENANTS[lieutenant.title].width;
+					yDelta = LIEUTENANTS[lieutenant.title].height;
+				}
+				else {
+					xDelta = LIEUTENANTS[lieutenant.title].height;
+					yDelta = LIEUTENANTS[lieutenant.title].width;
+				}
+
+
+				if (agent.vertical) {
+					xDelta = LIEUTENANTS[agent.title].width;
+					yDelta = LIEUTENANTS[agent.title].height;
+				}
+				else {
+					xDelta = LIEUTENANTS[agent.title].height;
+					yDelta = LIEUTENANTS[agent.title].width;
+				}
+				if (agent.direction == "V") {
+					xDelta = LIEUTENANTS[agent.title].width;
+					yDelta = LIEUTENANTS[agent.title].height;
+				}
+				else {
+					xDelta = LIEUTENANTS[agent.title].height;
+					yDelta = LIEUTENANTS[agent.title].width;
+				}
+
+				aura.css({
+					'position': 'absolute',
+					'left': '-' + (auraRadius * HCellSize).toString() + 'px',
+					'top': '-' + (auraRadius * VCellSize).toString() + 'px',
+					'width': ((2 * auraRadius + xDelta) * HCellSize).toString() + 'px',
+					'height': ((2 * auraRadius + yDelta) * VCellSize).toString() + 'px',
+					'background': OneObject.auras[j].color,
+					'opacity': '0.2',
+					'border-radius': ((HCellSize + VCellSize) / 4).toString() + 'px'
+				});
+				NewMapObject.append(aura);
+			}
+		}
+	}
+
+	NewMapObject.append(NewMapObjectImage);
+
+	//add in an array for later testing obverlapping
+	if (LineType.mapData.Layer == "figures") {
+		var coordinateObjects = mapObjects[[OneObject.x, OneObject.y]];
+		if (coordinateObjects == undefined) {
+			coordinateObjects = mapObjects[[OneObject.x, OneObject.y]] = [];
+		}
+		coordinateObjects.push({ "object": NewMapObject, "priority": zIndex });
+	}
+
+	return NewMapObject;
+}
+function CreateOneObjectOnHEXMap(OneObject, ImageFolder, LineType) {
+	var ImageFullPath = ImageFolder;
+	var HexDelta = (1 - (OneObject.x % 2)) * (VCellSize / 2);
+	//test angle
+	var angle = 0;
+	if (OneObject.angle != undefined) {
+		angle = OneObject.angle;
+	}
+	//test side
+	var side = "";
+	if (OneObject.side != undefined) {
+		side = OneObject.side;
+	}
+
+	//New Image
+	var NewObjectImage = $('<img>');
+	NewObjectImage.css({
+		'-ms-transform': 'rotate(' + angle + 'deg)',
+		'-webkit-transform': 'rotate(' + angle + 'deg)',
+		'transform': 'rotate(' + angle + 'deg)',
+		'transform-origin': MAP_TILES_CENTER_ROTATE_CELL[tile.title].left + 'px ' + MAP_TILES_CENTER_ROTATE_CELL[tile.title].top + 'px'
+	});
+	ImageFullPath = ImageFullPath + mapTilize(OneObject.title) + side + '.png';
+	NewObjectImage.attr('src', ImageFullPath);
+
+	//Put Image In Div + Css positioning
+	var NewObject = $('<div>');
+	NewObject.css({
+		'position': 'absolute',
+		'left': ((Math.floor(tile.x * HCellSize * 3 / 4)) - MAP_TILES_CENTER_ROTATE_CELL[tile.title].left + (HCellSize / 2)).toString() + 'px',
+		'top': ((tile.y * VCellSize) - MAP_TILES_CENTER_ROTATE_CELL[tile.title].top + (VCellSize / 2) + HexDelta).toString() + 'px'
+	});
+	NewObject.append(NewObjectImage);
+	return NewObject;
+}
+
+function adjustOverlappingImages() {
+	for (var coordinate in mapObjects) {
+		var tileObjects = mapObjects[coordinate];
+		if (tileObjects == undefined || tileObjects.length == undefined || tileObjects.length <= 1) {
+			continue;
+		}
+		tileObjects.sort(function (a, b) {
+			return a.priority - b.priority;
+		});
+		for (var i = 0; i < tileObjects.length; i++) {
+			var offset = 10 * (tileObjects.length - i - 1);
+			var leftString = tileObjects[i].object.css('left');
+			tileObjects[i].object.css('left', (parseInt(leftString.substring(0, leftString.length - 2)) + offset).toString() + "px");
+			var topString = tileObjects[i].object.css('top');
+			tileObjects[i].object.css('top', (parseInt(topString.substring(0, topString.length - 2)) + offset).toString() + "px");
+		}
+	}
+}
+

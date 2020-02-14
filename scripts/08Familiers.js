@@ -100,7 +100,7 @@ function AddLine_Ally() {
 function Create_AllyListValues() {
 	var html = addOption('Clear', '', 'UnSet_Ally(this);');
 	for (var i = 0; i < ALLIES_LIST.length; i++) {
-		html += addOption(ALLIES_LIST[i] + ' ', '', 'Set_Ally(this, \'' + ALLIES_LIST[i] + '\')');
+		html += addOption(ALLIES_LIST[i][0] + ' ', '', 'Set_Ally(this, \'' + ALLIES_LIST[i][0] + '\')');
 	}
 	return html;
 }
@@ -252,7 +252,7 @@ function RemoveLine_Familiar(Button) {
 function Create_FamiliarListValues() {
 	var html = addOption('Clear', '', 'UnSet_Familiar(this);');
 	for (var i = 0; i < FAMILIARS_LIST.length; i++) {
-		html += addOption(FAMILIARS_LIST[i] + ' ', '', 'Set_Familiar(this, \'' + FAMILIARS_LIST[i] + '\')');
+		html += addOption(FAMILIARS_LIST[i][0] + ' ', '', 'Set_Familiar(this, \'' + FAMILIARS_LIST[i][0] + '\')');
 	}
 	return html;
 }

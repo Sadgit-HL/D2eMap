@@ -1,8 +1,10 @@
-function LineClass(elementName, elementID, RemoveCallBack) {
+function LineClass(elementName, elementID, elementStorageName, RemoveCallBack) {
 	//global parameters (the same for every MainElement)
 	this.elementName = elementName;
 	this.elementID = folderize(elementID).toLowerCase();
+	this.elementStorageName = elementStorageName;
 	this.NameListValues;
+	this.AllData;
 	this.needSideList = false;
 	this.needCoordinates = false;
 	this.needAngleList = false;
@@ -28,6 +30,15 @@ function LineClass(elementName, elementID, RemoveCallBack) {
 
 	//specific parameters (could be different from line to line for the same MainElement)
 	this.XYBase = "1x1";						// -> should have a value if needCoordinates = true
+
+	//MapData
+	this.mapData = {};
+	this.mapData.Layer = "map";		//map / figures / ...
+	this.mapData.zIndex = "NA";		//using string type
+	for (i = 0; i < MAX_CustomInputs; i++) {
+		this.mapData['DisplayCI' + i] = false;
+		this.mapData['SpecificClassZeroCI' + i] = '';
+	}
 
 	this.AddOneEmptyLine = function() {
 			var lineHTML = $('<div>');
@@ -322,10 +333,9 @@ function Set_OpenCheckbox(RowElement, value) {
 function Create_AngleList(elementTitle) {
 	var html = createInputSelect('Select angle', 'Angle-Title', 'select-angle');
 	html.find('ul').append(addOption('Clear', '', 'UnSet_Angle(this,\'\');'));
-	html.find('ul').append(addOption('0' + ' ', '', 'Set_Angle(this, \'' + '0' + '\');'));
-	html.find('ul').append(addOption('90' + ' ', '', 'Set_Angle(this, \'' + '90' + '\');'));
-	html.find('ul').append(addOption('180' + ' ', '', 'Set_Angle(this, \'' + '180' + '\');'));
-	html.find('ul').append(addOption('270' + ' ', '', 'Set_Angle(this, \'' + '270' + '\');'));
+	for (var i = 0; i < ANGLES_LIST.length; i++) {
+		html.find('ul').append(addOption(ANGLES_LIST[i] + ' ', '', 'Set_Angle(this, \'' + ANGLES_LIST[i] + '\');'));
+	}
 	html.append($('<input type="hidden" name="Angle-Value" class="Angle-Value" value=""/>'));
 	return html;
 }

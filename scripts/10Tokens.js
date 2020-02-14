@@ -75,11 +75,11 @@ function AddLine_MapToken() {
 function Create_MapTokenListValues() {
 	var html = addOption('Clear', '', 'UnSet_MapToken(this);');
 	for (var i = 0; i < OBJECTIVES_LIST.length; i++) {
-		html += addOption(OBJECTIVES_LIST[i] + ' ', '', 'Set_MapToken(this, \'' + OBJECTIVES_LIST[i] + '\')');
+		html += addOption(OBJECTIVES_LIST[i][0] + ' ', '', 'Set_MapToken(this, \'' + OBJECTIVES_LIST[i][0] + '\')');
 	}
 	html += '<li role="separator" class="divider"></li>';
 	for (var i = 0; i < MISCELLANEOUS_LIST.length; i++) {
-		html += addOption(MISCELLANEOUS_LIST[i] + ' ', '', 'Set_MapToken(this, \'' + MISCELLANEOUS_LIST[i] + '\')');
+		html += addOption(MISCELLANEOUS_LIST[i][0] + ' ', '', 'Set_MapToken(this, \'' + MISCELLANEOUS_LIST[i][0] + '\')');
 	}
 	return html;
 }

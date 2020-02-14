@@ -3,11 +3,11 @@ function InitializeWindowFor_OLFigures() {
 
 	html.append(Create_ActButton());
 
-	//tiles zone
+	//monsters zone
 	html.append(CreateZone_Monsters());
-	//doors zone
+	//lieutenants zone
 	html.append(CreateZone_Lieutenants());
-	//xMarks zone
+	//agents zone
 	html.append(CreateZone_Agents());
 	//monsters traits
 	html.append(Create_MonsterTraitsList());
@@ -121,10 +121,10 @@ function RemoveLine_Monster(Button) {
 function Create_MonsterListValues() {
 	var html = addOption('Clear', '', 'UnSet_Monster(this);');
 	for (var i = 0; i < MONSTERS_LIST.length; i++) {
-		var monsterClass = folderize(MONSTERS_LIST[i][4]);
-		for (var j = 0; j < MONSTERS_LIST[i][5].length; j++) {
+		var monsterClass = folderize(MONSTERS_LIST[i][6]);
+		for (var j = 0; j < MONSTERS_LIST[i][7].length; j++) {
 			monsterClass += ' ';
-			monsterClass += urlize(MONSTERS_LIST[i][5][j]);
+			monsterClass += urlize(MONSTERS_LIST[i][7][j]);
 		}
 		var monsterTitle = MONSTERS_LIST[i][0];
 		var monsterVisible = (monsterTraits[MONSTERS[monsterTitle].traits[0]] != undefined || monsterTraits[MONSTERS[monsterTitle].traits[1]] != undefined) && selectedExpansions[MONSTERS[monsterTitle].expansion] != undefined;

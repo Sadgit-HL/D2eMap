@@ -119,16 +119,16 @@ function GetZone_Tiles(DataToUpdate) {
 		tile = tileLine.GetOneLineData(container);
 		result.push(tile);
 	}
-	DataToUpdate.tiles = result;
+	DataToUpdate[tileLine.elementStorageName] = result;
 	return DataToUpdate;
 }
 
 function FillZone_Tiles(NewData, FromPreFilledMaps) {
 	ResetZone_Tiles(FromPreFilledMaps);
-	if (NewData.tiles != undefined) {
-		for (var i = 0 ; i < NewData.tiles.length; i++) {
+	if (NewData[tileLine.elementStorageName] != undefined) {
+		for (var i = 0; i < NewData[tileLine.elementStorageName].length; i++) {
 			tileLine.XYBase = "1x1";
-			var html = tileLine.AddOneLineWithData(NewData.tiles[i]);
+			var html = tileLine.AddOneLineWithData(NewData[tileLine.elementStorageName][i]);
 			$('.tiles-container').append(html);
 		}
 	}
@@ -194,7 +194,7 @@ function FillZone_Doors(NewData, FromPreFilledMaps) {
 	ResetZone_Doors(FromPreFilledMaps);
 	if (NewData.doors != undefined) {
 		for (var i = 0 ; i < NewData.doors.length; i++) {
-			doorLine.XYBase = "1x2";
+			doorLine.XYBase = DOORS[NewData.doors[i].title].width + 'x' + DOORS[NewData.doors[i].title].height;
 			var html = doorLine.AddOneLineWithData(NewData.doors[i]);
 			$('.doors-container').append(html);
 		}
@@ -215,7 +215,7 @@ function AddLine_Door() {
 function Create_DoorListValues() {
 	var html = addOption('Clear', '', 'UnSet_Door(this);');
 	for (var i = 0; i < DOORS_LIST.length; i++) {
-		html += addOption(DOORS_LIST[i] + ' ', '', 'Set_Door(this, \'' + DOORS_LIST[i] + '\')');
+		html += addOption(DOORS_LIST[i][0] + ' ', '', 'Set_Door(this, \'' + DOORS_LIST[i][0] + '\')');
 	}
 	return html;
 }

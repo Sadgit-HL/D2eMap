@@ -1,7 +1,3 @@
-function addOptionOld(title, value, optionClass) {
-	return '<option class="' + optionClass + '" value="' + value + '">' + title + '</option>';
-}
-
 function addOption(title, optionClass, functionCallback, additionalAttribute, attributeValue) {
 	//return '<li class="' + optionClass + '"><a href="#" onclick="' + functionCallback + '">' + title + '</a></li>';
 	return '<li class="' + optionClass + '"' + (additionalAttribute != undefined ? ' ' + additionalAttribute + '="' + attributeValue + '"' : '') + '><a onclick="' + functionCallback + '">' + title + '</a></li>';
@@ -470,14 +466,23 @@ function RetroCompatibility(OldConfig) {
 
 		AndOlder = true;
 	}
+	// previous to 1.5.3
+	if (NewConfig.mapVersion == "1.5.2" || AndOlder == true) {
+		//rename tiles extensions
+		for (var i = 0; NewConfig.tiles != undefined && i < NewConfig.tiles.length; i++) {
+			if (NewConfig.tiles[i].title == "Extension1x2" || NewConfig.tiles[i].title == "Extension2x2") {
+				NewConfig.tiles[i].title = NewConfig.tiles[i].title.replace("Extension","Extension ");
+			}
+		}
+
+		AndOlder = true;
+	}
 
 	return NewConfig;
 }
 
 function rebuildMap(element, mapNb) {
 	var mapConfig = recoverConfig(MAP_HASES_LIST[mapNb][3]);
-
-
 
 	config.tiles = mapConfig.tiles;
 	config.doors = mapConfig.doors;
@@ -490,10 +495,6 @@ function rebuildMap(element, mapNb) {
 	config.currentAct = mapConfig.currentAct;
 	config.questObjectives = mapConfig.questObjectives;
 	config.monsterTraits = mapConfig.monsterTraits;
-
-	clearAllies();
-	clearVillagers();
-//	clearLieutenants();
 
 	updateAct(config.currentAct);
 	FillWindow_QuestObjectives(config, true);
@@ -575,417 +576,31 @@ function addMapObject(xCoordinate, yCoordinate, object, priority) {
 
 function constructMapFromConfig() {
 	var mapContainer = $('#map');
-    var map = mapContainer.find('.map');
-    var figures = mapContainer.find('.figures');
-    map.html('');
-    figures.html('');
+	var map = mapContainer.find('.map');
+	var figures = mapContainer.find('.figures');
+	map.html('');
+	figures.html('');
 	mapObjects = [];
 
-	for (var i = 0; config.tiles != undefined && i < config.tiles.length; i++) {
-		var tile = config.tiles[i];
-		var tileObject = $('<div>');
-		var tileImage = $('<img>');
-		var folder = 'images/map_tiles/';
-		var angle = tile.angle;
-		if (angle == 90 || angle == 270){
-			folder += 'vertical/';
-			angle -= 90;
-		}
-		tileObject.css({
-			'position' : 'absolute',
-			'left' : (tile.x * HCellSize).toString() + 'px',
-			'top' : (tile.y * VCellSize).toString() + 'px'
-		});
-		tileImage.css({
-			'-ms-transform' : 'rotate(' + angle + 'deg)',
-		    '-webkit-transform' : 'rotate(' + angle + 'deg)',
-		    'transform' : 'rotate(' + angle + 'deg)'
-		});
-		tileImage.attr('src', folder + mapTilize(tile.title) + tile.side + '.png');
-		tileObject.append(tileImage);
-        map.append(tileObject);
-	}
+	AddArrayObjectsOnMap(config.tiles, 'images/map_tiles/', tileLine, map);
+	AddArrayObjectsOnMap(config.doors, 'images/doors/', doorLine, map);
+	AddArrayObjectsOnMap(config.xs, 'images/blocks/', xMarkLine, map);
+	AddArrayObjectsOnMap(config.maptokens, 'images/misc/', maptokenLine, map);
+	AddArrayObjectsOnMap(config.familiars, 'images/familiars_tokens/', familiarLine, figures);
+	AddArrayObjectsOnMap(config.villagers, 'images/familiars_tokens/', villagerLine, figures);
+	AddArrayObjectsOnMap(config.monsters, 'images/monster_tokens/', monsterLine, figures);
+	AddArrayObjectsOnMap(config.allies, 'images/allies_tokens/', allyLine, figures);
+	AddArrayObjectsOnMap(config.lieutenants, 'images/monster_tokens/', lieutenantLine, figures);
+	AddArrayObjectsOnMap(config.agents, 'images/monster_tokens/', agentLine, figures);
+	AddObjectsOnMap(config.hero1, 'images/heroes_tokens/', heroLine, figures)
+	AddObjectsOnMap(config.hero2, 'images/heroes_tokens/', heroLine, figures)
+	AddObjectsOnMap(config.hero3, 'images/heroes_tokens/', heroLine, figures)
+	AddObjectsOnMap(config.hero4, 'images/heroes_tokens/', heroLine, figures)
 
-	for (var i = 0; config.doors != undefined && i < config.doors.length; i++) {
-		var door = config.doors[i];
-		var doorObject = $('<div>');
-		var doorImage = $('<img>');
-		var folder = 'images/doors/';
-		doorObject.css({
-			'position' : 'absolute',
-			'left' : (door.x * HCellSize).toString() + 'px',
-			'top' : (door.y * VCellSize).toString() + 'px'
-		});
-		if (door.vertical) {
-			doorImage.css({
-				'-ms-transform' : 'rotate(90deg)',
-				'-webkit-transform' : 'rotate(90deg)',
-				'transform' : 'rotate(90deg)',
-				'transform-origin' : HCellSize.toString() + 'px'
-			});
-		}
-		if (door.direction == "V") {
-			doorImage.css({
-				'-ms-transform' : 'rotate(90deg)',
-				'-webkit-transform' : 'rotate(90deg)',
-				'transform' : 'rotate(90deg)',
-				'transform-origin' : HCellSize.toString() + 'px'
-			});
-		}
-		if (door.opened != undefined && door.opened) {
-			doorObject.addClass('opened');
-		}
-		doorImage.attr('src', folder + urlize(door.title) + '.png');
-		doorObject.append(doorImage);
-        map.append(doorObject);
-	}
-
-	for (var i = 0; config.xs != undefined && i < config.xs.length; i++) {
-		var xs = config.xs[i];
-		var xsObject = $('<div>');
-		var xsImage = $('<img>');
-		var folder = 'images/blocks/';
-		xsObject.css({
-			'position' : 'absolute',
-			'left' : (xs.x * HCellSize).toString() + 'px',
-			'top' : (xs.y * VCellSize).toString() + 'px'
-		});
-		xsImage.attr('src', folder + urlize(xs.title) + '.png');
-		xsObject.append(xsImage);
-        map.append(xsObject);
-	}
-
-	for (var i = 0; config.maptokens != undefined && i < config.maptokens.length; i++) {
-		var objective = config.maptokens[i];
-		var objectiveObject = $('<div>');
-		var objectiveImage = $('<img>');
-		var folder = 'images/misc/';
-		var z_index = 0;
-		objectiveObject.css({
-			'position' : 'absolute',
-			'left' : (objective.x * HCellSize).toString() + 'px',
-			'top' : (objective.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-		objectiveImage.attr('src', folder + urlize(objective.title) + '.png');
-		objectiveObject.append(objectiveImage);
-		if (objective.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				if (objective.ci[j] != undefined) {
-					var objectiveCustomInputTemp = $('<div>').addClass('ci' + j);	
-					objectiveCustomInputTemp.html((objective.ci == undefined || objective.ci[j] == undefined) ? '' : objective.ci[j].toString());
-					objectiveObject.append(objectiveCustomInputTemp);
-				}
-			}
-		}
-		addMapObject(objective.x, objective.y, objectiveObject, z_index);
-        map.append(objectiveObject);
-	}
-
-	for (var i = 0; config.familiars != undefined && i < config.familiars.length; i++) {
-		var familiar = config.familiars[i];
-		var familiarObject = $('<div>');
-		var familiarImage = $('<img>');
-		var folder = 'images/familiars_tokens/';
-		var z_index = 1;
-		familiarObject.css({
-			'position' : 'absolute',
-			'left' : (familiar.x * HCellSize).toString() + 'px',
-			'top' : (familiar.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-		familiarImage.attr('src', folder + urlize(familiar.title) + '.png');
-		familiarObject.append(familiarImage);
-		if (familiar.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				if (familiar.ci[j] != undefined) {
-					var familiarCustomInputTemp = $('<div>').addClass('ci' + j);			//HP
-					familiarCustomInputTemp.html((familiar.ci == undefined || familiar.ci[j] == undefined) ? '' : familiar.ci[j].toString());
-					familiarObject.append(familiarCustomInputTemp);
-				}
-			}
-		}
-		addConditionsToImage(familiarObject, familiar.conditions);
-		addMapObject(familiar.x, familiar.y, familiarObject, z_index);
-        figures.append(familiarObject);
-	}
-
-	for (var i = 0; config.villagers != undefined && i < config.villagers.length; i++) {
-		var villager = config.villagers[i];
-		var villagerObject = $('<div>');
-		var villagerImage = $('<img>');
-		var folder = 'images/familiars_tokens/';
-		var z_index = 1;
-		villagerObject.css({
-			'position' : 'absolute',
-			'left' : (villager.x * HCellSize).toString() + 'px',
-			'top' : (villager.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-		villagerImage.attr('src', folder + urlize(villager.title) + '.png');
-		villagerObject.append(villagerImage);
-		if (villager.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				if (villager.ci[j] != undefined) {
-					var villagerCustomInputTemp = $('<div>').addClass('ci' + j);
-					villagerCustomInputTemp.html((villager.ci == undefined || villager.ci[j] == undefined) ? '' : villager.ci[j].toString());
-					villagerObject.append(villagerCustomInputTemp);
-				}
-			}
-		}
-		addConditionsToImage(villagerObject, villager.conditions);
-		addMapObject(villager.x, villager.y, villagerObject, z_index);
-        figures.append(villagerObject);
-	}
-
-	for (var i = 0; config.monsters != undefined && i < config.monsters.length; i++) {
-		var monster = config.monsters[i];
-		var monsterObject = $('<div>');
-		var monsterImage = $('<img>');
-		var z_index = 2;
-		var folder = 'images/monster_tokens/';
-		if (monster.vertical) folder += 'vertical/';
-		if (monster.direction == "V") folder += 'vertical/';
-		monsterObject.css({
-			'position' : 'absolute',
-			'left' : (monster.x * HCellSize).toString() + 'px',
-			'top' : (monster.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-
-		if (monster.auras != undefined) {
-			for (var j = 0; j < monster.auras.length; j++) {
-				var aura = $('<div>');
-				var auraRadius = parseInt(monster.auras[j].radius);
-
-				var xDelta;
-				var yDelta;
-				if (monster.vertical) {
-					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
-					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
-					}
-				else {
-					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
-					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
-					}
-				if (monster.direction == "V") {
-					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
-					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
-					}
-				else {
-					xDelta = MONSTERS[recoverMonsterBaseName(monster.title)].height;
-					yDelta = MONSTERS[recoverMonsterBaseName(monster.title)].width;
-					}
-
-				aura.css({
-					'position' : 'absolute',
-					'left' : '-' + (auraRadius * HCellSize).toString() + 'px',
-					'top' : '-' + (auraRadius * VCellSize).toString() + 'px',
-					'width' : ((2 * auraRadius + xDelta) * HCellSize).toString() + 'px',
-					'height' : ((2 * auraRadius + yDelta) * VCellSize).toString() + 'px',
-					'background' : monster.auras[j].color,
-					'opacity' : '0.2',
-					'border-radius': ((HCellSize + VCellSize) / 4).toString() + 'px'
-				});
-				monsterObject.append(aura);
-			}
-		}
-		monsterImage.attr('src', folder + urlize(recoverMonsterBaseName(monster.title)) + ((monster.master || monster.title.indexOf(MasterSuffix) > 0) ? '_master.png' : '.png'));
-		monsterObject.append(monsterImage);
-		if (monster.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				//0 -> HP
-				if (monster.ci[j] != undefined) {
-					var monsterCustomInputTemp = $('<div>').addClass('ci' + j);
-					monsterCustomInputTemp.html((monster.ci == undefined || monster.ci[j] == undefined) ? '' : monster.ci[j].toString());
-					monsterObject.append(monsterCustomInputTemp);
-				}
-			}
-		}
-		if (monsterLine.needAddTokenButton == true) {
-			addConditionsToImage(monsterObject, monster.conditions);
-		}
-		addMapObject(monster.x, monster.y, monsterObject, z_index);
-        figures.append(monsterObject);
-	}
-
-	for (var i = 0; config.allies != undefined && i < config.allies.length; i++) {
-		var ally = config.allies[i];
-		var allyObject = $('<div>');
-		var allyImage = $('<img>');
-		var folder = 'images/allies_tokens/';
-		var z_index = 2;
-		allyObject.css({
-			'position' : 'absolute',
-			'left' : (ally.x * HCellSize).toString() + 'px',
-			'top' : (ally.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-		allyImage.attr('src', folder + urlize(ally.title) + '.png');
-		allyObject.append(allyImage);
-		if (ally.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				//0 -> HP
-				if (ally.ci[j] != undefined) {
-					var allyCustomInputTemp = $('<div>').addClass('ci' + j);
-					allyCustomInputTemp.html((ally.ci == undefined || ally.ci[j] == undefined) ? '' : ally.ci[j].toString());
-					allyObject.append(allyCustomInputTemp);
-				}
-			}
-		}
-		if (allyLine.needAddTokenButton == true) {
-			addConditionsToImage(allyObject, ally.conditions);
-		}
-		addMapObject(ally.x, ally.y, allyObject, z_index);
-        figures.append(allyObject);
-	}
-
-	for (var i = 0; config.lieutenants != undefined && i < config.lieutenants.length; i++) {
-		var lieutenant = config.lieutenants[i];
-		var lieutenantObject = $('<div>');
-		var lieutenantImage = $('<img>');
-		var folder = 'images/monster_tokens/';
-		var z_index = 2;
-		if (lieutenant.vertical != undefined && lieutenant.vertical) folder += 'vertical/';
-		if (lieutenant.direction == "V") folder += 'vertical/';
-		lieutenantObject.css({
-			'position' : 'absolute',
-			'left' : (lieutenant.x * HCellSize).toString() + 'px',
-			'top' : (lieutenant.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-
-		if (lieutenant.auras != undefined) {
-			for (var j = 0; j < lieutenant.auras.length; j++) {
-				var aura = $('<div>');
-				var auraRadius = parseInt(lieutenant.auras[j].radius);
-
-				var xDelta;
-				var yDelta;
-				if (lieutenant.vertical) {
-					xDelta = LIEUTENANTS[lieutenant.title].width;
-					yDelta = LIEUTENANTS[lieutenant.title].height;
-					}
-				else {
-					xDelta = LIEUTENANTS[lieutenant.title].height;
-					yDelta = LIEUTENANTS[lieutenant.title].width;
-					}
-				if (lieutenant.direction == "V") {
-					xDelta = LIEUTENANTS[lieutenant.title].width;
-					yDelta = LIEUTENANTS[lieutenant.title].height;
-					}
-				else {
-					xDelta = LIEUTENANTS[lieutenant.title].height;
-					yDelta = LIEUTENANTS[lieutenant.title].width;
-					}
-
-				aura.css({
-					'position' : 'absolute',
-					'left' : '-' + (auraRadius * HCellSize).toString() + 'px',
-					'top' : '-' + (auraRadius * VCellSize).toString() + 'px',
-					'width' : ((2 * auraRadius + xDelta) * HCellSize).toString() + 'px',
-					'height' : ((2 * auraRadius + yDelta) * VCellSize).toString() + 'px',
-					'background' : lieutenant.auras[j].color,
-					'opacity' : '0.2',
-					'border-radius': ((HCellSize + VCellSize) / 4).toString() + 'px'
-				});
-				lieutenantObject.append(aura);
-			}
-		}
-		lieutenantImage.attr('src', folder + urlize(lieutenant.title) + '.png');
-		lieutenantObject.append(lieutenantImage);
-		if (lieutenant.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				//0 -> HP
-				if (lieutenant.ci[j] != undefined) {
-					var lieutenantCustomInputTemp = $('<div>').addClass('ci' + j);
-					lieutenantCustomInputTemp.html((lieutenant.ci == undefined || lieutenant.ci[j] == undefined) ? '' : lieutenant.ci[j].toString());
-					lieutenantObject.append(lieutenantCustomInputTemp);
-				}
-			}
-		}
-		addConditionsToImage(lieutenantObject, lieutenant.conditions);
-		addMapObject(lieutenant.x, lieutenant.y, lieutenantObject, z_index);
-        figures.append(lieutenantObject);
-	}
-
-	for (var i = 0; config.agents != undefined && i < config.agents.length; i++) {
-		var agent = config.agents[i];
-		var agentObject = $('<div>');
-		var agentImage = $('<img>');
-		var folder = 'images/monster_tokens/';
-		var z_index = 2;
-		if (agent.vertical != undefined && agent.vertical) folder += 'vertical/';
-		if (agent.direction == "V") folder += 'vertical/';
-		agentObject.css({
-			'position' : 'absolute',
-			'left' : (agent.x * HCellSize).toString() + 'px',
-			'top' : (agent.y * VCellSize).toString() + 'px',
-			'z-index' : z_index
-		});
-
-		if (agent.auras != undefined) {
-			for (var j = 0; j < agent.auras.length; j++) {
-				var aura = $('<div>');
-				var auraRadius = parseInt(agent.auras[j].radius);
-
-				var xDelta;
-				var yDelta;
-				if (agent.vertical) {
-					xDelta = LIEUTENANTS[agent.title].width;
-					yDelta = LIEUTENANTS[agent.title].height;
-					}
-				else {
-					xDelta = LIEUTENANTS[agent.title].height;
-					yDelta = LIEUTENANTS[agent.title].width;
-					}
-				if (lieutenant.direction == "V") {
-					xDelta = LIEUTENANTS[agent.title].width;
-					yDelta = LIEUTENANTS[agent.title].height;
-					}
-				else {
-					xDelta = LIEUTENANTS[agent.title].height;
-					yDelta = LIEUTENANTS[agent.title].width;
-					}
-
-				aura.css({
-					'position' : 'absolute',
-					'left' : '-' + (auraRadius * HCellSize).toString() + 'px',
-					'top' : '-' + (auraRadius * VCellSize).toString() + 'px',
-					'width' : ((2 * auraRadius + xDelta) * HCellSize).toString() + 'px',
-					'height' : ((2 * auraRadius + yDelta) * VCellSize).toString() + 'px',
-					'background' : agent.auras[j].color,
-					'opacity' : '0.2',
-					'border-radius': ((HCellSize + VCellSize) / 4).toString() + 'px'
-				});
-				agentObject.append(aura);
-			}
-		}
-		agentImage.attr('src', folder + urlize(agent.title.replace('Agent ', '')) + '.png');
-		agentObject.append(agentImage);
-		if (agent.ci != undefined) {
-			for (j = 0; j < MAX_CustomInputs; j++) {
-				//0 -> HP
-				if (agent.ci[j] != undefined) {
-					var agentCustomInputTemp = $('<div>').addClass('ci' + j);
-					agentCustomInputTemp.html((agent.ci == undefined || agent.ci[j] == undefined) ? '' : agent.ci[j].toString());
-					agentObject.append(agentCustomInputTemp);
-				}
-			}
-		}
-		addConditionsToImage(agentObject, agent.conditions);
-		addMapObject(agent.x, agent.y, agentObject, z_index);
-        figures.append(agentObject);
-	}
-
-	addHeroToMap(config.hero1);
-	addHeroToMap(config.hero2);
-	addHeroToMap(config.hero3);
-	addHeroToMap(config.hero4);
 
 	adjustOverlappingImages();
 
-	setShortLink();
+	//setShortLink();
 }
 
 function getConditionsArrayFromObjectOrArray(conditions) {
@@ -1001,86 +616,6 @@ function getConditionsArrayFromObjectOrArray(conditions) {
 		result = conditions;
 	}
 	return result;
-}
-
-function addConditionsToImage(sourcesObject, sourceConfig) {
-	var conditions = $('<div>').addClass('conditions');
-	var updatedSourceConfig = getConditionsArrayFromObjectOrArray(sourceConfig);
-	var interval = updatedSourceConfig != undefined && updatedSourceConfig.length > 3 ? Math.floor(50 / updatedSourceConfig.length) : 20;
-	for (var j = 0; updatedSourceConfig != undefined && j < updatedSourceConfig.length; j++) {
-		var conditionObject = $('<img>').attr('src', 'images/conditions_tokens/' + urlize(updatedSourceConfig[j]) + '.png');
-		if (j > 0) conditionObject.css({
-			'position' : 'absolute',
-			'top' : (interval * j).toString() + 'px'
-		});
-		conditions.append(conditionObject);
-	}
-	sourcesObject.append(conditions);
-}
-
-function addHeroToMap(hero) {
-	if (hero.title == '' || hero.title == undefined) return;
-	var heroObject = $('<div>');
-	var heroImage = $('<img>');
-	var z_index = 2;
-	var folder = 'images/heroes_tokens/';
-	heroObject.css({
-		'position' : 'absolute',
-		'left': (hero.x * HCellSize).toString() + 'px',
-		'top' : (hero.y * VCellSize).toString() + 'px',
-		'z-index' : z_index
-	});
-	heroImage.attr('src', folder + urlize(hero.title) + '.png');
-	if (hero.aura != undefined) {
-		var aura = $('<div>');
-		var auraRadius = parseInt(hero.aura.radius);
-		aura.css({
-			'position' : 'absolute',
-			'left': '-' + (auraRadius * HCellSize).toString() + 'px',
-			'top' : '-' + (auraRadius * VCellSize).toString() + 'px',
-			'width': ((2 * auraRadius + 1) * HCellSize).toString() + 'px',
-			'height' : ((2 * auraRadius + 1) * VCellSize).toString() + 'px',
-			'background' : hero.aura.color,
-			'opacity' : '0.2',
-			'border-radius': ((HCellSize + VCellSize) / 4).toString() + 'px'
-		});
-		heroObject.append(aura);
-	}
-	heroObject.append(heroImage);
-	if (hero.ci != undefined) {
-		for (j = 0; j < MAX_CustomInputs; j++) {
-			//0 -> HP
-			//1 -> Fatigue
-			if (hero.ci[j] != undefined) {
-				var heroCustomInputTemp = $('<div>').addClass('ci' + j);
-				heroCustomInputTemp.html((hero.ci == undefined || hero.ci[j] == undefined) ? '' : hero.ci[j].toString());
-				heroObject.append(heroCustomInputTemp);
-				if (j==0 && hero.ci[j] == 0) heroObject.addClass('secondary');	//drowned
-			}
-		}
-	}
-	addConditionsToImage(heroObject, hero.conditions);
-	addMapObject(hero.x, hero.y, heroObject, z_index);
-	$('#map .figures').append(heroObject);
-}
-
-function adjustOverlappingImages() {
-	for (var coordinate in mapObjects) {
-		var tileObjects = mapObjects[coordinate];
-		if (tileObjects == undefined || tileObjects.length == undefined || tileObjects.length <= 1) {
-			continue;
-		}
-		tileObjects.sort(function (a, b) {
-			  return a.priority - b.priority;
-			});
-		for (var i = 0; i < tileObjects.length; i++) {
-			var offset = 10 * (tileObjects.length - i - 1);
-			var leftString = tileObjects[i].object.css('left');
-			tileObjects[i].object.css('left', (parseInt(leftString.substring(0,leftString.length - 2)) + offset).toString() + "px");
-			var topString = tileObjects[i].object.css('top');
-			tileObjects[i].object.css('top', (parseInt(topString.substring(0,topString.length - 2)) + offset).toString() + "px");
-		}
-	}
 }
 
 function constructSettingsFromConfig() {
@@ -1200,8 +735,6 @@ function clearAdditionalElements() {
 	ResetWindow_MapDesign();
 	ResetWindow_OLFigures();
 	ResetWindow_MapTokens();
-//	clearLieutenants();
-//	clearAgents();
 	clearHeroesSackAndSearchItems();
 	clearHeroesConditions();
 	ResetWindow_Familiars();
