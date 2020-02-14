@@ -361,17 +361,13 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 		if (angle == '') {
 			angle = "0";
 		}
-		if (angle != "0") {
-			//Force origin to VCellSize/2 HCellSize/2
-			cssTransform = "32px 32px";
-		}
 	}
 	//test side
 	var side = "";
 	if(OneObject.side != undefined) {
 		side = OneObject.side;
 	}
-	//test direction (special doors)
+	//test direction (special doors / monsters / ... anithing with direction V/H)
 	if (OneObject.direction != undefined) {
 		switch (OneObject.direction) {
 			case "H":
@@ -381,8 +377,11 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 			case "V":
 				//Force Angle to  90
 				angle = "90";
-				//Force origin to HCellSize
-				cssTransform = HCellSize.toString() + "px";
+				//Force origin to HCellSize special doors
+				if (LineType.elementName == "door") {
+
+					cssTransform = HCellSize.toString() + "px";
+				}
 				break;
 		}
 	}
@@ -397,6 +396,10 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 		zIndex = LineType.mapData.zIndex;
 	}
 
+	if (angle != "0") {
+		//Force origin to VCellSize/2 HCellSize/2
+		cssTransform = "32px 32px";
+	}
 	//New Image
 	var NewMapObjectImage = $('<img>');
 	ImageFullPath = ImageFullPath + urlize(OneObject.title.replace(MinionSuffix, '')) + side + '.png';

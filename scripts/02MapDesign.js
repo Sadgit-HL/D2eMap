@@ -194,7 +194,7 @@ function FillZone_Doors(NewData, FromPreFilledMaps) {
 	ResetZone_Doors(FromPreFilledMaps);
 	if (NewData.doors != undefined) {
 		for (var i = 0 ; i < NewData.doors.length; i++) {
-			doorLine.XYBase = DOORS[NewData.doors[i].title].width + 'x' + DOORS[NewData.doors[i].title].height;
+			doorLine.XYBase = DOORS[NewData.doors[i].title].height + 'x' + DOORS[NewData.doors[i].title].width;
 			var html = doorLine.AddOneLineWithData(NewData.doors[i]);
 			$('.doors-container').append(html);
 		}
@@ -261,7 +261,7 @@ function FillZone_XMarks(NewData, FromPreFilledMaps) {
 	ResetZone_XMarks(FromPreFilledMaps);
 	if (NewData.xs != undefined) {
 		for (var i = 0 ; i < NewData.xs.length; i++) {
-			xMarkLine.XYBase = BLOCKS[NewData.xs[i].title].width + 'x' + BLOCKS[NewData.xs[i].title].height;
+			xMarkLine.XYBase = BLOCKS[NewData.xs[i].title].height + 'x' + BLOCKS[NewData.xs[i].title].width;
 			var html = xMarkLine.AddOneLineWithData(NewData.xs[i]);
 			$('.xs-container').append(html);
 		}
@@ -289,7 +289,7 @@ function Create_xMarkListValues() {
 
 function Set_XMarks(element, value) {
 	var container = $(element).parents('.select-row');
-	xMarkLine.XYBase = BLOCKS[value].width + 'x' + BLOCKS[value].height;
+	xMarkLine.XYBase = BLOCKS[value].height + 'x' + BLOCKS[value].width;
 	xMarkLine.Set_MainElement(container, value);
 }
 

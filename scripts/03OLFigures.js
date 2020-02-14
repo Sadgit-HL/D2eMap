@@ -95,7 +95,7 @@ function FillZone_Monsters(NewData, FromPreFilledMaps) {
 	ResetZone_Monsters(FromPreFilledMaps);
 	if (NewData.monsters != undefined) {
 		for (var i = 0 ; i < NewData.monsters.length; i++) {
-			monsterLine.XYBase = MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].width + 'x' + MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].height;
+			monsterLine.XYBase = MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].height + 'x' + MONSTERS[recoverMonsterBaseName(NewData.monsters[i].title)].width;
 			var html = monsterLine.AddOneLineWithData(NewData.monsters[i]);
 			$('.monster-container').append(html);
 		}
@@ -147,7 +147,7 @@ function Set_Monster(element, value) {
 		value = value + MinionSuffix;
 	}
 	var OneMonsterValue = recoverMonsterBaseName(value);
-	monsterLine.XYBase = MONSTERS[OneMonsterValue].width + 'x' + MONSTERS[OneMonsterValue].height;
+	monsterLine.XYBase = MONSTERS[OneMonsterValue].height + 'x' + MONSTERS[OneMonsterValue].width;
 	monsterLine.Set_MainElement(container, value);
 
 	var monsterHp;
@@ -271,7 +271,7 @@ function Create_LieutenantListValues() {
 
 function Set_Lieutenant(element, value) {
 	var container = $(element).parents('.select-row');
-	lieutenantLine.XYBase = LIEUTENANTS[value].width + 'x' + LIEUTENANTS[value].height;
+	lieutenantLine.XYBase = LIEUTENANTS[value].height + 'x' + LIEUTENANTS[value].width;
 	lieutenantLine.Set_MainElement(container, value);
 	Update_LieutenantImages(container);
 }
@@ -371,7 +371,7 @@ function Create_AgentListValues() {
 
 function Set_Agent(element, value) {
 	var container = $(element).parents('.select-row');
-	agentLine.XYBase = LIEUTENANTS[value].width + 'x' + LIEUTENANTS[value].height;
+	agentLine.XYBase = LIEUTENANTS[value].height + 'x' + LIEUTENANTS[value].width;
 	agentLine.Set_MainElement(container, value);
 	Update_AgentImages(container);
 }
