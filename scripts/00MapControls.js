@@ -415,19 +415,19 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 				//fixed point now top / right
 				// same y 
 				// x = oldX + width (wich is height before rotating 90)
-				xToSet = parseInt(xToSet) + LineType.AllData[OneObject.title].height - 1;
+				xToSet = parseInt(xToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].height - 1;
 				break;
 			case "180":
 				//fixed point now bottom / right
 				// y = oldY - height
-				yToSet = parseInt(yToSet) + LineType.AllData[OneObject.title].height - 1;
+				yToSet = parseInt(yToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].height - 1;
 				// x = oldX - width
-				xToSet = parseInt(xToSet) + LineType.AllData[OneObject.title].width - 1;
+				xToSet = parseInt(xToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].width - 1;
 				break;
 			case "270":
 				//fixed point now bottom / left
 				// y = oldY - height (wich is width before rotating 270)
-				yToSet = parseInt(yToSet) + LineType.AllData[OneObject.title].width - 1;
+				yToSet = parseInt(yToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].width - 1;
 				// same x
 				break;
 		}
