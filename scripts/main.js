@@ -616,7 +616,7 @@ function constructMapFromConfig() {
 
 	adjustOverlappingImages();
 
-	//setShortLink();
+	setShortLink();
 }
 
 function getConditionsArrayFromObjectOrArray(conditions) {
