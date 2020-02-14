@@ -473,7 +473,21 @@ function RetroCompatibility(OldConfig) {
 		//rename tiles extensions
 		for (var i = 0; NewConfig.tiles != undefined && i < NewConfig.tiles.length; i++) {
 			if (NewConfig.tiles[i].title == "Extension1x2" || NewConfig.tiles[i].title == "Extension2x2") {
-				NewConfig.tiles[i].title = NewConfig.tiles[i].title.replace("Extension","Extension ");
+				NewConfig.tiles[i].title = NewConfig.tiles[i].title.replace("Extension", "Extension ");
+				switch (NewConfig.tiles[i].angle) {
+					case "0":
+						NewConfig.tiles[i].angle = "180";
+						break;
+					case "90":
+						NewConfig.tiles[i].angle = "270";
+						break;
+					case "180":
+						NewConfig.tiles[i].angle = "0";
+						break;
+					case "270":
+						NewConfig.tiles[i].angle = "90";
+						break;
+				}
 			}
 		}
 
