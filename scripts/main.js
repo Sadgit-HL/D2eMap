@@ -436,11 +436,13 @@ function RetroCompatibility(OldConfig) {
 		}
 		for (var i = 1; i <= 4; i++) {
 			var heroConfig = NewConfig['hero' + i.toString()];
-			heroConfig.ci = [];
-			heroConfig.ci[0] = heroConfig.hp;
-			heroConfig.ci[1] = heroConfig.stamina;
-			delete heroConfig.hp;
-			delete heroConfig.stamina;
+			if (heroConfig != undefined) {
+				heroConfig.ci = [];
+				heroConfig.ci[0] = heroConfig.hp;
+				heroConfig.ci[1] = heroConfig.stamina;
+				delete heroConfig.hp;
+				delete heroConfig.stamina;
+			}
 		}
 
 		for (var i = 0; NewConfig.familiars != undefined && i < NewConfig.familiars.length; i++) {
