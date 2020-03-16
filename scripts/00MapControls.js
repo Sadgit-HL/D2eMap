@@ -250,7 +250,7 @@ function rotateAgents(clockwise, realWidth, realHeight) {
 }
 
 function rotateHeroes(clockwise, realWidth, realHeight) {
-	for (var i = 0; i < 4; i++) {
+	for (var i = 0; i < MAX_Heroes; i++) {
 		var hero = config['hero' + (i+1).toString()];
 		if (config.hero4.title == '') {
 			continue;
@@ -352,6 +352,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 	//default values
 	var ImageFullPath = ImageFolder;
 	var cssTransform = "";
+	var cssFigureDirection = "";
 	var xToSet = OneObject.x;
 	var yToSet = OneObject.y;
 	//test angle
@@ -363,7 +364,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 		}
 		if (angle != "0") {
 			//Force origin to VCellSize/2 HCellSize/2
-			cssTransform = "32px 32px";
+			//cssTransform = "32px 32px";
 		}
 	}
 	//test side
@@ -380,7 +381,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 				break;
 			case "V":
 				//Force Angle to  90
-				cssTransform = "32px 32px";
+				//cssTransform = "32px 32px";
 				angle = "90";
 				//Force origin to HCellSize special doors
 				if (LineType.elementName == "door") {
@@ -407,12 +408,6 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 	NewMapObjectImage.attr('src', ImageFullPath);
 	//rotation
 	if (angle != "0") {
-		NewMapObjectImage.css({
-			'-ms-transform': 'rotate(' + angle + 'deg)',
-			'-webkit-transform': 'rotate(' + angle + 'deg)',
-			'transform': 'rotate(' + angle + 'deg)',
-			'transform-origin': cssTransform
-		});
 		//update x y in function of the angle (rotation a fixed point) by default top/left
 		switch (angle) {
 			case "90":
@@ -420,21 +415,29 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 				// same y 
 				// x = oldX + width (wich is height before rotating 90)
 				xToSet = parseInt(xToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].height - 1;
+				cssTransform = "32px 32px";
+				cssFigureDirection = "rotated";
 				break;
 			case "180":
+				// box stays the same -> only rotate the image (with default center)
 				//fixed point now bottom / right
 				// y = oldY - height
-				yToSet = parseInt(yToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].height - 1;
+				//yToSet = parseInt(yToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].height - 1;
 				// x = oldX - width
-				xToSet = parseInt(xToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].width - 1;
+				//xToSet = parseInt(xToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].width - 1;
 				break;
 			case "270":
 				//fixed point now bottom / left
 				// y = oldY - height (wich is width before rotating 270)
 				yToSet = parseInt(yToSet) + LineType.AllData[recoverMonsterBaseName(OneObject.title)].width - 1;
+				cssTransform = "32px 32px";
+				cssFigureDirection = "rotated";
 				// same x
 				break;
 		}
+
+		//NewMapObjectImage.css({
+		//});
 	}
 
 	//Put Image In Div + Css positioning
@@ -443,6 +446,10 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 		'position': 'absolute',
 		'left': (xToSet * HCellSize).toString() + 'px',
 		'top': (yToSet * VCellSize).toString() + 'px',
+		'-ms-transform': 'rotate(' + angle + 'deg)',
+		'-webkit-transform': 'rotate(' + angle + 'deg)',
+		'transform': 'rotate(' + angle + 'deg)',
+		'transform-origin': cssTransform,
 		'z-index': zIndex
 	});
 	//for doors
@@ -454,7 +461,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 		if (LineType.mapData['DisplayCI' + j]) {
 			if (OneObject.ci != undefined) {
 				if (OneObject.ci[j] != undefined) {
-					var OneObjectCustomInputTemp = $('<div>').addClass('ci' + j);
+					var OneObjectCustomInputTemp = $('<div>').addClass('ci' + j).addClass(cssFigureDirection);
 					OneObjectCustomInputTemp.html((OneObject.ci == undefined || OneObject.ci[j] == undefined) ? '' : OneObject.ci[j].toString());
 					NewMapObject.append(OneObjectCustomInputTemp);
 					if (LineType.mapData['SpecificClassZeroCI' + j] != '' && OneObject.ci[j] == 0) {
@@ -466,7 +473,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 	}
 	//add tokens / conditions
 	if (LineType.needAddTokenButton) {
-		var conditionsDisplayContainer = $('<div>').addClass('conditions');
+		var conditionsDisplayContainer = $('<div>').addClass('conditions').addClass(cssFigureDirection);;
 
 		var updatedSourceConfig = getConditionsArrayFromObjectOrArray(OneObject.conditions);
 		var interval = updatedSourceConfig != undefined && updatedSourceConfig.length > 3 ? Math.floor(50 / updatedSourceConfig.length) : 20;

@@ -437,7 +437,7 @@ li.H, li.V
 }
 
 .select-row {
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .select-row > input[type="text"] {
@@ -456,7 +456,7 @@ li.H, li.V
 .items-selects > .btn-group,
 .sack-selects > .btn-group {
 	margin-right: 15px;
-	margin-bottom: 15px;
+	margin-bottom: 2px;
 	vertical-align: top;
 }
 
@@ -480,6 +480,11 @@ li.H, li.V
 	margin: 20px;
 	display: block;
 	max-width: 600px;
+}
+
+.conditions-container img {
+	margin: 0 10px 10px 10px;
+	height: 235px;
 }
 
 .imagescontainer img {
@@ -558,10 +563,24 @@ img.familiar-image {
 	top: 0;
 	background: red;
 }
+.ci0.rotated {
+	top: unset;
+	bottom: 0px;
+	-ms-transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
+}
 
 .ci1 {
 	bottom: 0;
 	background: rgb(184, 157, 10);
+}
+.ci1.rotated {
+	bottom: unset;
+	top: 0px;
+	-ms-transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
 }
 
 .grid div {
@@ -618,6 +637,12 @@ img.familiar-image {
 	position: absolute;
 	right: -5px;
 	top: -5px;
+}
+.conditions.rotated {
+	right: unset;
+	-ms-transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);
 }
 .conditions img {
 	width: 30px;
@@ -876,7 +901,8 @@ img.relic {
 	position: relative;
 	display: inline-block;
     vertical-align: top;
-    padding: 20px 0;
+//    padding: 20px 0;
+	float: left;
 }
 
 .tainted-container {

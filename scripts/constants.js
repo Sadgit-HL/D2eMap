@@ -1,4 +1,4 @@
-var MAPVERSION = "1.5.3";
+var MAPVERSION = "1.5.4";
 var MAPGAME = "Descent2Ed";
 
 var mapWidth = 40;
@@ -15,15 +15,15 @@ var MAX_CustomInputs = 5
 var CustomInput_SetTexts = [MAX_CustomInputs - 1];
 CustomInput_SetTexts[0] = 'Set HP';
 CustomInput_SetTexts[1] = 'Set Stamina';
-CustomInput_SetTexts[2] = 'Set Seq nb';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
-CustomInput_SetTexts[3] = 'Set Coins';
-CustomInput_SetTexts[4] = 'Set XP';
+CustomInput_SetTexts[2] = 'Set ';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
+CustomInput_SetTexts[3] = 'Set ';
+CustomInput_SetTexts[4] = 'Set ';
 var CustomInput_ButtonTexts = [MAX_CustomInputs - 1];
 CustomInput_ButtonTexts[0] = 'Add HP';
 CustomInput_ButtonTexts[1] = 'Add Stamina';
-CustomInput_ButtonTexts[2] = 'Add Seq nb';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
-CustomInput_ButtonTexts[3] = 'Add Coins';
-CustomInput_ButtonTexts[4] = 'Add XP';
+CustomInput_ButtonTexts[2] = 'Add ';	//BEWARE :  2 & 3 should be exclusive here as they are on the same space !
+CustomInput_ButtonTexts[3] = 'Add ';
+CustomInput_ButtonTexts[4] = 'Add ';
 
 function listsort(a, b) {
 	if (a[0] < b[0]) return -1;
@@ -281,13 +281,13 @@ for (var i = 0; i < MAP_TILES_LIST_COMPLETE.length; i++) {
 	MAP_TILES_SIZES[MAP_TILES_LIST_COMPLETE[i][0]] = { 'width': MAP_TILES_LIST_COMPLETE[i][1], 'height': MAP_TILES_LIST_COMPLETE[i][2] };
 	MAP_TILES_CENTER_ROTATE_CELL[MAP_TILES_LIST_COMPLETE[i][0]] = { 'left': MAP_TILES_LIST_COMPLETE[i][3], 'top': MAP_TILES_LIST_COMPLETE[i][4] };
 
-	var OneItem = {};
-	OneItem.title = MAP_TILES_LIST_COMPLETE[i][0];
-	OneItem.width = MAP_TILES_LIST_COMPLETE[i][1];
-	OneItem.height = MAP_TILES_LIST_COMPLETE[i][2];
-	OneItem.left = MAP_TILES_LIST_COMPLETE[i][3];
-	OneItem.top = MAP_TILES_LIST_COMPLETE[i][4];
-	MAP_TILES[MAP_TILES_LIST_COMPLETE[i][0]] = OneItem;
+	var oneItem = {};
+	oneItem.title = MAP_TILES_LIST_COMPLETE[i][0];
+	oneItem.width = MAP_TILES_LIST_COMPLETE[i][1];
+	oneItem.height = MAP_TILES_LIST_COMPLETE[i][2];
+	oneItem.left = MAP_TILES_LIST_COMPLETE[i][3];
+	oneItem.top = MAP_TILES_LIST_COMPLETE[i][4];
+	MAP_TILES[MAP_TILES_LIST_COMPLETE[i][0]] = oneItem;
 }
 
 ANGLES_LIST = [
@@ -328,15 +328,15 @@ var LIEUTENANTS_LIST = [
 var LIEUTENANTS = {};
 
 for (var i = 0; i < LIEUTENANTS_LIST.length; i++) {
-	var lieutenant = {};
-	lieutenant.title = LIEUTENANTS_LIST[i][0];
-	lieutenant.width = LIEUTENANTS_LIST[i][1];
-	lieutenant.height = LIEUTENANTS_LIST[i][2];
-	lieutenant.top = LIEUTENANTS_LIST[i][3];
-	lieutenant.left = LIEUTENANTS_LIST[i][4];
-	lieutenant.hasBack = LIEUTENANTS_LIST[i][5];
-	lieutenant.expansion = folderize(LIEUTENANTS_LIST[i][6]);
-	LIEUTENANTS[LIEUTENANTS_LIST[i][0]] = lieutenant;
+	var oneItem = {};
+	oneItem.title = LIEUTENANTS_LIST[i][0];
+	oneItem.width = LIEUTENANTS_LIST[i][1];
+	oneItem.height = LIEUTENANTS_LIST[i][2];
+	oneItem.top = LIEUTENANTS_LIST[i][3];
+	oneItem.left = LIEUTENANTS_LIST[i][4];
+	oneItem.hasBack = LIEUTENANTS_LIST[i][5];
+	oneItem.expansion = folderize(LIEUTENANTS_LIST[i][6]);
+	LIEUTENANTS[LIEUTENANTS_LIST[i][0]] = oneItem;
 }
 
 var MONSTERS_HP = [
@@ -413,21 +413,21 @@ function getMonsterTraits(i) {
 }
 
 for (var i = 0; i < MONSTERS_LIST.length; i++) {
-	var monster = {};
-	monster.title = MONSTERS_LIST[i][0];
-	monster.width = MONSTERS_LIST[i][1];
-	monster.height = MONSTERS_LIST[i][2];
-	monster.top = MONSTERS_LIST[i][3];
-	monster.left = MONSTERS_LIST[i][4];
-	monster.ranged = MONSTERS_LIST[i][5];
-	monster.expansion = folderize(MONSTERS_LIST[i][6]);
-	monster.traits = getMonsterTraits(i);
-	monster.hasBack = MONSTERS_LIST[i][8];
-	monster.minionHpActI = MONSTERS_HP[i][1];
-	monster.masterHpActI = MONSTERS_HP[i][2];
-	monster.minionHpActII = MONSTERS_HP[i][3];
-	monster.masterHpActII = MONSTERS_HP[i][4];
-	MONSTERS[MONSTERS_LIST[i][0]] = monster;
+	var oneItem = {};
+	oneItem.title = MONSTERS_LIST[i][0];
+	oneItem.width = MONSTERS_LIST[i][1];
+	oneItem.height = MONSTERS_LIST[i][2];
+	oneItem.top = MONSTERS_LIST[i][3];
+	oneItem.left = MONSTERS_LIST[i][4];
+	oneItem.ranged = MONSTERS_LIST[i][5];
+	oneItem.expansion = folderize(MONSTERS_LIST[i][6]);
+	oneItem.traits = getMonsterTraits(i);
+	oneItem.hasBack = MONSTERS_LIST[i][8];
+	oneItem.minionHpActI = MONSTERS_HP[i][1];
+	oneItem.masterHpActI = MONSTERS_HP[i][2];
+	oneItem.minionHpActII = MONSTERS_HP[i][3];
+	oneItem.masterHpActII = MONSTERS_HP[i][4];
+	MONSTERS[MONSTERS_LIST[i][0]] = oneItem;
 }
 
 SEARCH_ITEMS_LIST = [
@@ -1314,6 +1314,8 @@ ravager.newArchetype = war;
 
 var HYBRID_CLASSES = [avenger, lorekeeper, monk, raider, truthseer, watchman, heretic, steelcaster, trickster, battlemage, crusader, ravager];
 
+//Heroes
+var MAX_Heroes = 4
 var HEROES_LIST = [
 	['Ronan of the Wild', 1, 1, 32, 32, 10, 5, rog],
 	['Hugo the Glorious', 1, 1, 32, 32, 12, 3, war],
@@ -1394,16 +1396,16 @@ var HEROES_LIST = [
 var HEROES = {};
 
 for (var i = 0; i < HEROES_LIST.length; i++) {
-	var hero = {};
-	hero.title = HEROES_LIST[i][0];
-	hero.width = HEROES_LIST[i][1];
-	hero.height = HEROES_LIST[i][2];
-	hero.top = HEROES_LIST[i][3];
-	hero.left = HEROES_LIST[i][4];
-	hero.hp = HEROES_LIST[i][5];
-	hero.stamina = HEROES_LIST[i][6];
-	hero.archetype = HEROES_LIST[i][7];
-	HEROES[HEROES_LIST[i][0]] = hero;
+	var oneItem = {};
+	oneItem.title = HEROES_LIST[i][0];
+	oneItem.width = HEROES_LIST[i][1];
+	oneItem.height = HEROES_LIST[i][2];
+	oneItem.top = HEROES_LIST[i][3];
+	oneItem.left = HEROES_LIST[i][4];
+	oneItem.hp = HEROES_LIST[i][5];
+	oneItem.stamina = HEROES_LIST[i][6];
+	oneItem.archetype = HEROES_LIST[i][7];
+	HEROES[HEROES_LIST[i][0]] = oneItem;
 }
 
 MONSTERS_LIST.sort(listsort);
@@ -1417,14 +1419,14 @@ ALLIES_LIST = [
 var ALLIES = {};
 
 for (var i = 0; i < ALLIES_LIST.length; i++) {
-	var ally = {};
-	ally.title = ALLIES_LIST[i][0];
-	ally.width = ALLIES_LIST[i][1];
-	ally.height = ALLIES_LIST[i][2];
-	ally.top = ALLIES_LIST[i][3];
-	ally.left = ALLIES_LIST[i][4];
-	ally.hasCard = ALLIES_LIST[i][5];
-	ALLIES[ALLIES_LIST[i][0]] = ally;
+	var oneItem = {};
+	oneItem.title = ALLIES_LIST[i][0];
+	oneItem.width = ALLIES_LIST[i][1];
+	oneItem.height = ALLIES_LIST[i][2];
+	oneItem.top = ALLIES_LIST[i][3];
+	oneItem.left = ALLIES_LIST[i][4];
+	oneItem.hasCard = ALLIES_LIST[i][5];
+	ALLIES[ALLIES_LIST[i][0]] = oneItem;
 }
 
 ALLIES_SKILLS = {};
@@ -1449,14 +1451,14 @@ FAMILIARS_LIST = [
 var FAMILIARS = {};
 
 for (var i = 0; i < FAMILIARS_LIST.length; i++) {
-	var familiar = {};
-	familiar.title = FAMILIARS_LIST[i][0];
-	familiar.width = FAMILIARS_LIST[i][1];
-	familiar.height = FAMILIARS_LIST[i][2];
-	familiar.top = FAMILIARS_LIST[i][3];
-	familiar.left = FAMILIARS_LIST[i][4];
-	familiar.hasCard = FAMILIARS_LIST[i][5];
-	FAMILIARS[FAMILIARS_LIST[i][0]] = familiar;
+	var oneItem = {};
+	oneItem.title = FAMILIARS_LIST[i][0];
+	oneItem.width = FAMILIARS_LIST[i][1];
+	oneItem.height = FAMILIARS_LIST[i][2];
+	oneItem.top = FAMILIARS_LIST[i][3];
+	oneItem.left = FAMILIARS_LIST[i][4];
+	oneItem.hasCard = FAMILIARS_LIST[i][5];
+	FAMILIARS[FAMILIARS_LIST[i][0]] = oneItem;
 }
 
 VILLAGERS_LIST = [
@@ -1467,14 +1469,14 @@ VILLAGERS_LIST = [
 var VILLAGERS = {};
 
 for (var i = 0; i < VILLAGERS_LIST.length; i++) {
-	var villager = {};
-	villager.title = VILLAGERS_LIST[i][0];
-	villager.width = VILLAGERS_LIST[i][1];
-	villager.height = VILLAGERS_LIST[i][2];
-	villager.top = VILLAGERS_LIST[i][3];
-	villager.left = VILLAGERS_LIST[i][4];
-	villager.hasCard = VILLAGERS_LIST[i][5];
-	VILLAGERS[VILLAGERS_LIST[i][0]] = villager;
+	var oneItem = {};
+	oneItem.title = VILLAGERS_LIST[i][0];
+	oneItem.width = VILLAGERS_LIST[i][1];
+	oneItem.height = VILLAGERS_LIST[i][2];
+	oneItem.top = VILLAGERS_LIST[i][3];
+	oneItem.left = VILLAGERS_LIST[i][4];
+	oneItem.hasCard = VILLAGERS_LIST[i][5];
+	VILLAGERS[VILLAGERS_LIST[i][0]] = oneItem;
 }
 
 DOORS_LIST = [
@@ -1486,13 +1488,13 @@ DOORS_LIST = [
 ];
 DOORS = {};
 for (var i = 0; i < DOORS_LIST.length; i++) {
-	var door = {};
-	door.title = DOORS_LIST[i][0];
-	door.width = DOORS_LIST[i][1];
-	door.height = DOORS_LIST[i][2];
-	door.left = DOORS_LIST[i][3];
-	door.top = DOORS_LIST[i][4];
-	DOORS[DOORS_LIST[i][0]] = door;
+	var oneItem = {};
+	oneItem.title = DOORS_LIST[i][0];
+	oneItem.width = DOORS_LIST[i][1];
+	oneItem.height = DOORS_LIST[i][2];
+	oneItem.left = DOORS_LIST[i][3];
+	oneItem.top = DOORS_LIST[i][4];
+	DOORS[DOORS_LIST[i][0]] = oneItem;
 }
 
 
@@ -1508,13 +1510,13 @@ BLOCKS_LIST = [
 ];
 BLOCKS = {};
 for (var i = 0; i < BLOCKS_LIST.length; i++) {
-	var block = {};
-	block.title = BLOCKS_LIST[i][0];
-	block.width = BLOCKS_LIST[i][1];
-	block.height = BLOCKS_LIST[i][2];
-	block.left = BLOCKS_LIST[i][3];
-	block.top = BLOCKS_LIST[i][4];
-	BLOCKS[BLOCKS_LIST[i][0]] = block;
+	var oneItem = {};
+	oneItem.title = BLOCKS_LIST[i][0];
+	oneItem.width = BLOCKS_LIST[i][1];
+	oneItem.height = BLOCKS_LIST[i][2];
+	oneItem.left = BLOCKS_LIST[i][3];
+	oneItem.top = BLOCKS_LIST[i][4];
+	BLOCKS[BLOCKS_LIST[i][0]] = oneItem;
 }
 
 MAPTOKENS = {};
@@ -1528,14 +1530,14 @@ OBJECTIVES_LIST = [
 ];
 OBJECTIVES = {};
 for (var i = 0; i < OBJECTIVES_LIST.length; i++) {
-	var objective = {};
-	objective.title = OBJECTIVES_LIST[i][0];
-	objective.width = OBJECTIVES_LIST[i][1];
-	objective.height = OBJECTIVES_LIST[i][2];
-	objective.left = OBJECTIVES_LIST[i][3];
-	objective.top = OBJECTIVES_LIST[i][4];
-	OBJECTIVES[OBJECTIVES_LIST[i][0]] = objective;
-	MAPTOKENS[OBJECTIVES_LIST[i][0]] = objective;
+	var oneItem = {};
+	oneItem.title = OBJECTIVES_LIST[i][0];
+	oneItem.width = OBJECTIVES_LIST[i][1];
+	oneItem.height = OBJECTIVES_LIST[i][2];
+	oneItem.left = OBJECTIVES_LIST[i][3];
+	oneItem.top = OBJECTIVES_LIST[i][4];
+	OBJECTIVES[OBJECTIVES_LIST[i][0]] = oneItem;
+	MAPTOKENS[OBJECTIVES_LIST[i][0]] = oneItem;
 }
 
 MISCELLANEOUS_LIST = [
@@ -1548,14 +1550,14 @@ MISCELLANEOUS_LIST = [
 ];
 MISCELLANEOUS = {};
 for (var i = 0; i < MISCELLANEOUS_LIST.length; i++) {
-	var misc = {};
-	misc.title = MISCELLANEOUS_LIST[i][0];
-	misc.width = MISCELLANEOUS_LIST[i][1];
-	misc.height = MISCELLANEOUS_LIST[i][2];
-	misc.left = MISCELLANEOUS_LIST[i][3];
-	misc.top = MISCELLANEOUS_LIST[i][4];
-	MISCELLANEOUS[MISCELLANEOUS_LIST[i][0]] = misc;
-	MAPTOKENS[MISCELLANEOUS_LIST[i][0]] = misc;
+	var oneItem = {};
+	oneItem.title = MISCELLANEOUS_LIST[i][0];
+	oneItem.width = MISCELLANEOUS_LIST[i][1];
+	oneItem.height = MISCELLANEOUS_LIST[i][2];
+	oneItem.left = MISCELLANEOUS_LIST[i][3];
+	oneItem.top = MISCELLANEOUS_LIST[i][4];
+	MISCELLANEOUS[MISCELLANEOUS_LIST[i][0]] = oneItem;
+	MAPTOKENS[MISCELLANEOUS_LIST[i][0]] = oneItem;
 }
 
 CONDITIONS_INITIAL = [
@@ -1743,14 +1745,14 @@ OVERLORD_CARDS_LIST = [
 var OVERLORD_CARDS = {};
 
 for (var i = 0; i < OVERLORD_CARDS_LIST.length; i++) {
-	var card = {};
-	card.title = OVERLORD_CARDS_LIST[i][0];
-	card.number = OVERLORD_CARDS_LIST[i][2];
-	card.xp = OVERLORD_CARDS_LIST[i][3];
+	var oneItem = {};
+	oneItem.title = OVERLORD_CARDS_LIST[i][0];
+	oneItem.number = OVERLORD_CARDS_LIST[i][2];
+	oneItem.xp = OVERLORD_CARDS_LIST[i][3];
 	if (OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] == undefined) {
 		OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]] = [];
 	}
-	OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]].push(card);
+	OVERLORD_CARDS[OVERLORD_CARDS_LIST[i][1]].push(oneItem);
 }
 
 CORRUPTED_CITIZEN_CARDS = [
@@ -2295,7 +2297,6 @@ heroLine.XYBase = '1x1';		//DefaultValue
 heroLine.needCustomInput[0][0] = true;
 heroLine.needCustomInput[1][0] = true;
 heroLine.needAddTokenButton = true;
-heroLine.needAddRelicButton = true;
 heroLine.needAddAuraButton = true;
 heroLine.needRemoveButton = true;
 heroLine.mapData.Layer = "figures";
