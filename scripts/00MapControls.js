@@ -489,6 +489,9 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 	}
 	//aura
 	if (LineType.needAddAuraButton) {
+		if (OneObject.aura != undefined) {
+			OneObject.auras[0] = OneObject.aura;
+		}
 		if (OneObject.auras != undefined) {
 			for (var j = 0; j < OneObject.auras.length; j++) {
 				var aura = $('<div>');
@@ -496,57 +499,32 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 
 				var xDelta;
 				var yDelta;
+				var WidthTemp = 1;
+				var HeightTemp = 1;
+				if (LineType.elementName == "monster") {
+					WidthTemp = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+					HeightTemp = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+				}
+				if (LineType.elementName == "lieutenant" || LineType.elementName == "agent") {
+					WidthTemp = LIEUTENANTS[OneObject.title].width;
+					HeightTemp = LIEUTENANTS[OneObject.title].height;
+				}
+
 				if (OneObject.vertical) {
-					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
-					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+					xDelta = WidthTemp;
+					yDelta = HeightTemp;
 				}
 				else {
-					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
-					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
+					xDelta = HeightTemp;
+					yDelta = WidthTemp;
 				}
 				if (OneObject.direction == "V") {
-					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
-					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
+					xDelta = WidthTemp;
+					yDelta = HeightTemp;
 				}
 				else {
-					xDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].height;
-					yDelta = MONSTERS[recoverMonsterBaseName(OneObject.title)].width;
-				}
-
-
-				if (lieutenant.vertical) {
-					xDelta = LIEUTENANTS[lieutenant.title].width;
-					yDelta = LIEUTENANTS[lieutenant.title].height;
-				}
-				else {
-					xDelta = LIEUTENANTS[lieutenant.title].height;
-					yDelta = LIEUTENANTS[lieutenant.title].width;
-				}
-				if (lieutenant.direction == "V") {
-					xDelta = LIEUTENANTS[lieutenant.title].width;
-					yDelta = LIEUTENANTS[lieutenant.title].height;
-				}
-				else {
-					xDelta = LIEUTENANTS[lieutenant.title].height;
-					yDelta = LIEUTENANTS[lieutenant.title].width;
-				}
-
-
-				if (agent.vertical) {
-					xDelta = LIEUTENANTS[agent.title].width;
-					yDelta = LIEUTENANTS[agent.title].height;
-				}
-				else {
-					xDelta = LIEUTENANTS[agent.title].height;
-					yDelta = LIEUTENANTS[agent.title].width;
-				}
-				if (agent.direction == "V") {
-					xDelta = LIEUTENANTS[agent.title].width;
-					yDelta = LIEUTENANTS[agent.title].height;
-				}
-				else {
-					xDelta = LIEUTENANTS[agent.title].height;
-					yDelta = LIEUTENANTS[agent.title].width;
+					xDelta = HeightTemp;
+					yDelta = WidthTemp;
 				}
 
 				aura.css({
