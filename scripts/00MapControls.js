@@ -490,6 +490,7 @@ function CreateOneObjectOnSQUAREMap(OneObject, ImageFolder, LineType) {
 	//aura
 	if (LineType.needAddAuraButton) {
 		if (OneObject.aura != undefined) {
+			OneObject.auras = [];
 			OneObject.auras[0] = OneObject.aura;
 		}
 		if (OneObject.auras != undefined) {
